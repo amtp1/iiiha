@@ -1,0 +1,39 @@
+.gpt-container {
+    margin-top: 3%;
+    width: 630px;
+}
+
+textarea {
+    resize: none;
+    height: 250px;
+}
+
+.btn-row {
+    position: relative;
+    top: 10px;
+}
+
+.content {
+    max-height: 250px;
+    max-width: 608px;
+    padding: 0.5rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    margin-left: -6px;
+}
+
+.content::-webkit-scrollbar {
+    width: 10px;
+}
+
+.content::-webkit-scrollbar-track {
+    background-color: #e4e4e4;
+    border-radius: 10px;
+}
+
+.content::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-clip: content-box;
+    background-color: black;
+}

@@ -1,0 +1,16 @@
+{% extends 'index.html' %}
+{% block content %}
+<div class="container gpt-container">
+  <div class="row g-3">
+      <div class="row">
+        <textarea id="textarea" class="form-control"></textarea>
+      </div>
+      <div class="row btn-row">
+        <button id="generate-btn" type="button" class="btn btn-primary w-100" onclick="generateChatGPT()">Generate</button>
+      </div>
+      <div class="content">
+        <p id="content-text"></p>
+        </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,6 @@
+.vscode
+.env
+
+*.pyc
+
+__migrations__
