@@ -135,4 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 GPT_SECRET_KEY = os.getenv('GPT_SECRET_KEY')
 
-CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True

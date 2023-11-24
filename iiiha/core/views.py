@@ -4,6 +4,7 @@ import requests
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse
 from django.conf import settings
+from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request) -> HttpResponse:
@@ -13,7 +14,7 @@ def index(request) -> HttpResponse:
 def chatgpt(request) -> HttpResponse:
     return render(request, "chatgpt.html")
 
-
+@csrf_exempt
 def generate_chatgpt(request) -> JsonResponse:
     request = request.POST
     content = request['content']
