@@ -54,7 +54,12 @@ function generateFusion() {
                 function (data) {
                     let image = data['image'][0];
                     let contentImage = document.getElementById("content-image");
+                    let fusionImageResult = document.getElementById('fusion-image-result');
+                    if (fusionImageResult){
+                        fusionImageResult.remove();
+                    }
                     const newImage = document.createElement('img');
+                    newImage.id = 'fusion-image-result';
                     newImage.src = `data:image/png;base64,${image}`;
                     newImage.width = 600;
                     newImage.height = 300;
