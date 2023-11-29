@@ -1,19 +1,19 @@
 {% extends 'index.html' %}
-{% block title %}iiiha - Chat GPT{% endblock %}
+{% block title %}iiiha - Fusion{% endblock %}
 {% block content %}
 <div class="container gpt-container">
   <div class="row g-3">
       <div class="row">
         <div class="alert alert-info text-center" role="alert">
-          Chat GPT
+          Fusion
         </div>
-        <textarea id="chatgpt-textarea" class="form-control"></textarea>
+        <textarea id="fusion-textarea" class="form-control"></textarea>
       </div>
       <div class="row btn-row">
-        <button id="generate-btn" type="button" class="btn btn-primary w-100" onclick="generateChatGPT()">Generate</button>
+        <button id="generate-btn" type="button" class="btn btn-primary w-100" onclick="generateFusion()">Generate</button>
       </div>
       <div class="content">
-        <p id="content-text"></p>
+        <p id="content-image"></p>
         </div>
   </div>
 </div>

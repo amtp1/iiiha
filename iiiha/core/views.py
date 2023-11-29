@@ -6,6 +6,8 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.views.decorators.csrf import csrf_exempt
 
+from services.api.requests import *
+
 
 def index(request) -> HttpResponse:
     return render(request, "index.html")
@@ -14,18 +16,25 @@ def index(request) -> HttpResponse:
 def chatgpt(request) -> HttpResponse:
     return render(request, "chatgpt.html")
 
+
 @csrf_exempt
 def generate_chatgpt(request) -> JsonResponse:
     request = request.POST
     content = request['content']
-    url = 'https://api.openai.com/v1/chat/completions'
-    data = {'model': 'gpt-3.5-turbo', 'messages': [{'role': 'user', 'content': content}],
-            'temperature': 0.7
-    }
-    headers = {
-        'Content-Type': 'application/json',
-        'Authorization': f'Bearer {settings.GPT_SECRET_KEY}'
-    }
-    generate_request = requests.post(url=url, json=data, headers=headers)
-    response = json.loads(generate_request.text)
+    chat_gpt = ChatGPT()
+    response = chat_gpt.generate(content=content)
     return JsonResponse(response)
+
+
+def fusion(request) -> HttpResponse:
+    return render(request, 'fusion.html')
+
+
+@csrf_exempt
+def generate_fusion(request) -> JsonResponse:
+    request = request.POST
+    prompt = request['prompt']
+    fusion = Fusion()
+    uuid = fusion.generate(prompt=prompt)
+    response = fusion.check_generation(uuid=uuid)
+    return JsonResponse({'image': response})
