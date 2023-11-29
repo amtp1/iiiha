@@ -1,6 +1,11 @@
-.gpt-container {
-    margin-top: 3%;
-    width: 630px;
+@media (min-width:1025px) { .gpt-container { width: 50% !important; margin-left: none;} }
+@media (min-width:1025px) { .fusion-container { width: 50% !important;} }
+@media (max-width:500px) { .gpt-container { margin-left: 3% !important;} }
+@media (max-width:500px) { .fusion-container { margin-left: 3% !important;} }
+
+.gpt-container, .fusion-container {
+    margin-top: 3% !important;
+    /*margin-left: 3% !important;*/
 }
 
 textarea {
