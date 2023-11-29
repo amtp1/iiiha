@@ -61,8 +61,6 @@ function generateFusion() {
                     const newImage = document.createElement('img');
                     newImage.id = 'fusion-image-result';
                     newImage.src = `data:image/png;base64,${image}`;
-                    newImage.width = 600;
-                    newImage.height = 300;
                     contentImage.appendChild(newImage);
                     generateBtn.disabled = false;
                     generateBtn.innerHTML = "Generate";
