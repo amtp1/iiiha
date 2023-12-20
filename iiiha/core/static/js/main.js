@@ -1,60 +1,93 @@
-function generateChatGPT() {
-    let contentText = document.getElementById("chatgpt-textarea");
-    if (contentText.value == "") {
-        return alert("Поле не должно оставаться пустым!");
+function generateAssistentRequest() {
+    let textArea = $('textarea');
+    if (textArea.val() == "") {
+        return alert('Поле не должно оставаться пустым!');
     } else {
-        let generateBtn = document.getElementById("generate-btn");
+        let generateBtn = document.getElementById('pre-generate-btn');
         generateBtn.disabled = true;
         generateBtn.innerHTML = '<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>'
+
         let data = new FormData();
-        data.append("content", contentText.value);
+        data.append('content', textArea.val());
+
+        fetch('generate_assistent_request', {
+            method: 'POST',
+            body: data,
+            contentType: 'application/json',
+            headers: {
+                "X-Requested-With": 'XMLHttpRequest',
+                "X-CSRFToken": $.cookie('csrftoken')
+            },
+          }).then(function (response) {
+            response.json().then(
+                function (data) {
+                    let content = data['choices'][0]['message']['content'];
+                    if (content == 'Unknow') {
+                        $('#service-choice-modal').modal('show');
+                    } else {
+                        if (content == 'ChatGPT') {
+                            generateChatGPT();
+                        }
+                    }
+                }
+            )
+          });
+    }
+}
+
+function generateChatGPT() {
+    $('#service-choice-modal').modal('hide');
+    let textArea = $('textarea');
+    if (textArea.val() == "") {
+        return alert('Поле не должно оставаться пустым!');
+    } else {
+        let data = new FormData();
+        data.append("content", textArea.val());
 
         fetch("generate_chatgpt", {
             method: "POST",
             body: data,
             contentType: 'application/json',
             headers: {
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRFToken": $.cookie("csrftoken")
+                'X-Requested-With': "XMLHttpRequest",
+                'X-CSRFToken': $.cookie("csrftoken")
             },
-          }).then(function (response) {
+            }).then(function (response) {
             response.json().then(
                 function (data) {
+                    resetPreGenerateButton();
                     let content = data['choices'][0]['message']['content'];
-                    document.getElementById("content-text").innerHTML = content;
-                    generateBtn.disabled = false;
-                    generateBtn.innerHTML = "Generate";
+                    document.getElementById("content").innerHTML = content;
                     scrollIntoView('content-div');
                 }
             )
-          })
+        })
     }
 }
 
 function generateFusion() {
-    let contentText = document.getElementById("fusion-textarea");
-    if (contentText.value == "") {
-        return alert("Поле не должно оставаться пустым!");
+    $('#service-choice-modal').modal('hide');
+    let textArea = $('textarea');
+    if (textArea.val() == "") {
+        return alert('Поле не должно оставаться пустым!');
     } else {
-        let generateBtn = document.getElementById("generate-btn");
-        generateBtn.disabled = true;
-        generateBtn.innerHTML = '<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>'
         let data = new FormData();
-        data.append("prompt", contentText.value);
+        data.append('prompt', textArea.val());
 
-        fetch("generate_fusion", {
-            method: "POST",
+        fetch('generate_fusion', {
+            method: 'POST',
             body: data,
             contentType: 'application/json',
             headers: {
-                "X-Requested-With": "XMLHttpRequest",
-                "X-CSRFToken": $.cookie("csrftoken")
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': $.cookie('csrftoken')
             },
           }).then(function (response) {
             response.json().then(
                 function (data) {
+                    resetPreGenerateButton();
                     let image = data['image'][0];
-                    let contentImage = document.getElementById("content-image");
+                    let contentImage = document.getElementById('content');
                     let fusionImageResult = document.getElementById('fusion-image-result');
                     if (fusionImageResult){
                         fusionImageResult.remove();
@@ -63,8 +96,6 @@ function generateFusion() {
                     newImage.id = 'fusion-image-result';
                     newImage.src = `data:image/png;base64,${image}`;
                     contentImage.appendChild(newImage);
-                    generateBtn.disabled = false;
-                    generateBtn.innerHTML = "Generate";
                     scrollIntoView('fusion-image-result');
                 }
             )
@@ -74,4 +105,10 @@ function generateFusion() {
 
 function scrollIntoView(id) {
     document.getElementById(id).scrollIntoView({ block: "center", behavior: "smooth" });
-} 
+}
+
+function resetPreGenerateButton() {
+    let generateBtn = document.getElementById("pre-generate-btn");
+    generateBtn.disabled = false;
+    generateBtn.innerHTML = "Генерировать";
+}

@@ -1,6 +1,32 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
+<div id="service-choice-modal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Выберите сервис</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>Не удалось распознать ваш запрос, выберите сервис для продолжения.</p>
+        <div class="services">
+          <button id="service-choice-button" onclick="generateChatGPT()">
+            <div class="service-card">
+              <h2>ChatGPT</h2>
+            </div>
+          </button>
+          <button id="service-choice-button" onclick="generateFusion()">
+            <div class="service-card">
+              <h2>Fusion Image</h2>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
       <img src="{% static 'images/logo.svg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
@@ -10,12 +36,12 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
+          <!--<li class="nav-item">
             <a class="nav-link active" aria-current="page" href="chatgpt">Текст</a>
           </li>
           <li class="nav-item">
             <a class="nav-link active" aria-current="page" href="fusion">Картинки</a>
-          </li>
+          </li>-->
         </ul>
         <span class="navbar-text">
           Интегратор Искусственого Интеллекта
@@ -23,5 +49,18 @@
       </div>
     </div>
 </nav>
+<div class="container">
+	<div class="card">
+		<div class="card-image">	
+		</div>
+      <textarea class="form-control"></textarea>
+      <div class="action">
+        <button id="pre-generate-btn" class="action-button" onclick="generateAssistentRequest()">Генерировать</button>
+      </div>
+      <div id="content-div" class="content">
+        <p id="content"></p>
+      </div>
+	</div>
+</div>
 {% block content %}{% endblock %}
 {% endblock %}
