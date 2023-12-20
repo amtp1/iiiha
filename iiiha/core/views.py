@@ -18,6 +18,14 @@ def chatgpt(request) -> HttpResponse:
 
 
 @csrf_exempt
+def generate_assistent_request(request):
+    content = request.POST['content']
+    assistent_request = AssistentRequest()
+    response = assistent_request.generate(content)
+    return JsonResponse(response)
+
+
+@csrf_exempt
 def generate_chatgpt(request) -> JsonResponse:
     request = request.POST
     content = request['content']
