@@ -6,6 +6,7 @@ from .views import *
 
 urlpatterns = [
     path('', index, name='index'),
+    path('generate_assistent_request', generate_assistent_request, name='generate_assistent_request'),
     path('chatgpt', chatgpt, name='chatgpt'),
     path('generate_chatgpt', generate_chatgpt, name='generate_chatgpt'),
     path('fusion', fusion, name='fusion'),
