@@ -32,7 +32,8 @@ function generateAssistentRequest() {
                     if (content == 'Unknow') {
                         $('#service-choice-modal').modal('show');
                     } else {
-                        let contentArray = content.split(',');
+                        $('#service-choice-modal').modal('show');
+                        /*let contentArray = content.split(',');
                         if (contentArray.length == 1) {
                             content = contentArray[0].trim();
                             choiceContentCalls[content]();
@@ -52,7 +53,8 @@ function generateAssistentRequest() {
                                 services.appendChild(button);
                             });
                             $('#service-choice-modal').modal('show');
-                        }
+                        }*/
+
                     }
                 }
             )
