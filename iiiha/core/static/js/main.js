@@ -22,11 +22,14 @@ function generateAssistentRequest() {
             response.json().then(
                 function (data) {
                     let content = data['choices'][0]['message']['content'];
+                    console.log(content);
                     if (content == 'Unknow') {
                         $('#service-choice-modal').modal('show');
                     } else {
                         if (content == 'ChatGPT') {
                             generateChatGPT();
+                        } else {
+                            $('#service-choice-modal').modal('show');
                         }
                     }
                 }
