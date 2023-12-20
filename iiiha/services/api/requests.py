@@ -12,7 +12,7 @@ class AssistentRequest:
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
 
     def generate(self, content: str):
-        data = {'model': 'gpt-4-0314', 'messages': messages(content),
+        data = {'model': 'gpt-3.5-turbo', 'messages': messages(content),
                 'temperature': 0.7
         }
         headers = {
