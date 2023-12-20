@@ -1,20 +1,18 @@
 {% extends 'index.html' %}
 {% block title %}ИИИ-ХА! - Fusion{% endblock %}
 {% block content %}
-<div class="container fusion-container">
-  <div class="row g-3">
-      <div class="row">
-        <div class="alert alert-info text-center" role="alert">
-          Fusion
-        </div>
-        <textarea id="fusion-textarea" class="form-control"></textarea>
+{% load static %}
+<div class="container">
+	<div class="card">
+		<div class="card-image">
+		</div>
+      <textarea id="fusion-textarea" class="form-control"></textarea>
+      <div class="action">
+        <button id="generate-btn" class="action-button" onclick="generateFusion()">Generate</button>
       </div>
-      <div class="row btn-row">
-        <button id="generate-btn" type="button" class="btn btn-primary w-100" onclick="generateFusion()">Generate</button>
-      </div>
-      <div class="content">
+      <div>
         <p id="content-image"></p>
-        </div>
-  </div>
+      </div>
+	</div>
 </div>
 {% endblock %}

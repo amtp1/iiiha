@@ -24,6 +24,7 @@ function generateChatGPT() {
                     document.getElementById("content-text").innerHTML = content;
                     generateBtn.disabled = false;
                     generateBtn.innerHTML = "Generate";
+                    scrollIntoView('content-div');
                 }
             )
           })
@@ -64,8 +65,13 @@ function generateFusion() {
                     contentImage.appendChild(newImage);
                     generateBtn.disabled = false;
                     generateBtn.innerHTML = "Generate";
+                    scrollIntoView('fusion-image-result');
                 }
             )
           })
     }
 }
+
+function scrollIntoView(id) {
+    document.getElementById(id).scrollIntoView({ block: "center", behavior: "smooth" });
+} 

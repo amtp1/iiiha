@@ -1,20 +1,17 @@
 {% extends 'index.html' %}
 {% block title %}ИИИ-ХА! - Chat GPT{% endblock %}
 {% block content %}
-<div class="container gpt-container">
-  <div class="row g-3">
-      <div class="row">
-        <div class="alert alert-info text-center" role="alert">
-          Chat GPT
-        </div>
-        <textarea id="chatgpt-textarea" class="form-control"></textarea>
+<div class="container">
+	<div class="card">
+		<div class="card-image">	
+		</div>
+      <textarea id="chatgpt-textarea" class="form-control"></textarea>
+      <div class="action">
+        <button id="generate-btn" class="action-button" onclick="generateChatGPT()">Generate</button>
       </div>
-      <div class="row btn-row">
-        <button id="generate-btn" type="button" class="btn btn-primary w-100" onclick="generateChatGPT()">Generate</button>
-      </div>
-      <div class="content">
+      <div id="content-div" class="content">
         <p id="content-text"></p>
-        </div>
-  </div>
+      </div>
+	</div>
 </div>
 {% endblock %}
