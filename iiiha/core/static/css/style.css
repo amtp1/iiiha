@@ -3,7 +3,7 @@
 @media (min-width:1025px) { .service-card { width: 190px !important;} }
 @media (max-width:500px) { .gpt-container { margin-left: 3% !important; margin-top: 7% !important;} }
 @media (max-width:500px) { .fusion-container { margin-left: 3% !important; margin-top: 7% !important;} }
-@media (max-width:500px) { .service-card { width: 155px !important;} }
+@media (max-width:500px) { .service-card { width: 150px !important;} }
 
 textarea {
     resize: none;
