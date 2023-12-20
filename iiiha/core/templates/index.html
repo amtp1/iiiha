@@ -10,15 +10,10 @@
       </div>
       <div class="modal-body">
         <p>Не удалось распознать ваш запрос, выберите сервис для продолжения.</p>
-        <div class="services">
+        <div id="services" class="services">
           <button id="service-choice-button" onclick="generateChatGPT()">
             <div class="service-card">
               <h2>ChatGPT</h2>
-            </div>
-          </button>
-          <button id="service-choice-button" onclick="generateFusion()">
-            <div class="service-card">
-              <h2>Fusion Image</h2>
             </div>
           </button>
         </div>
@@ -36,12 +31,6 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <!--<li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="chatgpt">Текст</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="fusion">Картинки</a>
-          </li>-->
         </ul>
         <span class="navbar-text">
           Интегратор Искусственого Интеллекта
@@ -51,7 +40,7 @@
 </nav>
 <div class="container">
 	<div class="card">
-		<div class="card-image">	
+		<div class="card-image">
 		</div>
       <textarea class="form-control"></textarea>
       <div class="action">
