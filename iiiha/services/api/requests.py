@@ -2,8 +2,26 @@ import time
 import json
 
 import requests
-
 from django.conf import settings
+
+from ..temp.temp import messages
+
+
+class AssistentRequest:
+    def __init__(self):
+        self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
+
+    def generate(self, content: str):
+        data = {'model': 'gpt-4-0314', 'messages': messages(content),
+                'temperature': 0.7
+        }
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}'
+        }
+        request = requests.post(url=self.BASE_URL, json=data, headers=headers)
+        response = json.loads(request.text)
+        return response
 
 
 class ChatGPT:
