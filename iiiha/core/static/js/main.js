@@ -159,16 +159,29 @@ function resetServices() {
     remove('#service-choice-button');
 
     const services = document.getElementById('services');
-    const button = document.createElement('button');
-    button.id = 'service-choice-button';
-    button.setAttribute('onclick', 'generateChatGPT()');
-    const div = document.createElement('div');
-    div.className = 'service-card';
-    const h2 = document.createElement('h2');
-    h2.innerHTML = 'ChatGPT';
-    div.appendChild(h2);
-    button.appendChild(div);
-    services.appendChild(button);
+
+    const chatgpt_button = document.createElement('button');
+    chatgpt_button.id = 'service-choice-button';
+    chatgpt_button.setAttribute('onclick', 'generateChatGPT()');
+    const chatgpt_div = document.createElement('div');
+    chatgpt_div.className = 'service-card';
+    const chatgpt_h2 = document.createElement('h2');
+    chatgpt_h2.innerHTML = 'ChatGPT';
+    chatgpt_div.appendChild(chatgpt_h2);
+    chatgpt_button.appendChild(chatgpt_div);
+
+    const fusion_button = document.createElement('button');
+    fusion_button.id = 'service-choice-button';
+    fusion_button.setAttribute('onclick', 'generateFusion()');
+    const fusion_div = document.createElement('div');
+    fusion_div.className = 'service-card';
+    const fusion_h2 = document.createElement('h2');
+    fusion_h2.innerHTML = 'ImageFusion';
+    fusion_div.appendChild(fusion_h2);
+    fusion_button.appendChild(fusion_div);
+
+    services.appendChild(chatgpt_button);
+    services.appendChild(fusion_button);
 }
 
 function resetContent() {
