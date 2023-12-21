@@ -32,28 +32,33 @@ function generateAssistentRequest() {
                     if (content == 'Unknow') {
                         $('#service-choice-modal').modal('show');
                     } else {
-                        $('#service-choice-modal').modal('show');
-                        /*let contentArray = content.split(',');
+                        let contentArray = content.split(',');
                         if (contentArray.length == 1) {
                             content = contentArray[0].trim();
-                            choiceContentCalls[content]();
+                            try {
+                                choiceContentCalls[content]();
+                            } catch {
+                                generateChatGPT();
+                            }
                         } else {
                             const services = document.getElementById('services');
                             contentArray.forEach((content) => {
                                 content = content.trim();
-                                const button = document.createElement('button');
-                                button.id = 'service-choice-button';
-                                button.setAttribute('onclick', choiceCalls[content]);
-                                const div = document.createElement('div');
-                                div.className = 'service-card';
-                                const h2 = document.createElement('h2');
-                                h2.innerHTML = content;
-                                div.appendChild(h2);
-                                button.appendChild(div);
-                                services.appendChild(button);
+                                if (filterContent(content)) {
+                                    const button = document.createElement('button');
+                                    button.id = 'service-choice-button';
+                                    button.setAttribute('onclick', choiceCalls[content]);
+                                    const div = document.createElement('div');
+                                    div.className = 'service-card';
+                                    const h2 = document.createElement('h2');
+                                    h2.innerHTML = content;
+                                    div.appendChild(h2);
+                                    button.appendChild(div);
+                                    services.appendChild(button);
+                                }
                             });
                             $('#service-choice-modal').modal('show');
-                        }*/
+                        }
 
                     }
                 }
@@ -170,5 +175,12 @@ function resetContent() {
     let content = document.getElementById('content');
     if (content) {
         remove('#content');
+    }
+}
+
+function filterContent(content) {
+    let choice_services_array = Object.keys(choiceContentCalls);
+    if (content in choice_services_array) {
+        return content;
     }
 }
