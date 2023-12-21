@@ -4,6 +4,7 @@
 @media (max-width:500px) { .gpt-container { margin-left: 3% !important; margin-top: 7% !important;} }
 @media (max-width:500px) { .fusion-container { margin-left: 3% !important; margin-top: 7% !important;} }
 @media (max-width:500px) { .service-card { width: 150px !important;} }
+@media (min-width:370px) { .service-card { width: 140px !important;} }
 
 textarea {
     resize: none;
