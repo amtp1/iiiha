@@ -167,6 +167,11 @@ function resetServices() {
     chatgpt_div.className = 'service-card';
     const chatgpt_h2 = document.createElement('h2');
     chatgpt_h2.innerHTML = 'ChatGPT';
+    const chatgpt_p = document.createElement('p');
+    const chatgpt_small = document.createElement('small');
+    chatgpt_small.innerHTML = '(Тексты)';
+    chatgpt_p.appendChild(chatgpt_small);
+    chatgpt_h2.appendChild(chatgpt_p);
     chatgpt_div.appendChild(chatgpt_h2);
     chatgpt_button.appendChild(chatgpt_div);
 
@@ -177,6 +182,11 @@ function resetServices() {
     fusion_div.className = 'service-card';
     const fusion_h2 = document.createElement('h2');
     fusion_h2.innerHTML = 'ImageFusion';
+    const fusion_p = document.createElement('p');
+    const fusion_small = document.createElement('small');
+    fusion_small.innerHTML = '(Картинки)';
+    fusion_p.appendChild(fusion_small);
+    fusion_h2.appendChild(fusion_p);
     fusion_div.appendChild(fusion_h2);
     fusion_button.appendChild(fusion_div);
 
