@@ -99,6 +99,7 @@ function generateChatGPT() {
                     let content = data['choices'][0]['message']['content'];
                     let contentDiv = document.getElementById('content-div');
                     const contentP = document.createElement('p');
+                    contentDiv.style.overflow = 'auto';
                     contentP.id = 'content';
                     contentP.innerHTML = content;
                     contentDiv.appendChild(contentP);
@@ -141,6 +142,7 @@ function generateFusion() {
                     let image = data['image'][0];
                     let contentDiv = document.getElementById('content-div');
                     const contentP = document.createElement('p');
+                    contentDiv.style.overflow = 'hidden';
                     contentP.id = 'content';
                     let fusionImageResult = document.getElementById('fusion-image-result');
                     if (fusionImageResult){
