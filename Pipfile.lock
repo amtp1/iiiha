@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "db03ed82be2f77579c67dd81a96071e99e20675b5162bbfa635cc10664b5aa6e"
+            "sha256": "ea0b67be17f6f439abe04298ed9b6bc130bd0be223974b2db6c741c0706d468b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -130,19 +130,26 @@
         },
         "django": {
             "hashes": [
-                "sha256:8e0f1c2c2786b5c0e39fe1afce24c926040fad47c8ea8ad30aaf1188df29fc41",
-                "sha256:e1d37c51ad26186de355cbcec16613ebdabfa9689bbade9c538835205a8abbe9"
+                "sha256:8c8659665bc6e3a44fefe1ab0a291e5a3fb3979f9a8230be29de975e57e8f854",
+                "sha256:f47a37a90b9bbe2c8ec360235192c7fddfdc832206fcf618bb849b39256affc1"
             ],
             "index": "pypi",
-            "version": "==4.2.7"
+            "version": "==5.0.1"
+        },
+        "django-admin-volt": {
+            "hashes": [
+                "sha256:7f1eec85a41906fd50bd19bfc4a7a1f6515bd324b6fbe52b1befa4e5462fe8b8"
+            ],
+            "index": "pypi",
+            "version": "==1.0.10"
         },
         "idna": {
             "hashes": [
-                "sha256:814f528e8dead7d329833b91c5faa87d60bf71824cd12a7530b5526063d02cb4",
-                "sha256:90b77e79eaa3eba6de819a0c442c0b4ceefc341a7a2ab77d7562bf49f425c5c2"
+                "sha256:9ecdbbd083b06798ae1e86adcbfe8ab1479cf864e4ee30fe4e46a003d12491ca",
+                "sha256:c05567e9c24a6b9faaa835c4821bad0590fbb9d5779e7caa6e1cc4978e7eb24f"
             ],
             "markers": "python_version >= '3.5'",
-            "version": "==3.4"
+            "version": "==3.6"
         },
         "psycopg2": {
             "hashes": [
@@ -189,11 +196,11 @@
         },
         "tzdata": {
             "hashes": [
-                "sha256:11ef1e08e54acb0d4f95bdb1be05da659673de4acbd21bf9c69e94cc5e907a3a",
-                "sha256:7e65763eef3120314099b6939b5546db7adce1e7d6f2e179e3df563c70511eda"
+                "sha256:aa3ace4329eeacda5b7beb7ea08ece826c28d761cda36e747cfbf97996d39bf3",
+                "sha256:dd54c94f294765522c77399649b4fefd95522479a664a0cec87f41bebc6148c9"
             ],
             "markers": "sys_platform == 'win32'",
-            "version": "==2023.3"
+            "version": "==2023.4"
         },
         "urllib3": {
             "hashes": [

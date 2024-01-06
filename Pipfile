@@ -8,6 +8,7 @@ python-dotenv = "*"
 django = "*"
 psycopg2 = "*"
 requests = "*"
+django-admin-volt = "*"
 
 [dev-packages]
 
