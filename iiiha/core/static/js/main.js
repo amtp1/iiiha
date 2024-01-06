@@ -12,7 +12,7 @@ function generateAssistentRequest() {
     } else {
         let generateBtn = document.getElementById('pre-generate-btn');
         generateBtn.disabled = true;
-        generateBtn.innerHTML = '<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>'
+        generateBtn.innerHTML = '<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>';
 
         let data = new FormData();
         data.append('content', textArea.val());
@@ -59,8 +59,8 @@ function generateAssistentRequest() {
                             });
                             $('#service-choice-modal').modal('show');
                         }
-
                     }
+                    localStorage.setItem('isAssistent', true);
                 }
             )
           });
@@ -68,12 +68,19 @@ function generateAssistentRequest() {
 }
 
 function generateChatGPT() {
-    $('#service-choice-button').on('click', resetServices());
+    let isAssistent = localStorage.getItem('isAssistent');
+    if (isAssistent) {
+        $('#service-choice-button').on('click', resetServices());
+    }
     resetContent();
     let textArea = $('textarea');
     if (textArea.val() == "") {
         return alert('Поле не должно оставаться пустым!');
     } else {
+        let generateBtn = document.getElementById('pre-generate-btn');
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>';
+
         let data = new FormData();
         data.append('content', textArea.val());
 
@@ -103,12 +110,19 @@ function generateChatGPT() {
 }
 
 function generateFusion() {
-    $('#service-choice-button').on('click', resetServices());
+    let isAssistent = localStorage.getItem('isAssistent');
+    if (isAssistent) {
+        $('#service-choice-button').on('click', resetServices());
+    }
     resetContent();
     let textArea = $('textarea');
     if (textArea.val() == "") {
         return alert('Поле не должно оставаться пустым!');
     } else {
+        let generateBtn = document.getElementById('pre-generate-btn');
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>';
+
         let data = new FormData();
         data.append('prompt', textArea.val());
 
@@ -192,6 +206,8 @@ function resetServices() {
 
     services.appendChild(chatgpt_button);
     services.appendChild(fusion_button);
+
+    localStorage.removeItem('isAssistent');
 }
 
 function resetContent() {
