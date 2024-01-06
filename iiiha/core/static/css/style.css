@@ -1,10 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+
 @media (min-width:1025px) { .gpt-container { width: 50% !important; margin-top: 3% !important;} }
 @media (min-width:1025px) { .fusion-container { width: 50% !important; margin-top: 3% !important;} }
 @media (min-width:1025px) { .service-card { width: 190px !important;} }
+
 @media (max-width:500px) { .gpt-container { margin-left: 3% !important; margin-top: 7% !important;} }
 @media (max-width:500px) { .fusion-container { margin-left: 3% !important; margin-top: 7% !important;} }
 @media (max-width:500px) { .service-card { width: 150px !important;} }
 @media (min-width:370px) { .service-card { width: 140px !important;} }
+
+@media (max-width:500px) { #fusion-image-result {
+    display: block;
+    width: 20rem;
+    margin-left: 4.5%;
+    margin-right: auto;
+    }
+}
+
+@media (min-width:1025px) { #fusion-image-result {
+    display: block;
+	width: 240px;
+    margin-right: auto;
+	margin-left: 25%;
+    }
+}
 
 textarea {
     resize: none;
@@ -23,11 +42,11 @@ textarea {
     top: 10px;
 }
 
+/* Content */
 .content {
     max-height: 250px;
     max-width: 608px;
     padding: 0.5rem;
-    overflow-y: auto;
     scrollbar-width: thin;
 	margin-top: 5px;
 }
@@ -52,24 +71,6 @@ textarea {
 	margin-top: 20px;
 }
 
-@media (max-width:500px) { #fusion-image-result {
-    display: block;
-    width: 20rem;
-    margin-left: 4.5%;
-    margin-right: auto;
-    }
-}
-
-@media (min-width:1025px) { #fusion-image-result {
-    display: block;
-	width: 240px;
-    margin-right: auto;
-	margin-left: 25%;
-    }
-}
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
-
 *, *:after, *:before {
 	box-sizing: border-box;
 }
@@ -80,7 +81,7 @@ img {
 }
 
 
-// iOS Reset 
+/* iOS Reset */
 input {
 	appearance: none;
 	border-radius: 0;
@@ -90,12 +91,12 @@ input {
 	margin: 1rem auto;
 	display: flex;
 	flex-direction: column;
-	width: 100%;
-	max-width: 525px;
+	max-width: 520px;
 	background-color: #FFF;
-	border-radius: 10px;
-	box-shadow: 0 10px 20px 0 rgba(#999, .25);
-	padding: .55rem;
+	border-radius: 15px;
+	box-shadow: 0px 10px 20px 0px rgba(#999, .25);
+	padding: .40rem;
+	border-width: 1.5px;
 }
 
 .card-image {
@@ -172,7 +173,7 @@ input {
 .action-button {
 	font: inherit;
 	font-size: 1.25rem;
-	padding: 1em;
+	padding: 0.8em;
 	width: 100%;
 	font-weight: 500;
 	background-color: #6658d3;
@@ -196,6 +197,7 @@ input {
 	}
 }
 
+/* Services */
 #service-choice-button {
 	border: none;
 	background-color: white;
@@ -218,7 +220,7 @@ input {
 	border-radius: 20px;
   }
 
-  .service-card h2 {
+.service-card h2 {
 	z-index: 1;
 	color: white;
 	font-size: 1em;
@@ -244,7 +246,7 @@ input {
 	}
   }
 
-  .service-card::after {
+.service-card::after {
 	content: '';
 	position: absolute;
 	background: #07182E;
@@ -252,14 +254,6 @@ input {
 	inset: 5px;
 	border-radius: 15px;
   }
-
-.modal {
-	overflow-y: hidden;
-}
-
-.modal-dialog{
-    overflow-y: initial !important
-}
 
 .services{
 	height: 45vh;
@@ -280,4 +274,14 @@ input {
     border: 1px solid transparent;
     background-clip: content-box;
     background-color: black;
+}
+
+
+/* Modal */
+.modal {
+	overflow-y: hidden;
+}
+
+.modal-dialog{
+    overflow-y: initial !important
 }
