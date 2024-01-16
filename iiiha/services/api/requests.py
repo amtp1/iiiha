@@ -82,3 +82,40 @@ class Fusion:
 
             attempts -= 1
             time.sleep(delay)
+
+
+class PlusVector:
+    def __init__(self, prompt: str):
+        self.URL = 'https://api.plusvector.com/'
+        self.AUTH_HEADERS = {
+            'Authorization': f'Bearer {settings.PLUSVECTOR_API_KEY}'
+        }
+        self.prompt = prompt
+
+    def create(self):
+        data = {
+            'prompt': self.prompt,
+            'webhook': None
+        }
+
+        response = requests.post(self.URL + 'render/create', data=data, headers=self.AUTH_HEADERS)
+        data = response.json()
+        return data
+
+    def get(self, attempts=10, delay=10):
+        # create_response = self.create()
+        # generate_id = create_response['response']['id']
+
+        payload = {
+            'id': '018d1443-9482-70c6-a59d-61c55cd744b3'  # generate_id
+        }
+
+        while attempts > 0:
+            response = requests.get(self.URL + 'render', params=payload, headers=self.AUTH_HEADERS)
+            data = response.json()
+            if data['success'] == True:
+                if 'concepts' in data['response'].keys():
+                    if data['response']['concepts']:
+                        return data
+            attempts -= 1
+            time.sleep(delay)
