@@ -285,3 +285,7 @@ input {
 .modal-dialog{
     overflow-y: initial !important
 }
+
+#carouselPlusVectorIndicators {
+	left: 24%;
+}
