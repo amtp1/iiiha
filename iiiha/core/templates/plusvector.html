@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% block title %}ИИИ-ХА! - PlusVector{% endblock %}
+{% load static %}
+{% block body %}
+<div id="carouselPlusVectorIndicators" class="carousel slide w-50">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselPlusVectorIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselPlusVectorIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselPlusVectorIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselPlusVectorIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+  </div>
+  <div class="carousel-inner">
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselPlusVectorIndicators" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselPlusVectorIndicators" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div class="container">
+	<div class="card">
+		<div class="card-image">
+		</div>
+      <textarea class="form-control" placeholder="Введите запрос (Нарисуй картину)"></textarea>
+      <div class="action">
+        <button id="pre-generate-btn" class="action-button" onclick="generatePlusVector()">Генерировать</button>
+      </div>
+      <div id="content-div" class="content">
+        <p id="content"></p>
+      </div>
+	</div>
+</div>
+{% endblock %}
