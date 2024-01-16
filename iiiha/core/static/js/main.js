@@ -160,6 +160,67 @@ function generateFusion() {
     }
 }
 
+function generatePlusVector() {
+    let isAssistent = localStorage.getItem('isAssistent');
+    if (isAssistent) {
+        $('#service-choice-button').on('click', resetServices());
+    }
+    resetContent();
+    let textArea = $('textarea');
+    if (textArea.val() == "") {
+        return alert('Поле не должно оставаться пустым!');
+    } else {
+        let generateBtn = document.getElementById('pre-generate-btn');
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>';
+
+        let data = new FormData();
+        data.append('prompt', textArea.val());
+
+        fetch('generate_plusvector', {
+            method: 'POST',
+            body: data,
+            contentType: 'application/json',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': $.cookie('csrftoken')
+            },
+          }).then(function (response) {
+            response.json().then(
+                function (data) {
+                    resetPreGenerateButton();
+                    let contentDiv = document.getElementById('content-div');
+                    const contentP = document.createElement('p');
+                    contentDiv.style.overflow = 'hidden';
+                    contentP.id = 'content';
+                    const carouselPlusVector = document.getElementById('carouselPlusVectorIndicators');
+                    const carouselInner = carouselPlusVector.getElementsByClassName('carousel-inner')[0];
+                    let activeItem = 0;
+                    data['images'].forEach((image) => {
+                        activeItem += 1;
+                        let carouselItem = document.createElement('div');
+                        if (activeItem == 1){
+                            carouselItem.className = 'carousel-item active';
+                        } else {
+                            carouselItem.className = 'carousel-item';
+                        }
+                        let carouselImage = document.createElement('img');
+                        carouselImage.className = 'd-block w-100';
+                        carouselImage.src = image;
+                        carouselImage.width = 200;
+                        carouselImage.height = 200;
+                        carouselItem.appendChild(carouselImage);
+                        carouselInner.appendChild(carouselItem);
+                        contentP.appendChild(carouselPlusVector);
+                        contentDiv.appendChild(contentP);
+                    })
+                    scrollIntoView('content-div');
+                }
+            )
+          });
+    }
+}
+
 function scrollIntoView(id) {
     document.getElementById(id).scrollIntoView({ block: 'center', behavior: 'smooth' });
 }
