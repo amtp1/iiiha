@@ -46,3 +46,16 @@ def generate_fusion(request) -> JsonResponse:
     uuid = fusion.generate(prompt=prompt)
     response = fusion.check_generation(uuid=uuid)
     return JsonResponse({'image': response})
+
+
+def plusvector(request) -> HttpResponse:
+    return render(request, 'plusvector.html')
+
+
+@csrf_exempt
+def generate_plusvector(request) -> JsonResponse:
+    request = request.POST
+    prompt = request['prompt']
+    plus_vector = PlusVector(prompt=prompt)
+    plus_vector_response = plus_vector.get()
+    return JsonResponse({'images': plus_vector_response['response']['concepts']['images']})
