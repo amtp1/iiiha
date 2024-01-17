@@ -208,7 +208,7 @@ function generatePlusVector() {
                         carouselImage.className = 'd-block w-100';
                         carouselImage.src = image;
                         carouselImage.width = 200;
-                        carouselImage.height = 200;
+                        carouselImage.height = 240;
                         carouselItem.appendChild(carouselImage);
                         carouselInner.appendChild(carouselItem);
                         contentP.appendChild(carouselPlusVector);
