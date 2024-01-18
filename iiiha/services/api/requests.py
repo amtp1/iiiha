@@ -103,11 +103,11 @@ class PlusVector:
         return data
 
     def get(self, attempts=10, delay=10):
-        # create_response = self.create()
-        # generate_id = create_response['response']['id']
+        create_response = self.create()
+        generate_id = create_response['response']['id']
 
         payload = {
-            'id': '018d1443-9482-70c6-a59d-61c55cd744b3'  # generate_id
+            'id': generate_id
         }
 
         while attempts > 0:
