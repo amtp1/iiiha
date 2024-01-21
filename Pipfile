@@ -9,6 +9,7 @@ django = "*"
 psycopg2 = "*"
 requests = "*"
 django-admin-volt = "*"
+pillow = "*"
 
 [dev-packages]
 
