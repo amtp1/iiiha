@@ -7,7 +7,7 @@ from django.conf import settings
 from ..temp.temp import messages
 
 
-class AssistentRequest:
+class AssistentRequestService:
     def __init__(self):
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
 
@@ -24,7 +24,7 @@ class AssistentRequest:
         return response
 
 
-class ChatGPT:
+class ChatGPTService:
     def __init__(self):
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
 
@@ -41,7 +41,7 @@ class ChatGPT:
         return response
 
 
-class Fusion:
+class FusionService:
     def __init__(self):
         self.URL = 'https://api-key.fusionbrain.ai/'
         self.AUTH_HEADERS = {
@@ -84,7 +84,7 @@ class Fusion:
             time.sleep(delay)
 
 
-class PlusVector:
+class PlusVectorService:
     def __init__(self, prompt: str):
         self.URL = 'https://api.plusvector.com/'
         self.AUTH_HEADERS = {
@@ -119,3 +119,19 @@ class PlusVector:
                         return data
             attempts -= 1
             time.sleep(delay)
+
+
+class SmartCameraService:
+    def __init__(self):
+        self.URL = 'https://api.task-tiker.ru/api.php'
+        self.AUTH_HEADERS = {
+            'Authorization': f'Bearer {settings.SMARTCAMERA_API_KEY}',
+            'Content-Type': 'application/json'
+        }
+
+    def generate(self, image_url):
+        print(image_url)
+        payload = {'action': 'yandex_picture', 'url_picture': image_url}
+        response = requests.post(url=self.URL, json=payload, headers=self.AUTH_HEADERS)
+        data = response.json()
+        return data

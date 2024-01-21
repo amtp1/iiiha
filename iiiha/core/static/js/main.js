@@ -221,14 +221,64 @@ function generatePlusVector() {
     }
 }
 
+function generateSmartCamera() {
+    let isAssistent = localStorage.getItem('isAssistent');
+    if (isAssistent) {
+        $('#service-choice-button').on('click', resetServices());
+    }
+    resetContent();
+    var file = document.querySelector('input[type=file]').files[0];
+    if (file == undefined) {
+        return alert('Загрузите изображение для определения!');
+    } else {
+        let generateBtn = document.getElementById('pre-generate-btn');
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>';
+
+        let data = new FormData();
+        data.append('file', file);
+
+        fetch('generate_smartcamera', {
+            method: 'POST',
+            body: data,
+            contentType: 'application/json',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': $.cookie('csrftoken')
+            },
+          }).then(function (response) {
+            response.json().then(
+                function (data) {
+                    resetPreGenerateButton(is_check_button=true);
+                    let content = data['name'];
+                    if (content == null) {
+                        content = 'Не удалось распознать объект!';
+                    }
+                    let contentDiv = document.getElementById('content-div');
+                    const contentP = document.createElement('p');
+                    contentDiv.style.overflow = 'auto';
+                    contentP.id = 'content';
+                    contentP.innerHTML = content;
+                    contentDiv.appendChild(contentP);
+                    scrollIntoView('content-div');
+                }
+            )
+          });
+    }
+}
+
 function scrollIntoView(id) {
     document.getElementById(id).scrollIntoView({ block: 'center', behavior: 'smooth' });
 }
 
-function resetPreGenerateButton() {
+function resetPreGenerateButton(is_check_button=false) {
     let generateBtn = document.getElementById('pre-generate-btn');
     generateBtn.disabled = false;
-    generateBtn.innerHTML = 'Генерировать';
+    if (is_check_button) {
+        generateBtn.innerHTML = 'Определить';
+    } else {
+        generateBtn.innerHTML = 'Генерировать';
+    }
 }
 
 function resetServices() {

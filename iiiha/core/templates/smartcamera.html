@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %}ИИИ-ХА! - SmartCamera{% endblock %}
+{% load static %}
+{% block body %}
+<div class="container">
+    <div class="card">
+        <div class="card-image">
+        </div>
+        <div class="alert alert-warning text-center" role="alert">
+            Загрузите изображение для определения
+        </div>
+        <input type="file" class="form-control" id="smartcameraImageInput" accept="image/png, image/jpeg" />
+        <div class="action">
+            <button id="pre-generate-btn" class="action-button" onclick="generateSmartCamera()">Определить</button>
+        </div>
+        <div id="content-div" class="content">
+            <p id="content"></p>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -289,3 +289,8 @@ input {
 #carouselPlusVectorIndicators {
 	left: 12.56%;
 }
+
+.alert-warning {
+	margin-top: 3%;
+	font-size: 5;
+}
