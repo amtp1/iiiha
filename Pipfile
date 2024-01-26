@@ -10,6 +10,7 @@ psycopg2 = "*"
 requests = "*"
 django-admin-volt = "*"
 pillow = "*"
+djangorestframework = "*"
 
 [dev-packages]
 
