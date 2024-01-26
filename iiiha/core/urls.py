@@ -14,6 +14,9 @@ urlpatterns = [
     # path('plusvector', plusvector, name='plusvector'),
     # path('generate_plusvector', generate_plusvector, name='generate_plusvector'),
     path('smartcamera', smartcamera, name='smartcamera'),
-    path('generate_smartcamera', generate_smartcamera, name='generate_smartcamera')
+    path('generate_smartcamera', generate_smartcamera, name='generate_smartcamera'),
+
+    # API urls
+    path('api/checkfoodvalue/<str:food_name>', CheckFoodValueAPI.as_view(), name="checkfoodvalue")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
