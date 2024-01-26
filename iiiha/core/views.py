@@ -83,7 +83,7 @@ def generate_smartcamera(request) -> JsonResponse:
     image_url = f"http://{request.get_host()}{image_obj.image.url}"
     smart_camera = SmartCameraService()
     generate_data = smart_camera.generate(image_url=image_url)
-    content = f"Опиши в деталях и цифрах этот объект как можно больше: {generate_data['name']}"
+    content = f"Опиши в деталях и цифрах этот объект, как можно больше интересной информации: {generate_data['name']}"
     chat_gpt = ChatGPTService()
     chat_gpt_response = chat_gpt.generate(content=content)
     description = chat_gpt_response['choices'][0]['message']['content']
