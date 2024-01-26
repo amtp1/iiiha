@@ -1,10 +1,22 @@
 from django.shortcuts import render, HttpResponse
-from django.http import JsonResponse
-from django.conf import settings
+from django.http import JsonResponse, HttpRequest
+from rest_framework.generics import ListAPIView
+from rest_framework import authentication, permissions
+
 from django.views.decorators.csrf import csrf_exempt
 
 from services.api.requests import *
 from .models import *
+
+
+class CheckFoodValueAPI(ListAPIView):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request: HttpRequest, food_name: str) -> JsonResponse:
+        food_assitent = FoodAssistentRequestService()
+        food_assitent_response = food_assitent.generate(food_name)
+        return JsonResponse(food_assitent_response)
 
 
 def index(request) -> HttpResponse:
@@ -71,4 +83,8 @@ def generate_smartcamera(request) -> JsonResponse:
     image_url = f"http://{request.get_host()}{image_obj.image.url}"
     smart_camera = SmartCameraService()
     generate_data = smart_camera.generate(image_url=image_url)
-    return JsonResponse({'name': generate_data['name']})
+    content = f"Опиши вкратце этот объект: {generate_data['name']}"
+    chat_gpt = ChatGPTService()
+    chat_gpt_response = chat_gpt.generate(content=content)
+    description = chat_gpt_response['choices'][0]['message']['content']
+    return JsonResponse({'name': generate_data['name'], 'description': description})
