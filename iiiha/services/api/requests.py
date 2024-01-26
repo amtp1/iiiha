@@ -4,7 +4,7 @@ import json
 import requests
 from django.conf import settings
 
-from ..temp.temp import messages
+from ..temp.temp import messages, food_messages
 
 
 class AssistentRequestService:
@@ -135,3 +135,20 @@ class SmartCameraService:
         response = requests.post(url=self.URL, json=payload, headers=self.AUTH_HEADERS)
         data = response.json()
         return data
+
+
+class FoodAssistentRequestService:
+    def __init__(self):
+        self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
+
+    def generate(self, content: str):
+        data = {'model': 'gpt-3.5-turbo', 'messages': food_messages(content),
+                'temperature': 0.7
+        }
+        headers = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}'
+        }
+        request = requests.post(url=self.BASE_URL, json=data, headers=headers)
+        response = json.loads(request.text)
+        return response
