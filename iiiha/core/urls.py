@@ -11,8 +11,8 @@ urlpatterns = [
     path('generate_chatgpt', generate_chatgpt, name='generate_chatgpt'),
     path('fusion', fusion, name='fusion'),
     path('generate_fusion', generate_fusion, name='generate_fusion'),
-    # path('plusvector', plusvector, name='plusvector'),
-    # path('generate_plusvector', generate_plusvector, name='generate_plusvector'),
+    path('plusvector', plusvector, name='plusvector'),
+    path('generate_plusvector', generate_plusvector, name='generate_plusvector'),
     path('smartcamera', smartcamera, name='smartcamera'),
     path('generate_smartcamera', generate_smartcamera, name='generate_smartcamera'),
 
