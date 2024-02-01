@@ -130,7 +130,6 @@ class SmartCameraService:
         }
 
     def generate(self, image_url):
-        print(image_url)
         payload = {'action': 'yandex_picture', 'url_picture': image_url}
         response = requests.post(url=self.URL, json=payload, headers=self.AUTH_HEADERS)
         data = response.json()
