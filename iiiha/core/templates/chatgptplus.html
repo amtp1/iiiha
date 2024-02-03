@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}ИИИ-ХА! - Chat GPT Plus{% endblock %}
+{% block body %}
+<div class="container">
+	<div class="card">
+		<div class="card-image">
+		</div>
+      <textarea class="form-control" placeholder="Введите запрос (Напиши рассказ)"></textarea>
+      <div class="action">
+        <button id="pre-generate-btn" class="action-button" onclick="generateChatGPTPlus()">Генерировать</button>
+      </div>
+      <div id="content-div" class="content">
+        <p id="content"></p>
+      </div>
+	</div>
+</div>
+{% endblock %}

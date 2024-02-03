@@ -139,15 +139,42 @@ class SmartCameraService:
 class FoodAssistentRequestService:
     def __init__(self):
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
-
-    def generate(self, content: str):
-        data = {'model': 'gpt-3.5-turbo', 'messages': food_messages(content),
-                'temperature': 0.7
-        }
-        headers = {
+        self.AUTH_HEADERS = {
             'Content-Type': 'application/json',
             'Authorization': f'Bearer {settings.GPT_SECRET_KEY}'
         }
-        request = requests.post(url=self.BASE_URL, json=data, headers=headers)
+
+    def generate(self, content: str):
+        data = {'model': 'gpt-3.5-turbo', 'messages': food_messages(content),
+                'temperature': 0.7}
+
+        request = requests.post(url=self.BASE_URL, json=data, headers=self.AUTH_HEADERS)
         response = json.loads(request.text)
+        return response
+
+
+class ChatGPTPlusService:
+    def __init__(self):
+        self.BASE_URL = 'https://api.theb.ai/v1/chat/completions'
+        self.AUTH_HEADERS = {
+            'Authorization': f'Bearer {settings.CHATGPT_PLUS}',
+            'Content-Type': 'application/json'
+        }
+
+    def generate(self, content: str):
+        payload = {
+            'model': 'gpt-3.5-turbo',
+            'messages': [
+                {
+                    'role': 'user',
+                    'content': content
+                }
+            ],
+            'stream': False,
+            'model_params': {
+                'temperature': 1
+            }
+        }
+        request = requests.post(url=self.BASE_URL, json=payload, headers=self.AUTH_HEADERS)
+        response = request.json()
         return response

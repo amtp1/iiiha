@@ -221,6 +221,49 @@ function generatePlusVector() {
     }
 }
 
+function generateChatGPTPlus() {
+    let isAssistent = localStorage.getItem('isAssistent');
+    if (isAssistent) {
+        $('#service-choice-button').on('click', resetServices());
+    }
+    resetContent();
+    let textArea = $('textarea');
+    if (textArea.val() == "") {
+        return alert('Поле не должно оставаться пустым!');
+    } else {
+        let generateBtn = document.getElementById('pre-generate-btn');
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<span class="spinner-grow spinner-grow-sm" aria-hidden="true"></span>';
+
+        let data = new FormData();
+        data.append('content', textArea.val());
+
+        fetch('generate_chatgptplus', {
+            method: 'POST',
+            body: data,
+            contentType: 'application/json',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': $.cookie('csrftoken')
+            },
+            }).then(function (response) {
+            response.json().then(
+                function (data) {
+                    resetPreGenerateButton();
+                    let content = data['choices'][0]['message']['content'];
+                    let contentDiv = document.getElementById('content-div');
+                    const contentP = document.createElement('p');
+                    contentDiv.style.overflow = 'auto';
+                    contentP.id = 'content';
+                    contentP.innerHTML = content;
+                    contentDiv.appendChild(contentP);
+                    scrollIntoView('content-div');
+                }
+            )
+        });
+    }
+}
+
 function generateSmartCamera() {
     let isAssistent = localStorage.getItem('isAssistent');
     if (isAssistent) {

@@ -88,3 +88,16 @@ def generate_smartcamera(request) -> JsonResponse:
     chat_gpt_response = chat_gpt.generate(content=content)
     description = chat_gpt_response['choices'][0]['message']['content']
     return JsonResponse({'name': generate_data['name'], 'description': description})
+
+
+def chatgptplus(request) -> HttpResponse:
+    return render(request, 'chatgptplus.html')
+
+
+@csrf_exempt
+def generate_chatgptplus(request) -> JsonResponse:
+    request = request.POST
+    content = request['content']
+    chatgpt_plus = ChatGPTPlusService()
+    response = chatgpt_plus.generate(content=content)
+    return JsonResponse(response)

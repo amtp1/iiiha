@@ -15,6 +15,8 @@ urlpatterns = [
     path('generate_plusvector', generate_plusvector, name='generate_plusvector'),
     path('smartcamera', smartcamera, name='smartcamera'),
     path('generate_smartcamera', generate_smartcamera, name='generate_smartcamera'),
+    path('chatgptplus', chatgptplus, name='chatgptplus'),
+    path('generate_chatgptplus', generate_chatgptplus, name='generate_chatgptplus'),
 
     # API urls
     path('api/checkfoodvalue/<str:food_name>', CheckFoodValueAPI.as_view(), name="checkfoodvalue")
