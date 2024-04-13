@@ -1,17 +1,23 @@
 {% extends 'base.html' %}
 {% block title %}ИИИ-ХА! - Chat GPT{% endblock %}
 {% block body %}
-<div class="container">
-	<div class="card">
-		<div class="card-image">
-		</div>
-      <textarea class="form-control" placeholder="Введите запрос (Напиши рассказ)"></textarea>
-      <div class="action">
-        <button id="pre-generate-btn" class="action-button" onclick="generateChatGPT()">Генерировать</button>
+<section id="about">
+  <div class="container">				
+      <div class="single-info row mt-40 align-items-center">
+          <div class="col-lg-12 col-md-12 no-padding info-center">
+              <div class="info-content">
+                  <div class="fade-in-image"></div>
+
+                      <div class="mt-10">
+                          <textarea class="textarea" placeholder="Введите запрос (Напиши рассказ)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите запрос (Напиши рассказ)'" required></textarea>
+                      </div>
+                      <button id="pre-generate-btn" class="form-btn" type="button" onclick="generateChatGPT()">Генерировать</button>
+                      <div id="content-div" class="content">
+                          <p id="content"></p>
+                      </div>
+              </div>
+          </div>
       </div>
-      <div id="content-div" class="content">
-        <p id="content"></p>
-      </div>
-	</div>
-</div>
+  </div>
+</section>
 {% endblock %}

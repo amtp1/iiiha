@@ -2,7 +2,7 @@
 {% block title %}ИИИ-ХА! - Fusion{% endblock %}
 {% load static %}
 {% block body %}
-<div class="container">
+<!--<div class="container">
 	<div class="card">
 		<div class="card-image">
 		</div>
@@ -14,5 +14,24 @@
         <p id="content"></p>
       </div>
 	</div>
-</div>
+</div>-->
+<section id="about">
+  <div class="container">				
+      <div class="single-info row mt-40 align-items-center">
+          <div class="col-lg-12 col-md-12 no-padding info-center">
+              <div class="info-content">
+                  <div class="fade-in-image"></div>
+
+                      <div class="mt-10">
+                          <textarea class="textarea" placeholder="Введите запрос (Нарисуй картину)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите запрос (Нарисуй картину)'" required></textarea>
+                      </div>
+                      <button id="pre-generate-btn" class="form-btn" type="button" onclick="generateFusion()">Генерировать</button>
+                      <div id="content-div" class="content">
+                          <p id="content"></p>
+                      </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 {% endblock %}

@@ -1,71 +1,153 @@
 {% load static %}
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{% block title %}ИИИ-ХА!{% endblock title %}</title>
-	<meta name="description" content="">
-	<meta name="keywords" content="">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
-		rel="stylesheet">
-	<!-- Bootstrap -->
-	<link href="{% static 'bootstrap-5.3.2-dist/css/bootstrap.css' %}" rel="stylesheet">
-	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-		integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"> -->
+  <!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="{% static 'img/fav.png' %}">
+		<!-- Author Meta -->
+		<meta name="author" content="codepixer">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>ИИИ-ХА!</title>
 
-	<!-- Style -->
-	<link href="{% static 'css/style.css' %}" rel="stylesheet">
-	<!-- Owl Carousel Assets -->
-	<!-- <link href="{% static 'owl-carousel/owl.carousel.css' %}" rel="stylesheet"> -->
-	<!-- <link href="{% static 'owl-carousel/owl.theme.css' %}" rel="stylesheet"> -->
-	<!-- Bootstrap JS -->
-	<script defer src="{% static 'bootstrap-5.3.2-dist/js/bootstrap.js' %}" crossorigin="anonymous"></script>
-	<script defer src="{% static 'bootstrap-5.3.2-dist/js/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
-	<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> -->
-	<script src="{% static 'js/temp.js' %}"></script>
-	<script src="{% static 'js/main.js' %}"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+      <!--<link rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.css">-->
+		</head>
+		<body class="home-bl">
 
-</head>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <img src="{% static 'images/logo.svg' %}" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
-      <a class="navbar-brand" href="/">ИИИ-ХА!</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Тексты
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="chatgpt">ChatGPT</a></li>
-            </ul>
-          </li>
-		      <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Картинки
-            </a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="fusion">ImageFusion</a></li>
-              <!--<li><a class="dropdown-item" href="plusvector">PlusVector</a></li>-->
-              <li><a class="dropdown-item" href="smartcamera">SmartCamera</a></li>
-            </ul>
-          </li>
-        </ul>
-        <span class="navbar-text">
-          Интегратор Искусственого Интеллекта
-        </span>
-      </div>
+
+			 <header id="home">
+			    <div class="container">
+			    	<div class="row justify-content-between d-flex">
+					  <div class="logo-bl d-flex">
+				      <div id="logo">
+				        <a href="/"><img src="{% static 'img/el2.png' %}" alt="" title="" />ИИИ-ХА!</a>
+				      </div>
+					  <!-- #nav-menu-container -->	
+                       </div>
+					   <section class="navigation">
+  <div  class="nav-container">
+    <nav>
+      <div class="nav-mobile"><a id="nav-toggle" href=""><span></span></a></div>
+      <ul class="nav-list">
+        <li>
+          <a class="nav-link">Тексты</a>
+          <ul class="nav-dropdown">
+            <li>
+              <a href="chatgpt">Чат-бот</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="nav-link">Картинки</a>
+          <ul class="nav-dropdown">
+            <li>
+              <a href="fusion">Текст в картинку</a>
+            </li>
+            <li>
+              <a href="smartcamera">Картинка в текст</a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</section>
+<div class="rating-container">				  
+  <div class="smile-rating-container">
+    <div class="smile-rating-toggle-container">
+      <form class="submit-rating">
+        <input id="meh"  name="satisfaction" type="radio" value="white" onchange="handleChange(this)"/> 
+        <input id="fun" name="satisfaction" type="radio"  value="white1" onchange="handleChange(this)"/> 
+        <label for="meh" class="rating-label rating-label-meh">Режим «Ковбой»</label>
+        <div class="smile-rating-toggle"></div>
+        <div class="toggle-rating-pill"></div>
+        <label for="fun" class="rating-label rating-label-fun"></label>
+      </form>
     </div>
-</nav>
-{% block body %}{% endblock %}
-</html>
+  </div>
+  </div>
+
+
+                    <div class="slogan">
+					      <span>Интегратор Искусственного Интелекта<span>
+					</div>		   
+			    	</div>
+			    </div>
+			  </header><!-- #header -->
+
+			<!-- Start about Area -->
+			{% block body %}{% endblock %}
+			<!-- End about Area -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+			<script> 
+			let rb = document.querySelectorAll('input');
+let div = document.querySelectorAll('div.fade-in-image');
+
+function deleteClass() {
+  for (let b of div) {
+    b.classList.add('open');
+	b.classList.remove('open2');
+  }
+}
+rb.forEach((element, index) => {
+  element.addEventListener('change', () => {
+    deleteClass();
+    div[index].classList.remove('open');
+	div[index].classList.add('open2');
+  })
+});
+			</script>
+
+
+			<script> 
+(function ($) {
+  // Begin jQuery
+  $(function () {
+    // DOM ready
+    // If a link has a dropdown, add sub menu toggle.
+    $("nav ul li a:not(:only-child)").click(function (e) {
+      $(this).siblings(".nav-dropdown").toggle();
+      // Close one dropdown when selecting another
+      $(".nav-dropdown").not($(this).siblings()).hide();
+      e.stopPropagation();
+    });
+    // Clicking away from dropdown will remove the dropdown class
+    $("html").click(function () {
+      $(".nav-dropdown").hide();
+    });
+    // Toggle open and close nav styles on click
+    $("#nav-toggle").click(function () {
+      $("nav ul").slideToggle();
+    });
+    // Hamburger to X toggle
+    $("#nav-toggle").on("click", function () {
+      this.classList.toggle("active");
+    });
+  }); // end DOM ready
+})(jQuery); // end jQuery
+			</script>
+			<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+			<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>			
+			<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>	
+			<script src="{% static 'js/main.js' %}"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+      <script src="{% static 'js/temp.js' %}"></script>
+      <script defer src="{% static 'js/bootstrap-5.3.2-dist/bootstrap.js' %}" crossorigin="anonymous"></script>
+	    <script defer src="{% static 'js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>
+		</body>
+	</html>

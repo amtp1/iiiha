@@ -2,7 +2,7 @@
 {% block title %}ИИИ-ХА! - SmartCamera{% endblock %}
 {% load static %}
 {% block body %}
-<div class="container">
+<!--<div class="container">
     <div class="card">
         <div class="card-image">
         </div>
@@ -17,5 +17,29 @@
             <p id="content"></p>
         </div>
     </div>
-</div>
+</div>-->
+<section id="about">
+    <div class="container">				
+        <div class="single-info row mt-40 align-items-center">
+            <div class="col-lg-12 col-md-12 no-padding info-center">
+                <div class="info-content">
+                    <div class="fade-in-image"></div>
+  
+                    <div class="card-image">
+                    </div>
+                    <div class="alert alert-warning text-center" role="alert">
+                        Загрузите изображение для определения
+                    </div>
+                    <input type="file" class="form-control" id="smartcameraImageInput" accept="image/png, image/jpeg" />
+                    <div class="action">
+                        <button id="pre-generate-btn" class="form-btn" type="button" onclick="generateSmartCamera()" style="margin-top: 3%;">Определить</button>
+                    </div>
+                    <div id="content-div" class="content">
+                        <p id="content"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </section>
 {% endblock %}
