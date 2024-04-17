@@ -16,7 +16,7 @@
 		<!-- meta character set -->
 		<meta charset="UTF-8">
 		<!-- Site Title -->
-		<title>ИИИ-ХА!</title>
+		<title>Интегратор Искусственного Интеллекта - ИИИ-ХА!</title>
 
 			<!--
 			CSS
@@ -80,8 +80,6 @@
     </div>
   </div>
   </div>
-
-
                     <div class="slogan">
 					      <span>Интегратор Искусственного Интелекта<span>
 					</div>		   
@@ -96,50 +94,50 @@
 
 			<script> 
 			let rb = document.querySelectorAll('input');
-let div = document.querySelectorAll('div.fade-in-image');
+      let div = document.querySelectorAll('div.fade-in-image');
 
-function deleteClass() {
-  for (let b of div) {
-    b.classList.add('open');
-	b.classList.remove('open2');
-  }
-}
-rb.forEach((element, index) => {
-  element.addEventListener('change', () => {
-    deleteClass();
-    div[index].classList.remove('open');
-	div[index].classList.add('open2');
-  })
-});
-			</script>
+      function deleteClass() {
+        for (let b of div) {
+          b.classList.add('open');
+        b.classList.remove('open2');
+        }
+      }
+      rb.forEach((element, index) => {
+        element.addEventListener('change', () => {
+          deleteClass();
+          div[index].classList.remove('open');
+        div[index].classList.add('open2');
+        })
+      });
+            </script>
 
 
-			<script> 
-(function ($) {
-  // Begin jQuery
-  $(function () {
-    // DOM ready
-    // If a link has a dropdown, add sub menu toggle.
-    $("nav ul li a:not(:only-child)").click(function (e) {
-      $(this).siblings(".nav-dropdown").toggle();
-      // Close one dropdown when selecting another
-      $(".nav-dropdown").not($(this).siblings()).hide();
-      e.stopPropagation();
-    });
-    // Clicking away from dropdown will remove the dropdown class
-    $("html").click(function () {
-      $(".nav-dropdown").hide();
-    });
-    // Toggle open and close nav styles on click
-    $("#nav-toggle").click(function () {
-      $("nav ul").slideToggle();
-    });
-    // Hamburger to X toggle
-    $("#nav-toggle").on("click", function () {
-      this.classList.toggle("active");
-    });
-  }); // end DOM ready
-})(jQuery); // end jQuery
+            <script> 
+      (function ($) {
+        // Begin jQuery
+        $(function () {
+          // DOM ready
+          // If a link has a dropdown, add sub menu toggle.
+          $("nav ul li a:not(:only-child)").click(function (e) {
+            $(this).siblings(".nav-dropdown").toggle();
+            // Close one dropdown when selecting another
+            $(".nav-dropdown").not($(this).siblings()).hide();
+            e.stopPropagation();
+          });
+          // Clicking away from dropdown will remove the dropdown class
+          $("html").click(function () {
+            $(".nav-dropdown").hide();
+          });
+          // Toggle open and close nav styles on click
+          $("#nav-toggle").click(function () {
+            $("nav ul").slideToggle();
+          });
+          // Hamburger to X toggle
+          $("#nav-toggle").on("click", function () {
+            this.classList.toggle("active");
+          });
+        }); // end DOM ready
+      })(jQuery); // end jQuery
 			</script>
 			<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
 			<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>			
