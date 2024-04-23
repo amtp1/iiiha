@@ -1,6 +1,9 @@
 {% extends 'index.html' %}
-{% block title %}Текст в картинку - ИИИ-ХА!{% endblock %}
+<<<<<<< Updated upstream
 {% block description %}Бесплатный генератор картинок и изображений с искусственным интеллектом на основе нейросети Kandinsky онлайн на русском{% endblock %}
+=======
+{% block title %}Генератор картинок, сгенерировать изображение с помощью ИИ по текстовому описанию бесплатно онлайн - ИИИ-ХА!{% endblock %}
+>>>>>>> Stashed changes
 {% load static %}
 {% block body %}
 <section id="about">
@@ -11,7 +14,7 @@
                   <div class="fade-in-image"></div>
 
                       <div class="mt-10">
-                          <textarea class="textarea" placeholder="Введите запрос (Нарисуй картину)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите запрос (Нарисуй картину)'" required></textarea>
+                          <textarea class="textarea" placeholder="Введите запрос (нейросеть нарисует изображение)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите запрос (Нарисуй картину)'" required></textarea>
                       </div>
                       <button id="pre-generate-btn" class="form-btn" type="button" onclick="generateFusion()">Генерировать</button>
                       <div id="content-div" class="content">

@@ -4,13 +4,12 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-python-dotenv = "*"
 django = "*"
-psycopg2 = "*"
-requests = "*"
-django-admin-volt = "*"
-pillow = "*"
+python-dotenv = "*"
 djangorestframework = "*"
+psycopg2-binary = "*"
+requests = "*"
+pillow = "*"
 
 [dev-packages]
 

@@ -1,14 +1,15 @@
 {% load static %}
   <!DOCTYPE html>
-	<html lang="zxx" class="no-js">
-	<head>
+	<html lang="ru" class="no-js">
+	  <head>
+	    <meta name="yandex-verification"content="de0d6e40e8b0d925" />
 		<!-- Mobile Specific Meta -->
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
 		<!-- Favicon-->
 		<link rel="shortcut icon" href="{% static 'img/fav.png' %}">
 		<!-- Author Meta -->
-		<meta name="author" content="codepixer">
+		<meta name="author" content="web2best">
 		<!-- Meta Description -->
 		<meta name="description" content="{% block description %}{% endblock %}">
 		<!-- Meta Keyword -->
@@ -34,7 +35,7 @@
 			    	<div class="row justify-content-between d-flex">
 					  <div class="logo-bl d-flex">
 				      <div id="logo">
-				        <a href="/"><img src="{% static 'img/el2.png' %}" alt="" title="" />ИИИ-ХА!</a>
+				        <a href="/"><img src="{% static 'img/el2.png' %}" alt="Интегратор Искусственного Интеллекта" title="Интегратор Искусственного Интеллекта" />ИИИ-ХА!</a>
 				      </div>
 					  <!-- #nav-menu-container -->	
                        </div>
@@ -72,16 +73,16 @@
       <form class="submit-rating">
         <input id="meh"  name="satisfaction" type="radio" value="white" onchange="handleChange(this)"/> 
         <input id="fun" name="satisfaction" type="radio"  value="white1" onchange="handleChange(this)"/> 
-        <label for="meh" class="rating-label rating-label-meh">Режим «Ковбой»</label>
+       <!-- <label for="meh" class="rating-label rating-label-meh">Режим «Ковбой»</label>
         <div class="smile-rating-toggle"></div>
-        <div class="toggle-rating-pill"></div>
+        <div class="toggle-rating-pill"></div>--->
         <label for="fun" class="rating-label rating-label-fun"></label>
       </form>
     </div>
   </div>
   </div>
                     <div class="slogan">
-					      <span>Интегратор Искусственного Интелекта<span>
+					     <!-- <span>Интегратор Искусственного Интелекта<span>-->
 					</div>		   
 			    	</div>
 			    </div>
@@ -147,5 +148,15 @@
       <script src="{% static 'js/temp.js' %}"></script>
       <!--<script defer src="{% static 'js/bootstrap-5.3.2-dist/bootstrap.js' %}" crossorigin="anonymous"></script>-->
 	    <!--<script defer src="{% static 'js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>-->
+<!-- Yandex.Metrika counter --> <script type="text/javascript" >
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();
+for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r)
+{ return; }} k=e.createElement(t),a=e.getElementsByTagName(t)
+[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ym(97086059, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true
+});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/97086059" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
 		</body>
 	</html>
