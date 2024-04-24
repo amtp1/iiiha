@@ -16,8 +16,17 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic.base import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls')),
+    path(
+        "robots.txt",
+        TemplateView.as_view(template_name="robots.txt", content_type="text/plain"),
+    ),
+    path(
+        "sitemap.xml",
+        TemplateView.as_view(template_name="sitemap.xml", content_type="text/xml"),
+    ),
 ]
