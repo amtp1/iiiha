@@ -5,7 +5,6 @@ html{
     margin: 0;
     position: relative;
 	min-height: 100vh;
-	touch-action:none;
 }
 
   body
@@ -14,7 +13,6 @@ html{
     max-width: 100%;
     overflow-x: hidden;
 	min-height: 100%;
-	touch-action:none;
   }
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -238,7 +236,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     display: none;
   }
 }
-@import url('fonts/Lumberjack_Rough.otf');
+@import url(../fonts/Lumberjack_Rough.otf);
 .login-page {
     background: url(../img/bg.png) no-repeat bottom center;
     background-size: cover;
@@ -388,6 +386,9 @@ img.plane {
     border-radius: 20px;
 	padding: 8px;
 	margin: 30px auto 30px;
+}
+.info-content .alert {
+	font-family: Lumberjack_Rough;
 }
 .info-content .form-btn {
 	background: url(../img/btn-bg.png) no-repeat center center;
@@ -1225,7 +1226,7 @@ a:hover {
     line-height: 70px;
 	font-family: Lumberjack_Rough;
 }
-#avatar {
+#smartcameraImageInput {
     width: 100%;
     border: solid 2px rgba(174, 164, 145, 1);
     border-radius: 10px;
@@ -1235,8 +1236,13 @@ a:hover {
 	position: relative;
 	font-family: Lumberjack_Rough;
 	font-size: 18px;
+	background: transparent;
 }
-#avatar:after {
+#smartcameraImageInput[type="file"]::file-selector-button {
+  opacity:0;
+  width: 124px;
+}
+#smartcameraImageInput:after {
 	position: absolute;
     content: "";
     background: url(../img/el3.png) rgba(174, 164, 145, 1) no-repeat;
@@ -1245,16 +1251,7 @@ a:hover {
     width: 124px;
     height: 60px;
     left: 0;
-}
-#avatar:before {
-	position: absolute;
-    content: "";
-    background: url(../img/el4.png) no-repeat;
-    background-size: unset;
-    background-position: center center;
-    width: 124px;
-    height: 60px;
-    left: 0;
+	top: 0;
 }
 .parallax {
   position: absolute;
@@ -2056,7 +2053,6 @@ body {
     height: 100%;
     min-height: 100vh;
 	position: relative;
-	touch-action:none;
 }
 .rating-container {
     margin-left: 0;
@@ -2108,6 +2104,12 @@ body {
 .text-marquee-bl {
     height: 330px;
 }
+#smartcameraImageInput:after {
+    width: 100px;
+}
+#smartcameraImageInput[type="file"]::file-selector-button {
+  width: 100px;
+}
 }
 @media screen and (max-width: 375px) {
 .mob-slogan {
@@ -2128,4 +2130,8 @@ body {
 #about {
     padding-bottom: 50px;
 }
+}
+#content-div img {
+	max-width: 100%;
+    margin-top: 20px;
 }

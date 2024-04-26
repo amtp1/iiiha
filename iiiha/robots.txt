@@ -1,0 +1,3 @@
+User-agent: *
+Disallow: /plusvector
+Sitemap: https://ixa.su/temp/sitemap.xml
