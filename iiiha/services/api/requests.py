@@ -153,6 +153,23 @@ class FoodAssistentRequestService:
         return response
 
 
+class ChatGPTRequestService:
+    def __init__(self):
+        self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
+        self.AUTH_HEADERS = {
+            'Content-Type': 'application/json',
+            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}'
+        }
+
+    def generate(self, content: str):
+        data = {'model': 'gpt-3.5-turbo', 'messages': content,
+                'temperature': 0.7}
+
+        request = requests.post(url=self.BASE_URL, json=data, headers=self.AUTH_HEADERS)
+        response = json.loads(request.text)
+        return response
+
+
 class ChatGPTPlusService:
     def __init__(self):
         self.BASE_URL = 'https://api.theb.ai/v1/chat/completions'

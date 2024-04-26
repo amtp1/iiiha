@@ -2,6 +2,7 @@ from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse, HttpRequest
 from rest_framework.generics import ListAPIView
 from rest_framework import authentication, permissions
+from rest_framework.decorators import api_view
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -17,6 +18,17 @@ class CheckFoodValueAPI(ListAPIView):
         food_assitent = FoodAssistentRequestService()
         food_assitent_response = food_assitent.generate(food_name)
         return JsonResponse(food_assitent_response)
+
+
+class ChatGPTAPI(ListAPIView):
+    authentication_classes = [authentication.TokenAuthentication]
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request: HttpRequest, *args, **kwargs) -> JsonResponse:
+        data = request.data
+        gpt_request = ChatGPTRequestService()
+        response = gpt_request.generate(content=data['content'])
+        return JsonResponse(response)
 
 
 def index(request) -> HttpResponse:
