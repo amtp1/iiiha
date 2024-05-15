@@ -237,6 +237,28 @@ body.mobile-nav-active #mobile-nav-toggle {
   }
 }
 @import url(../fonts/Lumberjack_Rough.otf);
+@import url(../fonts/Lumberjack_Inline_Rough.otf);
+@import url(../fonts/Lumberjack_Rough_Shadow.otf);
+@import url(../fonts/Lumberjack.otf);
+
+/*@font-face {
+  font-family: 'LumberjackRough';
+  src: url('../fonts/Lumberjack_Rough.otf') format("opentype");
+}
+@font-face {
+  font-family: 'LumberjackRough';
+  src: url('../fonts/Lumberjack_Inline_Rough.otf') format("opentype");
+}
+@font-face {
+  font-family: 'LumberjackRough';
+  src: url('../fonts/Lumberjack_Rough_Shadow.otf') format("opentype");
+}
+@font-face {
+  font-family: 'LumberjackRough';
+  src: url('../fonts/Lumberjack.otf') format("opentype");
+}
+*/
+
 .login-page {
     background: url(../img/bg.png) no-repeat bottom center;
     background-size: cover;
