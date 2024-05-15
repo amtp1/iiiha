@@ -161,9 +161,11 @@ class ChatGPTRequestService:
             'Authorization': f'Bearer {settings.GPT_SECRET_KEY}'
         }
 
-    def generate(self, content: str):
-        data = {'model': 'gpt-3.5-turbo', 'messages': content,
-                'temperature': 0.7}
+    def generate(self, content: str, temperature: float):
+        data = {'model': 'gpt-3.5-turbo',
+                'messages': [{'role': 'system', 'role': 'assistant',
+                              'role': 'user', 'content': content}],
+                'temperature': temperature}
 
         request = requests.post(url=self.BASE_URL, json=data, headers=self.AUTH_HEADERS)
         response = json.loads(request.text)

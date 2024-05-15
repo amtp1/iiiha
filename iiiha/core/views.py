@@ -27,7 +27,7 @@ class ChatGPTAPI(ListAPIView):
     def post(self, request: HttpRequest, *args, **kwargs) -> JsonResponse:
         data = request.data
         gpt_request = ChatGPTRequestService()
-        response = gpt_request.generate(content=data['content'])
+        response = gpt_request.generate(content=data['content'], temperature=data['temperature'])
         return JsonResponse(response)
 
 
