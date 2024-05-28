@@ -1,3 +1,10 @@
+@font-face {
+	font-family: 'Lumberjack_Rough';
+	src: url('../fonts/Lumberjack_Rough.otf') format('otf'),
+       url('../fonts/Lumberjack-Rough.woff') format('woff');
+}
+
+
 html{
     width: 100%;
     max-width: 100%;
@@ -5,6 +12,8 @@ html{
     margin: 0;
     position: relative;
 	min-height: 100vh;
+	touch-action:none;
+  font-family: 'Lumberjack_Rough', sans-serif;
 }
 
   body
@@ -13,6 +22,7 @@ html{
     max-width: 100%;
     overflow-x: hidden;
 	min-height: 100%;
+	touch-action:none;
   }
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -91,7 +101,80 @@ html{
   }
 }
 
-
+/* popup style */
+.popup__bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  transition: 0.5s all;
+  background: rgb(0 0 0 / 50%);
+  z-index: 10;
+}
+.popup-error {
+  background: url(../img/bg-home.png) no-repeat;
+  background-size: cover;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 460px;
+  height: 400px;
+  border-radius: 30px;
+  padding: 40px 30px;
+  transition: 0.5s all;
+}
+.close-popup {
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  background: url(../img/bg-home.png) no-repeat;
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border: 1px solid #000;
+  border-radius: 50%;
+  padding: 10px;
+	z-index: 999;
+}
+.popup-error__text {
+  font-size: 24px;
+  color: rgba(79, 79, 79, 1);
+}
+.popup-error__button {
+  display: block;
+  background-color: #000;
+  color: rgba(245, 235, 200, 1);
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 24px;
+}
+.popup-block {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media (max-width: 800px) {
+  .close-popup {
+    background: none;
+    border: none;
+    right: 10px;
+    top: 10px;
+    left: auto;
+  }
+  .popup-error {
+    max-width: 100%;
+    width: 90%;
+  }
+  .popup-error__text {
+    font-size: 18px;
+  }
+}
 
 /* Mobile Nav Toggle */
 #mobile-nav-toggle {
@@ -236,29 +319,7 @@ body.mobile-nav-active #mobile-nav-toggle {
     display: none;
   }
 }
-@import url(../fonts/Lumberjack_Rough.otf);
-@import url(../fonts/Lumberjack_Inline_Rough.otf);
-@import url(../fonts/Lumberjack_Rough_Shadow.otf);
-@import url(../fonts/Lumberjack.otf);
-
-/*@font-face {
-  font-family: 'LumberjackRough';
-  src: url('../fonts/Lumberjack_Rough.otf') format("opentype");
-}
-@font-face {
-  font-family: 'LumberjackRough';
-  src: url('../fonts/Lumberjack_Inline_Rough.otf') format("opentype");
-}
-@font-face {
-  font-family: 'LumberjackRough';
-  src: url('../fonts/Lumberjack_Rough_Shadow.otf') format("opentype");
-}
-@font-face {
-  font-family: 'LumberjackRough';
-  src: url('../fonts/Lumberjack.otf') format("opentype");
-}
-*/
-
+@import url('fonts/Lumberjack_Rough.otf');
 .login-page {
     background: url(../img/bg.png) no-repeat bottom center;
     background-size: cover;
@@ -408,9 +469,6 @@ img.plane {
     border-radius: 20px;
 	padding: 8px;
 	margin: 30px auto 30px;
-}
-.info-content .alert {
-	font-family: Lumberjack_Rough;
 }
 .info-content .form-btn {
 	background: url(../img/btn-bg.png) no-repeat center center;
@@ -1248,7 +1306,7 @@ a:hover {
     line-height: 70px;
 	font-family: Lumberjack_Rough;
 }
-#smartcameraImageInput {
+#avatar {
     width: 100%;
     border: solid 2px rgba(174, 164, 145, 1);
     border-radius: 10px;
@@ -1258,13 +1316,8 @@ a:hover {
 	position: relative;
 	font-family: Lumberjack_Rough;
 	font-size: 18px;
-	background: transparent;
 }
-#smartcameraImageInput[type="file"]::file-selector-button {
-  opacity:0;
-  width: 124px;
-}
-#smartcameraImageInput:after {
+#avatar:after {
 	position: absolute;
     content: "";
     background: url(../img/el3.png) rgba(174, 164, 145, 1) no-repeat;
@@ -1273,7 +1326,16 @@ a:hover {
     width: 124px;
     height: 60px;
     left: 0;
-	top: 0;
+}
+#avatar:before {
+	position: absolute;
+    content: "";
+    background: url(../img/el4.png) no-repeat;
+    background-size: unset;
+    background-position: center center;
+    width: 124px;
+    height: 60px;
+    left: 0;
 }
 .parallax {
   position: absolute;
@@ -2075,6 +2137,7 @@ body {
     height: 100%;
     min-height: 100vh;
 	position: relative;
+	touch-action:none;
 }
 .rating-container {
     margin-left: 0;
@@ -2126,12 +2189,6 @@ body {
 .text-marquee-bl {
     height: 330px;
 }
-#smartcameraImageInput:after {
-    width: 100px;
-}
-#smartcameraImageInput[type="file"]::file-selector-button {
-  width: 100px;
-}
 }
 @media screen and (max-width: 375px) {
 .mob-slogan {
@@ -2152,8 +2209,4 @@ body {
 #about {
     padding-bottom: 50px;
 }
-}
-#content-div img {
-	max-width: 100%;
-    margin-top: 20px;
 }
