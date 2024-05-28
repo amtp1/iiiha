@@ -647,3 +647,7 @@ function filterContent(content) {
       return content;
   }
 }
+
+$('#close-popup-btn').on('click', function() {
+  $('#service-choice-modal').modal('hide');
+})
