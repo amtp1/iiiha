@@ -272,7 +272,7 @@ $(document).ready(function(){
 const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
 
 function generateAssistentRequest() {
-  let textArea = $('textarea');
+  /*let textArea = $('textarea');
   if (textArea.val() == "") {
       return alert('Поле не должно оставаться пустым!');
   } else {
@@ -330,9 +330,16 @@ function generateAssistentRequest() {
           )
         });
   }
+  */
+  $('#service-choice-modal').modal('show');
 }
 
 function generateChatGPT() {
+  try {
+    $('#service-choice-modal').modal('hide');
+  } catch(e) {
+    null;
+  }
   resetContent();
   let textArea = $('textarea');
   if (textArea.val() == "") {
@@ -372,6 +379,11 @@ function generateChatGPT() {
 }
 
 function generateFusion() {
+  try {
+    $('#service-choice-modal').modal('hide');
+  } catch(e) {
+    null;
+  }
   resetContent();
   let textArea = $('textarea');
   if (textArea.val() == "") {
