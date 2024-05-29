@@ -333,10 +333,6 @@ function generateAssistentRequest() {
 }
 
 function generateChatGPT() {
-  let isAssistent = localStorage.getItem('isAssistent');
-  if (isAssistent) {
-      $('#service-choice-button').on('click', resetServices());
-  }
   resetContent();
   let textArea = $('textarea');
   if (textArea.val() == "") {
@@ -376,10 +372,6 @@ function generateChatGPT() {
 }
 
 function generateFusion() {
-  let isAssistent = localStorage.getItem('isAssistent');
-  if (isAssistent) {
-      $('#service-choice-button').on('click', resetServices());
-  }
   resetContent();
   let textArea = $('textarea');
   if (textArea.val() == "") {
@@ -403,6 +395,7 @@ function generateFusion() {
         }).then(function (response) {
           response.json().then(
               function (data) {
+                try{
                   resetPreGenerateButton();
                   let image = data['image'][0];
                   let contentDiv = document.getElementById('content-div');
@@ -419,6 +412,9 @@ function generateFusion() {
                   contentP.appendChild(newImage);
                   contentDiv.appendChild(contentP);
                   scrollIntoView('fusion-image-result');
+                } catch(e) {
+                  return alert(`Ошибка: ${e}`);
+                }
               }
           )
         });
@@ -426,10 +422,6 @@ function generateFusion() {
 }
 
 function generatePlusVector() {
-  let isAssistent = localStorage.getItem('isAssistent');
-  if (isAssistent) {
-      $('#service-choice-button').on('click', resetServices());
-  }
   resetContent();
   let textArea = $('textarea');
   if (textArea.val() == "") {
@@ -487,10 +479,6 @@ function generatePlusVector() {
 }
 
 function generateChatGPTPlus() {
-  let isAssistent = localStorage.getItem('isAssistent');
-  if (isAssistent) {
-      $('#service-choice-button').on('click', resetServices());
-  }
   resetContent();
   let textArea = $('textarea');
   if (textArea.val() == "") {
@@ -530,10 +518,6 @@ function generateChatGPTPlus() {
 }
 
 function generateSmartCamera() {
-  let isAssistent = localStorage.getItem('isAssistent');
-  if (isAssistent) {
-      $('#service-choice-button').on('click', resetServices());
-  }
   resetContent();
   var file = document.querySelector('input[type=file]').files[0];
   if (file == undefined) {
