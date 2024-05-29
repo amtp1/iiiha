@@ -12,7 +12,7 @@ html{
     margin: 0;
     position: relative;
 	min-height: 100vh;
-	touch-action:none;
+	touch-action:auto;
   font-family: 'Lumberjack_Rough', sans-serif;
 }
 
