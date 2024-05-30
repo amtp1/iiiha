@@ -73,7 +73,7 @@ class FusionService:
         data = response.json()
         return data['uuid']
 
-    def check_generation(self, uuid, attempts=10, delay=15):
+    def check_generation(self, uuid, attempts=10, delay=20):
         while attempts > 0:
             response = requests.get(self.URL + 'key/api/v1/text2image/status/' + uuid, headers=self.AUTH_HEADERS)
             data = response.json()
