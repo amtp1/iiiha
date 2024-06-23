@@ -145,7 +145,7 @@ class FoodAssistentRequestService:
         }
 
     def generate(self, content: str):
-        data = {'model': 'gpt-3.5-turbo', 'messages': food_messages(content),
+        data = {'model': 'gpt-4o', 'messages': food_messages(content),
                 'temperature': 0.7}
 
         request = requests.post(url=self.BASE_URL, json=data, headers=self.AUTH_HEADERS)
