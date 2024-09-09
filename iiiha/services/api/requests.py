@@ -29,7 +29,7 @@ class ChatGPTService:
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
 
     def generate(self, content=None):
-        data = {'model': 'gpt-3.5-turbo', 'messages': [{'role': 'user', 'content': content}],
+        data = {'model': 'gpt-4o-mini', 'messages': [{'role': 'user', 'content': content}],
                 'temperature': 0.7
         }
         headers = {
@@ -38,6 +38,7 @@ class ChatGPTService:
         }
         request = requests.post(url=self.BASE_URL, json=data, headers=headers)
         response = json.loads(request.text)
+        print(response)
         return response
 
 
