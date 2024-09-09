@@ -92,7 +92,7 @@ def generate_smartcamera(request) -> JsonResponse:
     request_files = request.FILES
     image = request_files['file']
     image_obj = SmartCamera.objects.create(image=image)
-    image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg' # f"http://{request.get_host()}{image_obj.image.url}"
+    image_url = f"http://{request.get_host()}{image_obj.image.url}"
     smart_camera = SmartCameraService()
     generate_response = smart_camera.generate(image_url=image_url)
     content = generate_response['choices'][0]['message']['content']
