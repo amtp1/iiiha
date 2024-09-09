@@ -32,7 +32,7 @@ DEBUG = bool(os.getenv('DEBUG'))
 
 ALLOWED_HOSTS = ['*']
 
-CSRF_TRUSTED_ORIGINS = ['https://ixa.su', 'http://103.90.73.123:8000']
+CSRF_TRUSTED_ORIGINS = ['http://103.90.73.123:8000']
 
 
 # Application definition
