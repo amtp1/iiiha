@@ -124,14 +124,16 @@ class PlusVectorService:
 
 class SmartCameraService:
     def __init__(self):
-        self.URL = 'https://api.task-tiker.ru/api.php'
+        self.URL = 'https://api.openai.com/v1/chat/completions'
         self.AUTH_HEADERS = {
-            'Authorization': f'Bearer {settings.SMARTCAMERA_API_KEY}',
+            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}',
             'Content-Type': 'application/json'
         }
 
     def generate(self, image_url):
-        payload = {'action': 'yandex_picture', 'url_picture': image_url}
+        payload = {'model': 'gpt-4o-mini', 'messages': [
+            {"role": "user", "content": [{"type": "text", "text": "Что на картинке?"},
+            {"type": "image_url","image_url": {"url": image_url}}]}]}
         response = requests.post(url=self.URL, json=payload, headers=self.AUTH_HEADERS)
         data = response.json()
         return data

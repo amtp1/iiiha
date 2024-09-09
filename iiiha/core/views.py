@@ -92,14 +92,11 @@ def generate_smartcamera(request) -> JsonResponse:
     request_files = request.FILES
     image = request_files['file']
     image_obj = SmartCamera.objects.create(image=image)
-    image_url = f"http://{request.get_host()}{image_obj.image.url}"
+    image_url = 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/dd/Gfp-wisconsin-madison-the-nature-boardwalk.jpg/2560px-Gfp-wisconsin-madison-the-nature-boardwalk.jpg' # f"http://{request.get_host()}{image_obj.image.url}"
     smart_camera = SmartCameraService()
-    generate_data = smart_camera.generate(image_url=image_url)
-    content = f"Опиши в деталях и цифрах этот объект, как можно больше интересной информации: {generate_data['name']}"
-    chat_gpt = ChatGPTService()
-    chat_gpt_response = chat_gpt.generate(content=content)
-    description = chat_gpt_response['choices'][0]['message']['content']
-    return JsonResponse({'name': generate_data['name'], 'description': description})
+    generate_response = smart_camera.generate(image_url=image_url)
+    content = generate_response['choices'][0]['message']['content']
+    return JsonResponse({'content': content})
 
 
 def chatgptplus(request) -> HttpResponse:
