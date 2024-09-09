@@ -148,7 +148,7 @@ class FoodAssistentRequestService:
         }
 
     def generate(self, content: str):
-        data = {'model': 'gpt-4o', 'messages': food_messages(content),
+        data = {'model': 'gpt-4o-mini', 'messages': food_messages(content),
                 'temperature': 0.7}
 
         request = requests.post(url=self.BASE_URL, json=data, headers=self.AUTH_HEADERS)
@@ -165,7 +165,7 @@ class ChatGPTRequestService:
         }
 
     def generate(self, content: str, temperature: float):
-        data = {'model': 'gpt-3.5-turbo',
+        data = {'model': 'gpt-4o-mini',
                 'messages': [{'role': 'system', 'role': 'assistant',
                               'role': 'user', 'content': content}],
                 'temperature': temperature}
@@ -185,7 +185,7 @@ class ChatGPTPlusService:
 
     def generate(self, content: str):
         payload = {
-            'model': 'gpt-3.5-turbo',
+            'model': 'gpt-4o-mini',
             'messages': [
                 {
                     'role': 'user',
