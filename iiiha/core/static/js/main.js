@@ -410,6 +410,11 @@ function generateFusion() {
                 try{
                   resetPreGenerateButton();
                   let image = data['image'][0];
+                  let fadeImage = document.getElementById('fusion-result');
+                  fadeImage.style.backgroundImage = `url('data:image/png;base64, ${image}')`;
+                  fadeImage.style.maxWidth = '300px';
+                  fadeImage.style.marginLeft = '20%';
+                  /*
                   let contentDiv = document.getElementById('content-div');
                   const contentP = document.createElement('p');
                   contentDiv.style.overflow = 'hidden';
@@ -424,6 +429,7 @@ function generateFusion() {
                   contentP.appendChild(newImage);
                   contentDiv.appendChild(contentP);
                   scrollIntoView('fusion-image-result');
+                  */
                 } catch(e) {
                   return alert(`Ошибка: ${e}`);
                 }
