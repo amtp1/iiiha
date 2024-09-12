@@ -1692,6 +1692,15 @@ Toggle Changes
     -ms-transition: all 1s ease-in;
     transition: all 1s ease-in;
 }
+
+#fusion-result {
+	-webkit-transition: all 1s ease-in;
+    -moz-transition: all 1s ease-in;
+    -o-transition: all 1s ease-in;
+    -ms-transition: all 1s ease-in;
+    transition: all 1s ease-in;
+}
+
 @media (max-width: 1800px) {
 .home-bl .slogan span {
     font-size: 22px;
