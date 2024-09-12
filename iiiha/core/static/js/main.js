@@ -1,49 +1,47 @@
-
 $(document).ready(function(){
-	"use strict";
+  "use strict";
 
-	var window_width 	 = $(window).width(),
-	window_height 		 = window.innerHeight,
-	header_height 		 = $(".default-header").height(),
-	header_height_static = $(".site-header.static").outerHeight(),
-	fitscreen 			 = window_height - header_height;
+  var window_width = $(window).width(),
+  window_height = window.innerHeight,
+  header_height = $(".default-header").height(),
+  header_height_static = $(".site-header.static").outerHeight(),
+  fitscreen = window_height - header_height;
+
+  $(".fullscreen").css("height", window_height)
+  $(".fitscreen").css("height", fitscreen);
+
+  if(document.getElementById("default-select")){
+        $('select').niceSelect();
+  };
+
+  $('.img-pop-up').magnificPopup({
+      type: 'image',
+      gallery:{
+      enabled:true
+      }
+  });
+
+  jQuery(document).ready(function($) {
+  $('.popup-content').magnificPopup({
+      type: 'inline'
+  });
+  });
+
+  $('.play-btn').magnificPopup({
+      type: 'iframe',
+      mainClass: 'mfp-fade',
+      removalDelay: 160,
+      preloader: false,
+      fixedContentPos: false
+  });
 
 
-	$(".fullscreen").css("height", window_height)
-	$(".fitscreen").css("height", fitscreen);
+  //  Counter Js 
 
-     if(document.getElementById("default-select")){
-          $('select').niceSelect();
-    };
-
-    $('.img-pop-up').magnificPopup({
-        type: 'image',
-        gallery:{
-        enabled:true
-        }
-    });
-
-    jQuery(document).ready(function($) {
-    $('.popup-content').magnificPopup({
-        type: 'inline'
-    });
-    });
-
-    $('.play-btn').magnificPopup({
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
-        fixedContentPos: false
-    });
-
-
-    //  Counter Js 
-
-    $('.counter').counterUp({
-        delay: 10,
-        time: 1000
-    });
+  $('.counter').counterUp({
+      delay: 10,
+      time: 1000
+  });
 
 
   // Initiate superfish on nav menu
@@ -413,7 +411,7 @@ function generateFusion() {
                   let fadeImage = document.getElementById('fusion-result');
                   fadeImage.style.backgroundImage = `url('data:image/png;base64, ${image}')`;
                   fadeImage.style.maxWidth = '100%';
-                  // fadeImage.style.marginLeft = '20%';
+
                   /*
                   let contentDiv = document.getElementById('content-div');
                   const contentP = document.createElement('p');
