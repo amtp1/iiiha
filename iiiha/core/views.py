@@ -90,11 +90,14 @@ def smartcamera(request) -> HttpResponse:
 @csrf_exempt
 def generate_smartcamera(request) -> JsonResponse:
     request_files = request.FILES
-    image = request_files['file']
-    image_obj = SmartCamera.objects.create(image=image)
-    image_url = f"http://{request.get_host()}{image_obj.image.url}"
-    smart_camera = SmartCameraService()
-    generate_response = smart_camera.generate(image_url=image_url)
+    image = request_files['file']  # Get image from request files.
+
+    # ===> Hide image save function for time.
+    # image_obj = SmartCamera.objects.create(image=image)
+    # image_url = f"http://{request.get_host()}{image_obj.image.url}"
+
+    smart_camera = SmartCameraService()  # Init SmartCameraService instance.
+    generate_response = smart_camera.generate(image_file=image.file)  # Call generate function.
     content = generate_response['choices'][0]['message']['content']
     return JsonResponse({'content': content})
 

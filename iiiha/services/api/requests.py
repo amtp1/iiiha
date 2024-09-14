@@ -1,5 +1,6 @@
 import time
 import json
+import base64
 
 import requests
 from django.conf import settings
@@ -38,7 +39,6 @@ class ChatGPTService:
         }
         request = requests.post(url=self.BASE_URL, json=data, headers=headers)
         response = json.loads(request.text)
-        print(response)
         return response
 
 
@@ -130,10 +130,11 @@ class SmartCameraService:
             'Content-Type': 'application/json'
         }
 
-    def generate(self, image_url):
+    def generate(self, image_file):
+        base64_image = base64.b64encode(image_file.read()).decode('utf-8')
         payload = {'model': 'gpt-4o-mini', 'messages': [
             {"role": "user", "content": [{"type": "text", "text": "Что на картинке?"},
-            {"type": "image_url","image_url": {"url": image_url}}]}]}
+            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{base64_image}"}}]}]}
         response = requests.post(url=self.URL, json=payload, headers=self.AUTH_HEADERS)
         data = response.json()
         return data
