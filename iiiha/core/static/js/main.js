@@ -566,7 +566,7 @@ function generateSmartCamera() {
                   const contentP = document.createElement('p');
                   contentDiv.style.overflow = 'auto';
                   contentP.id = 'content';
-                  contentP.innerHTML = `<span class="badge text-bg-info">Результат:</span> ${content}<br>`;
+                  contentP.innerHTML = `<span class="badge text-bg-info"><h5>Результат:</h5></span> ${content}<br>`;
                   contentDiv.appendChild(contentP);
                   scrollIntoView('content-div');
               }
