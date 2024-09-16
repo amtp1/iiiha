@@ -15,7 +15,7 @@ class CheckFoodValueAPI(ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request: HttpRequest, food_name: str) -> JsonResponse:
-        food_assitent = FoodAssistentRequestService()
+        food_assitent = FoodAssistantRequestService()
         food_assitent_response = food_assitent.generate(food_name)
         return JsonResponse(food_assitent_response)
 
@@ -40,10 +40,10 @@ def chatgpt(request) -> HttpResponse:
 
 
 @csrf_exempt
-def generate_assistent_request(request):
+def generate_assistant_request(request):
     content = request.POST['content']
-    assistent_request = AssistentRequestService()
-    response = assistent_request.generate(content)
+    assistant_request = AssistantRequestService()
+    response = assistant_request.generate(content)
     return JsonResponse(response)
 
 

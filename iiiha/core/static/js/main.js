@@ -269,7 +269,7 @@ $(document).ready(function(){
 
 const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
 
-function generateAssistentRequest() {
+function generateAssistantRequest() {
   /*let textArea = $('textarea');
   if (textArea.val() == "") {
       return alert('Поле не должно оставаться пустым!');
@@ -280,7 +280,7 @@ function generateAssistentRequest() {
 
       let data = new FormData();
       data.append('content', textArea.val());
-      fetch('generate_assistent_request', {
+      fetch('generate_assistant_request', {
           method: 'POST',
           body: data,
           contentType: 'application/json',
@@ -323,7 +323,7 @@ function generateAssistentRequest() {
                           $('#service-choice-modal').modal('show');
                       }
                   }
-                  localStorage.setItem('isAssistent', true);
+                  localStorage.setItem('isAssistant', true);
               }
           )
         });
@@ -629,7 +629,7 @@ function resetServices() {
   services.appendChild(chatgpt_button);
   services.appendChild(fusion_button);
 
-  localStorage.removeItem('isAssistent');
+  localStorage.removeItem('isAssistant');
 }
 
 function resetContent() {

@@ -8,7 +8,7 @@ from django.conf import settings
 from ..temp.temp import messages, food_messages
 
 
-class AssistentRequestService:
+class AssistantRequestService:
     def __init__(self):
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
 
@@ -24,6 +24,8 @@ class AssistentRequestService:
         response = json.loads(request.text)
         return response
 
+
+class SmartAssis
 
 class ChatGPTService:
     def __init__(self):
@@ -140,7 +142,7 @@ class SmartCameraService:
         return data
 
 
-class FoodAssistentRequestService:
+class FoodAssistantRequestService:
     def __init__(self):
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
         self.AUTH_HEADERS = {
