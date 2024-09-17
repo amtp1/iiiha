@@ -135,6 +135,8 @@ class SmartCameraService:
         pharmacist = 'asst_2pmAWoQb6A7ZErDyJpnvxUNE'
         sport = 'asst_6zwpttlszuU01VPtFvQct5lf'
         food = 'asst_8DrxNX02LfyqekxqXibcBWrw'
+        auto_expert = 'asst_IDGYZ1cF5QsM2fddezaRT23U'
+        cynologist = 'asst_JKJue14SrbWCdgX7eEO5Q17F'
 
     def __init__(self):
         self.URL = 'https://api.openai.com/v1/chat/completions'
@@ -202,6 +204,12 @@ class SmartCameraService:
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'food':
             asst = self.generate_asst_by_id(self.SmartCameraAsstId.food)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+        elif content == 'auto_expert':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.auto_expert)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+        elif content == 'cynologist':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.cynologist)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
 
     def encode_image(self, image_file):

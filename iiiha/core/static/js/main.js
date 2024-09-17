@@ -586,9 +586,9 @@ function resetPreGenerateButton(is_check_button=false) {
   let generateBtn = document.getElementById('pre-generate-btn');
   generateBtn.disabled = false;
   if (is_check_button) {
-      generateBtn.innerHTML = 'Определить';
+      generateBtn.innerHTML = 'ИИИ-ХА!';
   } else {
-      generateBtn.innerHTML = 'Генерировать';
+      generateBtn.innerHTML = 'ИИИ-ХА!';
   }
 }
 
