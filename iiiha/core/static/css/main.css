@@ -145,7 +145,7 @@ html{
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 460px;
-  height: 400px;
+  height: 460px;
   border-radius: 30px;
   padding: 40px 30px;
   transition: 0.5s all;
