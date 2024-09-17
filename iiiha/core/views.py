@@ -97,8 +97,7 @@ def generate_smartcamera(request) -> JsonResponse:
     # image_url = f"http://{request.get_host()}{image_obj.image.url}"
 
     smart_camera = SmartCameraService()  # Init SmartCameraService instance.
-    generate_response = smart_camera.generate(image_file=image.file)  # Call generate function.
-    content = generate_response['choices'][0]['message']['content']
+    content = smart_camera.main(image_file=image.file)
     return JsonResponse({'content': content})
 
 
