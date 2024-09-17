@@ -568,7 +568,7 @@ function generateSmartCamera() {
                   contentDiv.style.overflow = 'auto';
                   contentP.id = 'content';
                   contentP.innerHTML = `<span class="badge text-bg-success">Подключен: ${asst_name}</span><br>
-                  <span class="badge text-bg-info"><h5>Результат:</h5></span> ${content}<br>`;
+                  <span class="badge text-bg-info"><h5>Результат:</h5></span> ${convertMarkdownToHTML(content)}<br>`;
                   contentDiv.appendChild(contentP);
                   scrollIntoView('content-div');
               }
@@ -646,6 +646,11 @@ function filterContent(content) {
   if (content in choice_services_array) {
       return content;
   }
+}
+
+function convertMarkdownToHTML(text) {
+  // Replace **bold** with <strong>bold</strong>
+  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 }
 
 $('#close-popup-btn').on('click', function() {
