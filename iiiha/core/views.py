@@ -98,7 +98,7 @@ def generate_smartcamera(request) -> JsonResponse:
 
     smart_camera = SmartCameraService()  # Init SmartCameraService instance.
     content = smart_camera.main(image_file=image.file)
-    return JsonResponse({'content': content})
+    return JsonResponse({'asst_name': content['asst_name'], 'content': content['content']})
 
 
 def chatgptplus(request) -> HttpResponse:

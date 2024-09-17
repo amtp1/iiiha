@@ -558,6 +558,7 @@ function generateSmartCamera() {
           response.json().then(
               function (data) {
                   resetPreGenerateButton(is_check_button=true);
+                  let asst_name = data['asst_name']
                   let content = data['content'];
                   if (content == null) {
                       content = 'Не удалось распознать объект!';
@@ -566,7 +567,8 @@ function generateSmartCamera() {
                   const contentP = document.createElement('p');
                   contentDiv.style.overflow = 'auto';
                   contentP.id = 'content';
-                  contentP.innerHTML = `<span class="badge text-bg-info"><h5>Результат:</h5></span> ${content}<br>`;
+                  contentP.innerHTML = `<span class="badge text-bg-success">Подключен: ${asst_name}</span><br>
+                  <span class="badge text-bg-info"><h5>Результат:</h5></span> ${content}<br>`;
                   contentDiv.appendChild(contentP);
                   scrollIntoView('content-div');
               }

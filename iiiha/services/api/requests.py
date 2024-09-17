@@ -177,23 +177,32 @@ class SmartCameraService:
 
     def check_asst_content_response(self, content):
         if content == 'main':
-            return self.generate()
+            asst_name = 'Основной ассистент'
+            return {'asst_name': asst_name, 'content': self.generate()}
         elif content == 'beer':
-            return self.generate(self.generate_asst_by_id(self.SmartCameraAsstId.beer).get('instructions'))
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.beer)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'whiskey':
-            return self.generate(self.generate_asst_by_id(self.SmartCameraAsstId.whiskey).get('instructions'))
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.whiskey)
+            return self.generate(asst.get('instructions'))
         elif content == 'wine':
-            return self.generate(self.generate_asst_by_id(self.SmartCameraAsstId.wine).get('instructions'))
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.wine)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'doc':
-            return self.generate(self.generate_asst_by_id(self.SmartCameraAsstId.doc).get('instructions'))
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.doc)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'cinema':
-            return self.generate(self.generate_asst_by_id(self.SmartCameraAsstId.cinema).get('instructions'))
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.cinema)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'pharmacist':
-            return self.generate(self.generate_asst_by_id(self.SmartCameraAsstId.pharmacist).get('instructions'))
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.pharmacist)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'sport':
-            return self.generate(self.generate_asst_by_id(self.SmartCameraAsstId.sport).get('instructions'))
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.sport)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'food':
-            return self.generate(self.generate_asst_by_id(self.SmartCameraAsstId.food).get('instructions'))
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.food)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
 
     def encode_image(self, image_file):
         base64_image = base64.b64encode(image_file.read()).decode('utf-8')
