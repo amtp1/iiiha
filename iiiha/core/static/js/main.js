@@ -649,8 +649,12 @@ function filterContent(content) {
 }
 
 function convertMarkdownToHTML(text) {
-  // Replace **bold** with <strong>bold</strong>
-  return text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+             .replace(/### (.+?)(?=\n|$)/g, '<h3>$1</h3>')
+             .replace(/## (.+?)(?=\n|$)/g, '<h2>$1</h2>')
+             .replace(/# (.+?)(?=\n|$)/g, '<h1>$1</h1>');
+  const lines = text.split('\n');
+  return lines.map(line => `<p>${line.trim()}</p>`).join('');
 }
 
 $('#close-popup-btn').on('click', function() {
