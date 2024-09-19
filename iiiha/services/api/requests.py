@@ -137,6 +137,11 @@ class SmartCameraService:
         food = 'asst_8DrxNX02LfyqekxqXibcBWrw'
         auto_expert = 'asst_IDGYZ1cF5QsM2fddezaRT23U'
         cynologist = 'asst_JKJue14SrbWCdgX7eEO5Q17F'
+        polyglot = 'asst_qrMbAqVawxnRWCKI9FybYX9g'
+        guide = 'asst_KBuHlKwvsofuufHBEAjoQK9E'
+        botanist = 'asst_yNOzqzIOWjDHsdxt7ebGELm0'
+        zoologist = 'asst_8zGAhZh9GXX3CrEvRs8MgtF5'
+        art = 'asst_mH4utaJ8pVOYalo5vbXrvrZH'
 
     def __init__(self):
         self.URL = 'https://api.openai.com/v1/chat/completions'
@@ -210,6 +215,21 @@ class SmartCameraService:
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'cynologist':
             asst = self.generate_asst_by_id(self.SmartCameraAsstId.cynologist)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+        elif content == 'polyglot':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.polyglot)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+        elif content == 'guide':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.guide)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+        elif content == 'botanist':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.botanist)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+        elif content == 'zoologist':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.zoologist)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+        elif content == 'art':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.art)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
 
     def encode_image(self, image_file):
