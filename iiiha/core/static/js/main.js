@@ -660,3 +660,18 @@ function convertMarkdownToHTML(text) {
 $('#close-popup-btn').on('click', function() {
   $('#service-choice-modal').modal('hide');
 })
+
+document.getElementById('smartcameraImageInput').addEventListener('change', function(){
+  var file = document.querySelector('input[type=file]').files[0];
+  const reader = new FileReader();
+    reader.onload = function(e) {
+        // Получаем строку Base64
+        const base64String = e.target.result;
+        
+        // Устанавливаем изображение как фон для div
+        const backgroundDiv = document.getElementById('smartcamera-result');
+        backgroundDiv.style.backgroundImage = `url('${base64String}')`;
+    }
+    // Читаем содержимое файла как Data URL (Base64)
+    reader.readAsDataURL(file);
+});
