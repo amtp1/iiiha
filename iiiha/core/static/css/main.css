@@ -2265,12 +2265,12 @@ width: 124px;
 }
 
 #smartcameraImageInput:after {
-position: absolute;
+  position: absolute;
   content: "";
   background: url(../img/el3.png) rgba(174, 164, 145, 1) no-repeat;
   background-size: unset;
   background-position: center center;
-  width: 500px;
+  width: 124px;
   height: 60px;
   left: 0;
   top: 0;
