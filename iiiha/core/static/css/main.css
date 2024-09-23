@@ -1674,7 +1674,7 @@ Toggle Changes
     padding-bottom: 60%;
 	border-radius: 8px;
 }
-.open {
+/*.open {
 	background: url(../img/img1.png) no-repeat center top/cover;
 	width: 100%;
 	-webkit-transition: all 1s ease-in;
@@ -1683,6 +1683,7 @@ Toggle Changes
     -ms-transition: all 1s ease-in;
     transition: all 1s ease-in;
 }
+*/
 .open2 {
 	background: url(../img/img2.png) no-repeat center top/cover;
 	width: 100%;
@@ -1693,7 +1694,7 @@ Toggle Changes
     transition: all 1s ease-in;
 }
 
-#fusion-result {
+#fusion-result, #smartcamera-result {
 	-webkit-transition: all 1s ease-in;
     -moz-transition: all 1s ease-in;
     -o-transition: all 1s ease-in;
