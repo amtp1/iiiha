@@ -2258,17 +2258,19 @@ font-family: Lumberjack_Rough;
 font-size: 18px;
 background: transparent;
 }
+
 #smartcameraImageInput[type="file"]::file-selector-button {
 opacity:0;
 width: 124px;
 }
+
 #smartcameraImageInput:after {
 position: absolute;
   content: "";
   background: url(../img/el3.png) rgba(174, 164, 145, 1) no-repeat;
   background-size: unset;
   background-position: center center;
-  width: 124px;
+  width: 500px;
   height: 60px;
   left: 0;
   top: 0;
