@@ -130,12 +130,12 @@ class SmartCameraService:
         beer = 'asst_9wiloBO5MJmUETNl2uycKoH5'
         whiskey = 'asst_1JPJoSReXjL0u04T61azD7gU'
         wine = 'asst_dZJs90A8rlxbYbVRHlHPchaz'
-        doc = 'asst_LHTzmbG7vHf6SIKRerh8HTFj'
-        cinema = 'asst_AcXImnyaMZx13AFDC5TzcR2x'
-        pharmacist = 'asst_2pmAWoQb6A7ZErDyJpnvxUNE'
-        sport = 'asst_6zwpttlszuU01VPtFvQct5lf'
+        diplom = 'asst_LHTzmbG7vHf6SIKRerh8HTFj'
+        movie = 'asst_AcXImnyaMZx13AFDC5TzcR2x'
+        medicine = 'asst_2pmAWoQb6A7ZErDyJpnvxUNE'
+        fat = 'asst_6zwpttlszuU01VPtFvQct5lf'
         food = 'asst_8DrxNX02LfyqekxqXibcBWrw'
-        auto_expert = 'asst_IDGYZ1cF5QsM2fddezaRT23U'
+        auto = 'asst_IDGYZ1cF5QsM2fddezaRT23U'
         cynologist = 'asst_JKJue14SrbWCdgX7eEO5Q17F'
         polyglot = 'asst_qrMbAqVawxnRWCKI9FybYX9g'
         guide = 'asst_KBuHlKwvsofuufHBEAjoQK9E'
@@ -195,23 +195,23 @@ class SmartCameraService:
         elif content == 'wine':
             asst = self.generate_asst_by_id(self.SmartCameraAsstId.wine)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'doc':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.doc)
+        elif content == 'diplom':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.diplom)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'cinema':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.cinema)
+        elif content == 'movie':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.movie)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'pharmacist':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.pharmacist)
+        elif content == 'medicine':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.medicine)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'sport':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.sport)
+        elif content == 'fat':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.fat)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'food':
             asst = self.generate_asst_by_id(self.SmartCameraAsstId.food)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'auto_expert':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.auto_expert)
+        elif content == 'auto':
+            asst = self.generate_asst_by_id(self.SmartCameraAsstId.auto)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'cynologist':
             asst = self.generate_asst_by_id(self.SmartCameraAsstId.cynologist)
