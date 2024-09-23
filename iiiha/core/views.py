@@ -1,3 +1,5 @@
+import requests
+
 from django.shortcuts import render, HttpResponse
 from django.http import JsonResponse, HttpRequest
 from rest_framework.generics import ListAPIView
@@ -29,6 +31,19 @@ class ChatGPTAPI(ListAPIView):
         gpt_request = ChatGPTRequestService()
         response = gpt_request.generate(content=data['content'], temperature=data['temperature'])
         return JsonResponse(response)
+
+
+class CheckProductAPI(ListAPIView):
+    permission_classes = []
+
+    def post(self, request: HttpRequest, *args, **kwargs) -> JsonResponse:
+        data = request.data
+        url_picture = data.get('url_picture')
+        url = 'https://api.webastera.ru/api.php'
+        data = {'action': 'yandex_picture', 'url_picture': url_picture}
+        api_request = requests.post(url=url, json=data)
+        api_response = api_request.json()
+        return JsonResponse(api_response)
 
 
 def index(request) -> HttpResponse:

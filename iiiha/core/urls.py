@@ -20,7 +20,8 @@ urlpatterns = [
 
     # API urls
     path('api/checkfoodvalue/<str:food_name>', CheckFoodValueAPI.as_view(), name="checkfoodvalue"),
-    path('api/chatgpt', ChatGPTAPI.as_view(), name="chatgpt")
+    path('api/chatgpt', ChatGPTAPI.as_view(), name="chatgpt"),
+    path('api/check_product', CheckProductAPI.as_view(), name="check_product")
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) \
   + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) \
   + static(settings.TEMP_URL, document_root=settings.TEMP_ROOT)
