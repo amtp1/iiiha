@@ -126,15 +126,15 @@
 
       function deleteClass() {
         for (let b of div) {
-          b.classList.add('open');
-        b.classList.remove('open2');
+          // b.classList.add('open');
+        // b.classList.remove('open2');
         }
       }
       rb.forEach((element, index) => {
         element.addEventListener('change', () => {
           deleteClass();
-          div[index].classList.remove('open');
-        div[index].classList.add('open2');
+          // div[index].classList.remove('open');
+        // div[index].classList.add('open2');
         })
       });
             </script>
