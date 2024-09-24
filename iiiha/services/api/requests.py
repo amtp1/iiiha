@@ -191,7 +191,7 @@ class SmartCameraService:
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'whiskey':
             asst = self.generate_asst_by_id(self.SmartCameraAsstId.whiskey)
-            return self.generate(asst.get('instructions'))
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
         elif content == 'wine':
             asst = self.generate_asst_by_id(self.SmartCameraAsstId.wine)
             return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
