@@ -14,3 +14,16 @@ class UUIDFileStorage(FileSystemStorage):
 
 class SmartCamera(models.Model):
     image = models.ImageField(storage=UUIDFileStorage())
+
+
+class Assistants(models.Model):
+    key_word = models.CharField(max_length=255, verbose_name='Ключевое слово')
+    asst_id = models.CharField(max_length=255, verbose_name='Id ассистента')
+
+    def __str__(self):
+        return f"Ассистент №{self.id}, ID: {self.asst_id}"
+
+    class Meta:
+        db_table = "assistants"
+        verbose_name = "Ассистент"
+        verbose_name_plural = "Ассистенты"

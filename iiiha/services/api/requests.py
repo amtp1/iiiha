@@ -6,7 +6,8 @@ from dataclasses import dataclass
 import requests
 from django.conf import settings
 
-from ..temp.temp import messages, food_messages
+from ..temp.temp import food_messages
+from core.models import *
 
 
 class Config:
@@ -150,25 +151,6 @@ class PlusVectorService:
 
 
 class SmartCameraService(Config):
-    @dataclass
-    class SmartCameraAsstId:
-        main = 'asst_R8urIWSIEAfJLJd3Un1fZQ19'
-        beer = 'asst_9wiloBO5MJmUETNl2uycKoH5'
-        whiskey = 'asst_1JPJoSReXjL0u04T61azD7gU'
-        wine = 'asst_dZJs90A8rlxbYbVRHlHPchaz'
-        diplom = 'asst_LHTzmbG7vHf6SIKRerh8HTFj'
-        movie = 'asst_AcXImnyaMZx13AFDC5TzcR2x'
-        medicine = 'asst_2pmAWoQb6A7ZErDyJpnvxUNE'
-        fat = 'asst_6zwpttlszuU01VPtFvQct5lf'
-        food = 'asst_8DrxNX02LfyqekxqXibcBWrw'
-        auto = 'asst_IDGYZ1cF5QsM2fddezaRT23U'
-        cynologist = 'asst_JKJue14SrbWCdgX7eEO5Q17F'
-        polyglot = 'asst_qrMbAqVawxnRWCKI9FybYX9g'
-        guide = 'asst_KBuHlKwvsofuufHBEAjoQK9E'
-        botanist = 'asst_yNOzqzIOWjDHsdxt7ebGELm0'
-        zoologist = 'asst_8zGAhZh9GXX3CrEvRs8MgtF5'
-        art = 'asst_mH4utaJ8pVOYalo5vbXrvrZH'
-
     def __init__(self):
         super().__init__()
         self.URL = 'https://api.openai.com/v1/chat/completions'
@@ -176,7 +158,8 @@ class SmartCameraService(Config):
         self.BASE_IMAGE = None
 
     def generate_main_asst(self):
-        url = f'https://api.openai.com/v1/assistants/{self.SmartCameraAsstId().main}'
+        main_asst = Assistants.objects.get(key_word='main')
+        url = f'https://api.openai.com/v1/assistants/{main_asst.asst_id}'
         request = requests.get(url=url, headers=self.ASST_AUTH_HEADERS)
         response = request.json()
         return response
@@ -201,54 +184,9 @@ class SmartCameraService(Config):
         return content
 
     def check_asst_content_response(self, content):
-        if content == 'main':
-            asst_name = 'Основной ассистент'
-            return {'asst_name': asst_name, 'content': self.generate()}
-        elif content == 'beer':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.beer)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'whiskey':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.whiskey)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'wine':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.wine)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'diplom':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.diplom)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'movie':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.movie)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'medicine':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.medicine)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'fat':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.fat)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'food':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.food)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'auto':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.auto)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'cynologist':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.cynologist)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'polyglot':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.polyglot)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'guide':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.guide)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'botanist':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.botanist)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'zoologist':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.zoologist)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
-        elif content == 'art':
-            asst = self.generate_asst_by_id(self.SmartCameraAsstId.art)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+        asst_obj = Assistants.objects.get(key_word=content)
+        asst = self.generate_asst_by_id(asst_obj.asst_id)
+        return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
 
     def encode_image(self, image_file):
         base64_image = base64.b64encode(image_file.read()).decode('utf-8')
