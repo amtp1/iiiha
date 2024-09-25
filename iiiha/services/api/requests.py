@@ -9,13 +9,39 @@ from django.conf import settings
 from ..temp.temp import messages, food_messages
 
 
-class AssistantRequestService:
+class Config:
     def __init__(self):
+        self.GPT_AUTH_HEADERS = {
+            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}',
+            'Content-Type': 'application/json'
+        }
+
+        self.ASST_AUTH_HEADERS = {
+            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}',
+            'Content-Type': 'application/json',
+            'OpenAI-Beta': 'assistants=v2'
+        }
+
+
+class AssistantRequestService(Config):
+    def __init__(self):
+        super().__init__()
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
 
+    def generate_main_asst(self):
+        url = 'https://api.openai.com/v1/assistants/asst_h1t8ISoM3fX0ZwZR1DS83Unj'
+        request = requests.get(url=url, headers=self.ASST_AUTH_HEADERS)
+        response = request.json()
+        return response
+
     def generate(self, content: str):
-        data = {'model': 'gpt-4o-mini', 'messages': messages(content),
-                'temperature': 0.7
+        asst_response = self.generate_main_asst()
+        data = {'model': 'gpt-4o-mini', 'messages': [
+                        {"role": "user", "content": [
+                            {"type": "text", "text": asst_response.get('instructions')},
+                            {"type": "text", "text": content}
+                            ]},
+                    ]
                 }
         headers = {
             'Content-Type': 'application/json',
@@ -123,7 +149,7 @@ class PlusVectorService:
             time.sleep(delay)
 
 
-class SmartCameraService:
+class SmartCameraService(Config):
     @dataclass
     class SmartCameraAsstId:
         main = 'asst_R8urIWSIEAfJLJd3Un1fZQ19'
@@ -144,16 +170,8 @@ class SmartCameraService:
         art = 'asst_mH4utaJ8pVOYalo5vbXrvrZH'
 
     def __init__(self):
+        super().__init__()
         self.URL = 'https://api.openai.com/v1/chat/completions'
-        self.AUTH_HEADERS = {
-            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}',
-            'Content-Type': 'application/json'
-        }
-        self.ASST_AUTH_HEADERS = {
-            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}',
-            'Content-Type': 'application/json',
-            'OpenAI-Beta': 'assistants=v2'
-        }
 
         self.BASE_IMAGE = None
 
@@ -177,7 +195,7 @@ class SmartCameraService:
                             {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{self.BASE_IMAGE}"}}
                             ]}
                     ]}
-        response = requests.post(url=self.URL, json=payload, headers=self.AUTH_HEADERS)
+        response = requests.post(url=self.URL, json=payload, headers=self.GPT_AUTH_HEADERS)
         data = response.json()
         content = data['choices'][0]['message']['content']
         return content
@@ -243,30 +261,24 @@ class SmartCameraService:
         return check_response
 
 
-class FoodAssistantRequestService:
+class FoodAssistantRequestService(Config):
     def __init__(self):
+        super().__init__()
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
-        self.AUTH_HEADERS = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}'
-        }
 
     def generate(self, content: str):
         data = {'model': 'gpt-4o-mini', 'messages': food_messages(content),
                 'temperature': 0.7}
 
-        request = requests.post(url=self.BASE_URL, json=data, headers=self.AUTH_HEADERS)
+        request = requests.post(url=self.BASE_URL, json=data, headers=self.GPT_AUTH_HEADERS)
         response = json.loads(request.text)
         return response
 
 
-class ChatGPTRequestService:
+class ChatGPTRequestService(Config):
     def __init__(self):
+        super().__init__()
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
-        self.AUTH_HEADERS = {
-            'Content-Type': 'application/json',
-            'Authorization': f'Bearer {settings.GPT_SECRET_KEY}'
-        }
 
     def generate(self, content: str, temperature: float):
         data = {'model': 'gpt-4o-mini',
@@ -274,7 +286,7 @@ class ChatGPTRequestService:
                               'role': 'user', 'content': content}],
                 'temperature': temperature}
 
-        request = requests.post(url=self.BASE_URL, json=data, headers=self.AUTH_HEADERS)
+        request = requests.post(url=self.BASE_URL, json=data, headers=self.GPT_AUTH_HEADERS)
         response = json.loads(request.text)
         return response
 

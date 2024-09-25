@@ -262,15 +262,10 @@ $(document).ready(function(){
         });
  });
 
- const choiceContentCalls = {
-  'ChatGPT': generateChatGPT,
-  'ImageFusion': generateFusion,
-}
-
 const remove = (sel) => document.querySelectorAll(sel).forEach(el => el.remove());
 
 function generateAssistantRequest() {
-  /*let textArea = $('textarea');
+  let textArea = $('textarea');
   if (textArea.val() == "") {
       return alert('Поле не должно оставаться пустым!');
   } else {
@@ -292,44 +287,25 @@ function generateAssistantRequest() {
           response.json().then(
               function (data) {
                   let content = data['choices'][0]['message']['content'];
-                  if (content == 'Unknow') {
+                  try {
+                    if (content == 'chatgpt') {
+                      generateChatGPT();
+                    } else if (content == 'fusion') {
+                      generateFusion();
+                    } else if (content == 'smartcamera') {
+                      window.location.replace('smartcamera');
+                    } else {
                       $('#service-choice-modal').modal('show');
-                  } else {
-                      let contentArray = content.split(',');
-                      if (contentArray.length == 1) {
-                          content = contentArray[0].trim();
-                          try {
-                              choiceContentCalls[content]();
-                          } catch {
-                              generateChatGPT();
-                          }
-                      } else {
-                          const services = document.getElementById('services');
-                          contentArray.forEach((content) => {
-                              content = content.trim();
-                              if (filterContent(content)) {
-                                  const button = document.createElement('button');
-                                  button.id = 'service-choice-button';
-                                  button.setAttribute('onclick', choiceCalls[content]);
-                                  const div = document.createElement('div');
-                                  div.className = 'service-card';
-                                  const h2 = document.createElement('h2');
-                                  h2.innerHTML = content;
-                                  div.appendChild(h2);
-                                  button.appendChild(div);
-                                  services.appendChild(button);
-                              }
-                          });
-                          $('#service-choice-modal').modal('show');
-                      }
+                    }
+                  } catch (e) {
+                    alert(e);
                   }
                   localStorage.setItem('isAssistant', true);
               }
           )
         });
   }
-  */
-  $('#service-choice-modal').modal('show');
+  // $('#service-choice-modal').modal('show');
 }
 
 function generateChatGPT() {
