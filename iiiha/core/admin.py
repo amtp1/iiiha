@@ -7,3 +7,4 @@ from .models import *
 class Assistants(admin.ModelAdmin):
     fields = ['key_word', 'asst_id']
     list_display = ['key_word', 'asst_id']
+    search_fields = ['key_word']
