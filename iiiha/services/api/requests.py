@@ -184,9 +184,13 @@ class SmartCameraService(Config):
         return content
 
     def check_asst_content_response(self, content):
-        asst_obj = Assistants.objects.get(key_word=content)
-        asst = self.generate_asst_by_id(asst_obj.asst_id)
-        return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+        if content == 'main':
+            asst_name = 'Основной ассистент'
+            return {'asst_name': asst_name, 'content': self.generate()}
+        else:
+            asst_obj = Assistants.objects.get(key_word=content)
+            asst = self.generate_asst_by_id(asst_obj.asst_id)
+            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
 
     def encode_image(self, image_file):
         base64_image = base64.b64encode(image_file.read()).decode('utf-8')
