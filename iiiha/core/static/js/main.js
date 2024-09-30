@@ -294,7 +294,7 @@ function generateAssistantRequest() {
                       generateFusion();
                     } else if (content == 'smartcamera') {
                       window.location.replace('smartcamera');
-                    } else {
+                    } else if (content == 'menu') {
                       $('#service-choice-modal').modal('show');
                     }
                   } catch (e) {
@@ -534,16 +534,26 @@ function generateSmartCamera() {
           response.json().then(
               function (data) {
                   resetPreGenerateButton(is_check_button=true);
-                  let asst_name = data['asst_name']
+                  let asst_name = data['asst_name'] 
                   let content = data['content'];
-                  if (content == null) {
+                  let yandex_content = data['yandex_data'];
+                  console.log(yandex_content);
+                  if (content == null && yandex_content == null) {
                       content = 'Не удалось распознать объект!';
+                  } else if (content == null && yandex_content != null) {
+                    content = `Название: ${yandex_content['name']}
+                               Минимальная цена: ${yandex_content['minPrice']}
+                               Максимальная цена: ${yandex_content['maxPrice']}`;
+                  } else if (content != null && yandex_content != null){
+                    content += `<br><br><span>Название:</span> ${yandex_content['name']}
+                               <span>Минимальная цена:</span> ${yandex_content['minPrice']} руб.
+                               <span>Максимальная цена:</span> ${yandex_content['maxPrice']} руб.`;
                   }
                   let contentDiv = document.getElementById('content-div');
                   const contentP = document.createElement('p');
                   contentDiv.style.overflow = 'auto';
                   contentP.id = 'content';
-                  contentP.innerHTML = `<span class="badge text-bg-success">Подключен: ${asst_name}</span><br>
+                  contentP.innerHTML = `<span class="badge text-bg-success">Подключен: ${asst_name}${yandex_content ? ' и Yandex' : ''}</span><br>
                   <span class="badge text-bg-info"><h5>Результат:</h5></span> ${convertMarkdownToHTML(content)}<br>`;
                   contentDiv.appendChild(contentP);
                   scrollIntoView('content-div');
