@@ -5,6 +5,7 @@ from dataclasses import dataclass
 
 import requests
 from django.conf import settings
+from requests.exceptions import JSONDecodeError
 
 from ..temp.temp import food_messages
 from core.models import *
@@ -170,6 +171,13 @@ class SmartCameraService(Config):
         response = request.json()
         return response
 
+    def yandex(self):
+        url = 'https://api.webastera.ru/api.php'
+        data = {'action': 'yandex_picture', 'url_picture': f"data:image/jpeg;base64,{self.BASE_IMAGE}"}
+        request = requests.post(url=url, json=data)
+        response = request.json()
+        return response
+
     def generate(self, instruction=""):
         payload = {'model': 'gpt-4o-mini',
                    'messages': [
@@ -184,13 +192,24 @@ class SmartCameraService(Config):
         return content
 
     def check_asst_content_response(self, content):
+        content_data = {'asst_name': None, 'content': None, 'yandex_data': None}
         if content == 'main':
-            asst_name = 'Основной ассистент'
-            return {'asst_name': asst_name, 'content': self.generate()}
+            content_data['asst_name'] = 'Основной ассистент'
+            content_data['content'] = self.generate()
         else:
             asst_obj = Assistants.objects.get(key_word=content)
             asst = self.generate_asst_by_id(asst_obj.asst_id)
-            return {'asst_name': asst.get('name'), 'content': self.generate(asst.get('instructions'))}
+            content_data['asst_name'] = asst.get('name')
+            content_data['content'] = self.generate(asst.get('instructions'))
+
+        try:
+            yandex_gen_resp = self.yandex()
+            content_data['yandex_data'] = {'name': yandex_gen_resp['name'], 'minPrice': yandex_gen_resp['minPrice'],
+                                           'maxPrice': yandex_gen_resp['maxPrice']
+                                           }
+        except JSONDecodeError:
+            return content_data
+        return content_data
 
     def encode_image(self, image_file):
         base64_image = base64.b64encode(image_file.read()).decode('utf-8')
