@@ -1,10 +1,13 @@
-import requests
+import uuid
 
+import requests
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import JsonResponse, HttpRequest
 from rest_framework.generics import ListAPIView
 from rest_framework import authentication, permissions
 from rest_framework.decorators import api_view
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -47,13 +50,7 @@ class CheckProductAPI(ListAPIView):
 
 
 def index(request) -> HttpResponse:
-    return render(request, "index.html")
-    """
-    if request.user.is_authenticated:
-        return render(request, "index.html")
-    else:
-        return redirect('login')
-    """
+    return render(request, "index.html", {'auth_user': request.user.is_authenticated})
 
 
 def chatgpt(request) -> HttpResponse:
@@ -136,5 +133,38 @@ def generate_chatgptplus(request) -> JsonResponse:
     return JsonResponse(response)
 
 
-def login(request):
+def signin(request):
+    if request.POST:
+        email = request.POST['email']
+        password = request.POST['password']
+        user = User.objects.get(email=email)
+        if not user:
+            return render(request, 'login.html', {'message': 'Такого пользователя не существует!'})
+        else:
+            try:
+                user = authenticate(username=user.username, password=password)
+                login(request, user)
+                return redirect('index')
+            except AttributeError:
+                return render(request, 'login.html', {'message': 'Неверный пароль!'})
     return render(request, 'login.html')
+
+
+def signup(request):
+    email = request.POST['email']
+    password = request.POST['password']
+    retry_password = request.POST['retry_password']
+    username = uuid.uuid1()
+    if password == retry_password:
+        user = User.objects.get(email=email)
+        if not user:
+            user = User.objects.create_user(username=username, email=email, password=password)
+            user = authenticate(username=username, password=password)
+            return redirect('index')
+        else:
+            return render(request, 'login.html', {'message': 'Такой пользователь уже существует!'})
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('index')

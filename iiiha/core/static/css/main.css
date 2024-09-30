@@ -437,7 +437,8 @@ img.plane {
     font-size: 32px;
     line-height: 86px;
     display: block;
-	font-family: Lumberjack_Rough;
+	  font-family: Lumberjack_Rough;
+    cursor: pointer;
 }
 .form-bl-top h3 {
 	font-family: Lumberjack_Rough;
@@ -508,15 +509,16 @@ img.plane {
     height: 115px;
     width: 100%;
     margin: 20px 0;
-	font-size: 18px;
+	  font-size: 18px;
     padding: 15px;
-	font-family: Lumberjack_Rough;
-	background: none;
+	  font-family: Lumberjack_Rough;
+	  background: none;
 }
 #logo a {
-	font-family: Lumberjack_Rough;
+	  font-family: Lumberjack_Rough;
     font-size: 48px;
     color: rgba(0, 0, 0, 1);
+    margin-left: -100px;
 }
 #logo img {
     margin-right: 10px;
@@ -1988,6 +1990,7 @@ nav ul li a:not(:only-child):after {
     padding-left: 10px;
 
 }
+
 }
 @media screen and (min-width: 799px) {
   .nav-list {

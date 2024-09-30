@@ -1,0 +1,183 @@
+{% load static %}
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="codepixer">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>ИИИ-ХА!</title>
+
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		</head>
+		<body class="login-page">
+			{% if message %}
+				<script>alert('{{message}}'); window.location.replace('/');</script>
+			{% endif %}
+                    <div class="slogan mob-slogan">
+					      <span>Интегратор Искусственного Интелекта<span>
+					</div>
+
+			<!-- start banner Area -->
+			<section class="banner-area" id="login">	
+					    <div id="axis" class="banner-content parallax">
+							<div><img src="{% static 'img/el1.png' %}" alt=""></div>
+						</div>
+
+				<div class="text-marquee-bl">
+						<div class="text-marquee">
+					<div class="wrap" style="display:none;">
+                    <div class="items-wrap">
+                        <div class="items marquee reverce"">
+						    <span class="item">Yandex Whisper Dalle ElevenLabs Sora</span>
+					    </div>
+						<div class="items marquee reverce"">
+						    <span class="item">Yandex Whisper Dalle ElevenLabs Sora</span>
+					    </div>
+					</div>
+					</div>
+					<div class="wrap">
+                    <div class="items-wrap">
+                        <div class="items marquee reverce"">
+						    <span class="item">ChatGPT StableDiffusion Kandinsky TTS</span>
+					    </div>
+						<div class="items marquee reverce"">
+						    <span class="item">ChatGPT StableDiffusion Kandinsky TTS</span>
+					    </div>
+					</div>
+					</div>
+					<div class="wrap">
+                    <div class="items-wrap">
+                        <div class="items marquee reverce"">
+						    <span class="item">Yandex Whisper Dalle ElevenLabs Sora</span>
+					    </div>
+						<div class="items marquee reverce"">
+						    <span class="item">Yandex Whisper Dalle ElevenLabs Sora</span>
+					    </div>
+					</div>
+					</div>
+					
+                    </div>
+				</div>
+						<div class="banner-right">
+							<a href="#form" class="popup-content"><img src="{% static 'img/btn.png' %}" alt=""></a>
+						</div>												
+			</section>
+			<!-- End banner Area -->	
+			
+			<div id="form" class="form-bl">
+			  <div class="form-wrap">
+			    <div class="form-bl-top">
+			         <h3>Войти</h3>
+				     <img class="form-img" src="{% static 'img/el2.png' %}" alt="">
+			    </div>
+				<form action="/signin" method="post">
+					{% csrf_token %}
+					<div class="mt-10">
+						<input type="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required class="input">
+					</div>
+					<div class="mt-10">
+						<input type="password" name="password" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль'" required class="input">
+					</div>
+					<button class="form-btn" type="submit">Продолжить</button>
+				</form>
+				<div class="form-bl-bottom">
+			         <a href="#" class="black-btn">Нет аккаунта?</a>
+				     <a href="#form1" class="popup-content red-btn">Зарегистрироваться</a>
+			    </div>
+			   </div>	
+			</div>
+			
+			<div id="form1" class="form-bl form-bl-r">
+			  <div class="form-wrap">
+			    <div class="form-bl-top">
+			         <h3>Создать аккаунт</h3>
+				     <img class="form-img" src="{% static 'img/el2.png' %}" alt="">
+			    </div>
+				<form action="/signup" method="post">
+					{% csrf_token %}
+					<div class="mt-10">
+						<input type="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required class="input">
+					</div>
+					<div class="mt-10">
+						<input type="password" name="password" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль'" required class="input">
+					</div>
+					<div class="mt-10">
+						<input type="password" name="retry_password" placeholder="Повторить пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Повторить пароль'" required class="input">
+					</div>
+					<button class="form-btn" type="submit">Продолжить</button>
+				</form>
+				<div class="form-bl-bottom">
+			         <a href="#" class="black-btn">Уже есть аккаунт?</a>
+				     <a href="#form" class="popup-content red-btn">Войти</a>
+			    </div>
+			   </div>	
+			</div>
+			
+			
+			<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>			
+			<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA"></script>
+  			<script src="{% static 'js/easing.min.js' %}"></script>			
+			<script src="{% static 'js/hoverIntent.js' %}"></script>
+			<script src="{% static 'js/superfish.min.js' %}"></script>	
+			<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+			<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+			<script src="{% static 'js/owl.carousel.min.js' %}"></script>			
+			<script src="{% static 'js/jquery.sticky.js' %}"></script>
+			<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>			
+			<script src="{% static 'js/parallax.min.js' %}"></script>	
+			<script src="{% static 'js/waypoints.min.js' %}"></script>
+			<script src="{% static 'js/jquery.counterup.min.js' %}"></script>			
+			<script src="{% static 'js/mail-script.js' %}"></script>	
+			<script src="{% static 'js/main.js' %}"></script>	
+			<script>var currentX = '';
+var currentY = '';
+var movementConstant = .065;
+
+$(document).mousemove(function(e) {
+  if (currentX == '') currentX = e.pageX;
+  var xdiff = e.pageX - currentX;
+  currentX = e.pageX;
+  if (currentY == '') currentY = e.pageY;
+  var ydiff = e.pageY - currentY;
+  currentY = e.pageY;
+
+  $('.parallax div').each(function(i, el) {
+    var movement = (i + 1) * (xdiff * movementConstant);
+    var movementy = (i + 1) * (ydiff * movementConstant);
+    var newX = $(el).position().left + movement;
+    var newY = $(el).position().top + movementy;
+    var cssObj = {
+      'left': newX + 'px',
+      'top': newY + 'px'
+    };
+
+    $(el).css('left', newX + 'px');
+     $(el).css('top', newY + 'px');
+    $(el).css({
+      "transform": "translate(" + newX + "px," + newY + "px)"
+    });
+  });
+});</script>
+		</body>
+	</html>
+
+
+
