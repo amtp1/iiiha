@@ -170,6 +170,7 @@ def signup(request):
         except User.DoesNotExist:
             user = User.objects.create_user(username=username, email=email, password=password)
             user = authenticate(username=username, password=password)
+            login(request, user)
             return redirect('index')
 
 
