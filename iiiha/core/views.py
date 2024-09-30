@@ -159,13 +159,18 @@ def signup(request):
     retry_password = request.POST['retry_password']
     username = uuid.uuid1()
     if password == retry_password:
-        user = User.objects.get(email=email)
-        if not user:
+        try:
+            user = User.objects.get(email=email)
+            if not user:
+                user = User.objects.create_user(username=username, email=email, password=password)
+                user = authenticate(username=username, password=password)
+                return redirect('index')
+            else:
+                return render(request, 'login.html', {'message': 'Такой пользователь уже существует!'})
+        except User.DoesNotExist:
             user = User.objects.create_user(username=username, email=email, password=password)
-            user = authenticate(username=username, password=password)
-            return redirect('index')
-        else:
-            return render(request, 'login.html', {'message': 'Такой пользователь уже существует!'})
+                user = authenticate(username=username, password=password)
+                return redirect('index')
 
 
 def logout_user(request):
