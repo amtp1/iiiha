@@ -1,6 +1,6 @@
 import requests
 
-from django.shortcuts import render, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse
 from django.http import JsonResponse, HttpRequest
 from rest_framework.generics import ListAPIView
 from rest_framework import authentication, permissions
@@ -48,6 +48,12 @@ class CheckProductAPI(ListAPIView):
 
 def index(request) -> HttpResponse:
     return render(request, "index.html")
+    """
+    if request.user.is_authenticated:
+        return render(request, "index.html")
+    else:
+        return redirect('login')
+    """
 
 
 def chatgpt(request) -> HttpResponse:
@@ -113,7 +119,8 @@ def generate_smartcamera(request) -> JsonResponse:
 
     smart_camera = SmartCameraService()  # Init SmartCameraService instance.
     content = smart_camera.main(image_file=image.file)
-    return JsonResponse({'asst_name': content['asst_name'], 'content': content['content']})
+    return JsonResponse({'asst_name': content['asst_name'], 'content': content['content'],
+                         'yandex_data': content['yandex_data']})
 
 
 def chatgptplus(request) -> HttpResponse:
@@ -127,3 +134,7 @@ def generate_chatgptplus(request) -> JsonResponse:
     chatgpt_plus = ChatGPTPlusService()
     response = chatgpt_plus.generate(content=content)
     return JsonResponse(response)
+
+
+def login(request):
+    return render(request, 'login.html')
