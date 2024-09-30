@@ -537,7 +537,6 @@ function generateSmartCamera() {
                   let asst_name = data['asst_name'] 
                   let content = data['content'];
                   let yandex_content = data['yandex_data'];
-                  console.log(yandex_content);
                   if (content == null && yandex_content == null) {
                       content = 'Не удалось распознать объект!';
                   } else if (content == null && yandex_content != null) {
