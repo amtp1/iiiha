@@ -54,7 +54,7 @@ def index(request) -> HttpResponse:
 
 
 def chatgpt(request) -> HttpResponse:
-    return render(request, "chatgpt.html")
+    return render(request, "chatgpt.html", {'auth_user': request.user.is_authenticated})
 
 
 @csrf_exempt
@@ -75,7 +75,7 @@ def generate_chatgpt(request) -> JsonResponse:
 
 
 def fusion(request) -> HttpResponse:
-    return render(request, 'fusion.html')
+    return render(request, 'fusion.html', {'auth_user': request.user.is_authenticated})
 
 
 @csrf_exempt
@@ -102,7 +102,10 @@ def generate_plusvector(request) -> JsonResponse:
 
 
 def smartcamera(request) -> HttpResponse:
-    return render(request, 'smartcamera.html')
+    if request.user.is_authenticated:
+        return render(request, 'smartcamera.html', {'auth_user': request.user.is_authenticated})
+    else:
+        return JsonResponse({'error': 'Unauthorized!'})
 
 
 @csrf_exempt
@@ -117,7 +120,7 @@ def generate_smartcamera(request) -> JsonResponse:
     smart_camera = SmartCameraService()  # Init SmartCameraService instance.
     content = smart_camera.main(image_file=image.file)
     return JsonResponse({'asst_name': content['asst_name'], 'content': content['content'],
-                         'yandex_data': content['yandex_data']})
+                        'yandex_data': content['yandex_data']})
 
 
 def chatgptplus(request) -> HttpResponse:
