@@ -137,16 +137,19 @@ def signin(request):
     if request.POST:
         email = request.POST['email']
         password = request.POST['password']
-        user = User.objects.get(email=email)
-        if not user:
+        try:
+            user = User.objects.get(email=email)
+            if not user:
+                return render(request, 'login.html', {'message': 'Неверная электронная почта!'})
+            else:
+                try:
+                    user = authenticate(username=user.username, password=password)
+                    login(request, user)
+                    return redirect('index')
+                except AttributeError:
+                    return render(request, 'login.html', {'message': 'Неверный пароль!'})
+        except User.DoesNotExist:
             return render(request, 'login.html', {'message': 'Такого пользователя не существует!'})
-        else:
-            try:
-                user = authenticate(username=user.username, password=password)
-                login(request, user)
-                return redirect('index')
-            except AttributeError:
-                return render(request, 'login.html', {'message': 'Неверный пароль!'})
     return render(request, 'login.html')
 
 
