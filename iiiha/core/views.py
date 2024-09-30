@@ -169,8 +169,8 @@ def signup(request):
                 return render(request, 'login.html', {'message': 'Такой пользователь уже существует!'})
         except User.DoesNotExist:
             user = User.objects.create_user(username=username, email=email, password=password)
-                user = authenticate(username=username, password=password)
-                return redirect('index')
+            user = authenticate(username=username, password=password)
+            return redirect('index')
 
 
 def logout_user(request):
