@@ -540,13 +540,13 @@ function generateSmartCamera() {
                   if (content == null && yandex_content == null) {
                       content = 'Не удалось распознать объект!';
                   } else if (content == null && yandex_content != null) {
-                    content = `Товар: ${yandex_content['name']}
+                    content = `<b>Товар: ${yandex_content['name']}</b>
                                Минимальная цена: ${yandex_content['minPrice']}
                                Максимальная цена: ${yandex_content['maxPrice']}`;
                   } else if (content != null && yandex_content != null){
-                    content += `<br><br><span>Товар:</span> ${yandex_content['name']}
-                               <span>Минимальная цена:</span> ${yandex_content['minPrice']} руб.
-                               <span>Максимальная цена:</span> ${yandex_content['maxPrice']} руб.`;
+                    content += `<br><br><b>Товар: ${yandex_content['name']}</b>
+                               Минимальная цена: ${yandex_content['minPrice']} руб.
+                               Максимальная цена: ${yandex_content['maxPrice']} руб.`;
                   }
                   let contentDiv = document.getElementById('content-div');
                   const contentP = document.createElement('p');
