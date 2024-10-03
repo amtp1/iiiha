@@ -20,6 +20,8 @@ urlpatterns = [
     path('signin', signin, name='signin'),
     path('signup', signup, name='signup'),
     path('logout', logout_user, name='logout_user'),
+    path('offer', offer, name='offer'),
+    path('privacy-policy', privacy_policy, name='privacy-policy'),
 
     # API urls
     path('api/checkfoodvalue/<str:food_name>', CheckFoodValueAPI.as_view(), name="checkfoodvalue"),

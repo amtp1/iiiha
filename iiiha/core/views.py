@@ -180,3 +180,11 @@ def signup(request):
 def logout_user(request):
     logout(request)
     return redirect('index')
+
+
+def offer(request):
+    return render(request, 'offer.html')
+
+
+def privacy_policy(request):
+    return render(request, 'privacy-policy.html')

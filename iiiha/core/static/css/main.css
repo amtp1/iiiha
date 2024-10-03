@@ -2288,3 +2288,18 @@ width: 124px;
   color: white;
 	background-color: green;
 }
+
+main {
+  padding: 45px;
+  margin-left: 20%;
+}
+
+.docs li {
+  margin: 10px 0;
+  margin-left: 20%;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
