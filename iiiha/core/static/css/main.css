@@ -2299,6 +2299,10 @@ main {
   margin-left: 20%;
 }
 
+#inn {
+  list-style-type: none;
+}
+
 a {
   color: black;
   text-decoration: none;
