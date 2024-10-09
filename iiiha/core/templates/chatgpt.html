@@ -8,7 +8,11 @@
       <div class="single-info row mt-40 align-items-center">
           <div class="col-lg-12 col-md-12 no-padding info-center">
               <div class="info-content">
+                {% if auth_user %}
+                  <div class="fade-in-image auth"></div>
+                {% else %}
                   <div class="fade-in-image"></div>
+                {% endif %}
 
                       <div class="mt-10">
                           <textarea class="textarea" placeholder="Введите запрос (умный ИИ чат-бот ответит)" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Введите запрос (умный ИИ чат-бот ответит)'" required></textarea>

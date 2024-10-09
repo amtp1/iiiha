@@ -1676,6 +1676,13 @@ Toggle Changes
     padding-bottom: 60%;
 	border-radius: 8px;
 }
+
+.fade-in-image.auth {
+  background: url(../img/img1.png) no-repeat center top/cover;
+	width: 100%;
+    padding-bottom: 60%;
+	border-radius: 8px;
+}
 /*.open {
 	background: url(../img/img1.png) no-repeat center top/cover;
 	width: 100%;
