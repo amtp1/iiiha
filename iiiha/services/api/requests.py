@@ -1,7 +1,8 @@
 import time
 import json
 import base64
-from dataclasses import dataclass
+import logging
+from logging.config import fileConfig
 
 import requests
 from django.conf import settings
@@ -9,6 +10,7 @@ from requests.exceptions import JSONDecodeError
 
 from ..temp.temp import food_messages
 from core.models import *
+from loguru import logger
 
 
 class Config:
@@ -29,6 +31,7 @@ class AssistantRequestService(Config):
     def __init__(self):
         super().__init__()
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
+        logger.add("core/debug/services/gpt/assistant/debug.log")
 
     def generate_main_asst(self):
         url = 'https://api.openai.com/v1/assistants/asst_h1t8ISoM3fX0ZwZR1DS83Unj'
@@ -51,12 +54,15 @@ class AssistantRequestService(Config):
         }
         request = requests.post(url=self.BASE_URL, json=data, headers=headers)
         response = json.loads(request.text)
+        if request.status_code != 200:
+            logger.error(response)
         return response
 
 
 class ChatGPTService:
     def __init__(self):
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
+        logger.add("core/debug/services/gpt/chat/debug.log")
 
     def generate(self, content=None):
         data = {'model': 'gpt-4o-mini', 'messages': [{'role': 'user', 'content': content}],
@@ -68,6 +74,7 @@ class ChatGPTService:
         }
         request = requests.post(url=self.BASE_URL, json=data, headers=headers)
         response = json.loads(request.text)
+        logger.info(response)
         return response
 
 
@@ -78,6 +85,7 @@ class FusionService:
             'X-Key': f'Key {settings.FUSION_API_KEY}',
             'X-Secret': f'Secret {settings.FUSION_SECRET_KEY}',
         }
+        c
 
     def get_model(self):
         response = requests.get(self.URL + 'key/api/v1/models', headers=self.AUTH_HEADERS)
@@ -101,6 +109,10 @@ class FusionService:
         }
         response = requests.post(self.URL + 'key/api/v1/text2image/run', headers=self.AUTH_HEADERS, files=data)
         data = response.json()
+        if response.status_code != 200:
+            logger.error(data)
+        else:
+            logger.info(data)
         return data['uuid']
 
     def check_generation(self, uuid, attempts=10, delay=20):
