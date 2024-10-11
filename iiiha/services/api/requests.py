@@ -13,6 +13,9 @@ from core.models import *
 from loguru import logger
 
 
+log_path = 'core/log/services'
+
+
 class Config:
     def __init__(self):
         self.GPT_AUTH_HEADERS = {
@@ -30,8 +33,8 @@ class Config:
 class AssistantRequestService(Config):
     def __init__(self):
         super().__init__()
-        self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
-        logger.add("core/debug/services/gpt/assistant/debug.log")
+        self.BASE_URL = 'https://api.openai.com/v1/chat/completions's
+        logger.add(f"{log_path}/gpt/assistant/debug.log")
 
     def generate_main_asst(self):
         url = 'https://api.openai.com/v1/assistants/asst_h1t8ISoM3fX0ZwZR1DS83Unj'
@@ -62,7 +65,7 @@ class AssistantRequestService(Config):
 class ChatGPTService:
     def __init__(self):
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
-        logger.add("core/debug/services/gpt/chat/debug.log")
+        logger.add(f"{log_path}/gpt/chat/debug.log")
 
     def generate(self, content=None):
         data = {'model': 'gpt-4o-mini', 'messages': [{'role': 'user', 'content': content}],
