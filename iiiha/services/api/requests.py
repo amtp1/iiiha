@@ -33,7 +33,7 @@ class Config:
 class AssistantRequestService(Config):
     def __init__(self):
         super().__init__()
-        self.BASE_URL = 'https://api.openai.com/v1/chat/completions's
+        self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
         logger.add(f"{log_path}/gpt/assistant/debug.log")
 
     def generate_main_asst(self):
