@@ -108,10 +108,7 @@ class FusionService:
         }
         response = requests.post(self.URL + 'key/api/v1/text2image/run', headers=self.AUTH_HEADERS, files=data)
         data = response.json()
-        if response.status_code != 200:
-            logger.error(data)
-        else:
-            logger.info(data)
+        logger.info(data)
         return data['uuid']
 
     def check_generation(self, uuid, attempts=10, delay=20):
