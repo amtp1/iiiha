@@ -168,6 +168,7 @@ class SmartCameraService(Config):
         self.URL = 'https://api.openai.com/v1/chat/completions'
 
         self.BASE_IMAGE = None
+        logger.add(f"{log_path}/smartcamera/debug.log")
 
     def generate_main_asst(self):
         main_asst = Assistants.objects.get(key_word='main')
@@ -200,6 +201,8 @@ class SmartCameraService(Config):
         response = requests.post(url=self.URL, json=payload, headers=self.GPT_AUTH_HEADERS)
         data = response.json()
         content = data['choices'][0]['message']['content']
+        if response.status_code != 200:
+            logger.error(content)
         return content
 
     def check_asst_content_response(self, content):
