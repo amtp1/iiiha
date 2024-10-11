@@ -114,7 +114,7 @@ class FusionService:
         logger.info(data)
         return data['uuid']
 
-    def check_generation(self, uuid, attempts=10, delay=20):
+    def check_generation(self, uuid, attempts=10, delay=25):
         while True:
             response = requests.get(self.URL + 'key/api/v1/text2image/status/' + uuid, headers=self.AUTH_HEADERS)
             data = response.json()
