@@ -115,7 +115,7 @@ class FusionService:
         return data['uuid']
 
     def check_generation(self, uuid, attempts=15, delay=25):
-        while attempts > 0:
+        while True:
             response = requests.get(self.URL + 'key/api/v1/text2image/status/' + uuid, headers=self.AUTH_HEADERS)
             data = response.json()
             if data['status'] == 'DONE':
