@@ -395,7 +395,7 @@ function generateFusion() {
                 try{
                   resetPreGenerateButton();
                   let image = data['image'][0];
-                  let fadeImage = document.getElementById('fusion-result');
+                  let fadeImage = document.getElementById('fade-in-image-result');
                   fadeImage.style.backgroundImage = `url('data:image/png;base64, ${image}')`;
                   fadeImage.style.maxWidth = '100%';
 
@@ -665,7 +665,7 @@ document.getElementById('smartcameraImageInput').addEventListener('change', func
         const base64String = e.target.result;
         
         // Устанавливаем изображение как фон для div
-        const backgroundDiv = document.getElementById('smartcamera-result');
+        const backgroundDiv = document.getElementById('fade-in-image-result');
         backgroundDiv.style.backgroundImage = `url('${base64String}')`;
     }
     // Читаем содержимое файла как Data URL (Base64)

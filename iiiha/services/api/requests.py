@@ -88,6 +88,7 @@ class FusionService:
             'X-Key': f'Key {settings.FUSION_API_KEY}',
             'X-Secret': f'Secret {settings.FUSION_SECRET_KEY}',
         }
+        logger.add(f"{log_path}/fusion/debug.log")
 
     def get_model(self):
         response = requests.get(self.URL + 'key/api/v1/models', headers=self.AUTH_HEADERS)

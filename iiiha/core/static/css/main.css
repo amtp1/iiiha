@@ -1703,7 +1703,7 @@ Toggle Changes
     transition: all 1s ease-in;
 }
 
-#fusion-result, #smartcamera-result {
+#fade-in-image-result {
 	-webkit-transition: all 1s ease-in;
     -moz-transition: all 1s ease-in;
     -o-transition: all 1s ease-in;
