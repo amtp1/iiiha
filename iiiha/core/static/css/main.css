@@ -2307,10 +2307,10 @@ main {
 .docs li {
   margin: 10px 0;
   margin-left: 20%;
-  font-size: 15px;
+  font-size: 17px;
 }
 
-#inn {
+#inn, #email {
   list-style-type: none;
 }
 
