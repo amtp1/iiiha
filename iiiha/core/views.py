@@ -1,6 +1,7 @@
 import uuid
 
 import requests
+import fal_client
 from django.shortcuts import render, redirect, HttpResponse
 from django.http import JsonResponse, HttpRequest
 from rest_framework.generics import ListAPIView
@@ -134,6 +135,29 @@ def generate_chatgptplus(request) -> JsonResponse:
     chatgpt_plus = ChatGPTPlusService()
     response = chatgpt_plus.generate(content=content)
     return JsonResponse(response)
+
+
+def flux(request) -> HttpResponse:
+    return render(request, 'flux.html')
+
+
+@csrf_exempt
+def generate_flux(request) -> JsonResponse:
+    def on_queue_update(update):
+        if isinstance(update, fal_client.InProgress):
+            for log in update.logs:
+                pass  # print(log["message"]))
+
+    request = request.POST
+    result = fal_client.subscribe(
+        "fal-ai/flux-pro/v1.1",
+        arguments={
+            "prompt": request['prompt']
+        },
+        with_logs=True,
+        on_queue_update=on_queue_update,
+    )
+    return JsonResponse(result)
 
 
 def signin(request):

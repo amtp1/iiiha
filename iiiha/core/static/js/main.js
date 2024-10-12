@@ -294,7 +294,12 @@ function generateAssistantRequest() {
                     if (content == 'chatgpt') {
                       generateChatGPT();
                     } else if (content == 'fusion') {
-                      generateFusion();
+                      console.log(user_is_auth);
+                      if (user_is_auth == 'False') {
+                        generateFusion();
+                      } else {
+                        generateFlux();
+                      }
                     } else if (content == 'smartcamera') {
                       window.location.replace('smartcamera');
                     } else if (content == 'menu') {
@@ -567,6 +572,63 @@ function generateSmartCamera() {
                   <span class="badge text-bg-info"><h5>Результат:</h5></span> ${convertMarkdownToHTML(content)}<br>`;
                   contentDiv.appendChild(contentP);
                   scrollIntoView('content-div');
+              }
+          )
+        });
+  }
+}
+
+function generateFlux() {
+  resetContent();
+  let textArea = $('textarea');
+  if (textArea.val() == "") {
+      return alert('Поле не должно оставаться пустым!');
+  } else {
+      let generateBtn = document.getElementById('pre-generate-btn');
+      generateBtn.disabled = true;
+      generateBtn.innerText = 'Идёт генерация ...';
+
+      let data = new FormData();
+      data.append('prompt', textArea.val());
+
+      fetch('generate_flux', {
+          method: 'POST',
+          body: data,
+          contentType: 'application/json',
+          headers: {
+              'X-Requested-With': 'XMLHttpRequest',
+              'X-CSRFToken': $.cookie('csrftoken')
+          },
+        }).then(function (response) {
+          response.json().then(
+              function (data) {
+                try{
+                  resetPreGenerateButton();
+                  resetPreGenerateButton();
+                  let image = data['images'][0]['url'];
+                  let fadeImage = document.getElementById('fade-in-image-result');
+                  fadeImage.style.backgroundImage = `url('${image}')`;
+                  fadeImage.style.maxWidth = '100%';
+
+                  /*
+                  let contentDiv = document.getElementById('content-div');
+                  const contentP = document.createElement('p');
+                  contentDiv.style.overflow = 'hidden';
+                  contentP.id = 'content';
+                  let fusionImageResult = document.getElementById('fusion-image-result');
+                  if (fusionImageResult){
+                      fusionImageResult.remove();
+                  }
+                  const newImage = document.createElement('img');
+                  newImage.id = 'fusion-image-result';
+                  newImage.src = `data:image/png;base64,${image}`;
+                  contentP.appendChild(newImage);
+                  contentDiv.appendChild(contentP);
+                  scrollIntoView('fusion-image-result');
+                  */
+                } catch(e) {
+                  return alert(`Ошибка: ${e}`);
+                }
               }
           )
         });
