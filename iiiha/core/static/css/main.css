@@ -36,9 +36,9 @@ html{
     padding: 0;
     margin: 0;
     position: relative;
-	min-height: 100vh;
-	touch-action:auto;
-  font-family: 'Lumberjack_Rough', sans-serif;
+    min-height: 100vh;
+    touch-action:auto;
+    font-family: 'Lumberjack_Rough', sans-serif;
 }
 
   body
@@ -46,8 +46,8 @@ html{
     width: 100%;
     max-width: 100%;
     overflow-x: hidden;
-	min-height: 100%;
-	touch-action:auto;
+    min-height: 100%;
+    touch-action:auto;
   }
 /*--------------------------------------------------------------
 # Navigation Menu
@@ -345,6 +345,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   }
 }
 @import url('fonts/Lumberjack_Rough.otf');
+
 .login-page {
     background: url(../img/bg.png) no-repeat bottom center;
     background-size: cover;
@@ -421,9 +422,9 @@ img.plane {
     height: 84px;
     width: 100%;
     margin-bottom: 20px;
-	font-size: 26px;
+	  font-size: 26px;
     padding: 0 15px;
-	font-family: Lumberjack_Rough;
+	  font-family: Lumberjack_Rough;
 }
 .form-btn {
     height: 86px;
@@ -442,7 +443,7 @@ img.plane {
     cursor: pointer;
 }
 .form-bl-top h3 {
-	font-family: Lumberjack_Rough;
+	  font-family: Lumberjack_Rough;
     font-size: 48px;
     font-weight: 400;
     line-height: 61px;
@@ -459,12 +460,12 @@ img.plane {
 }
 .form-bl-bottom span {
 	font-family: Lumberjack_Rough;
-    font-size: 24px;
+  font-size: 24px;
 	color: rgba(90, 48, 36, 1);
 }
 .form-bl-bottom a {
 	font-family: Lumberjack_Rough;
-    font-size: 24px;
+  font-size: 24px;
 	color: rgba(90, 48, 36, 1);
 }
 .form-bl-bottom a.red-btn {
@@ -526,8 +527,8 @@ img.plane {
 }
 .slogan span {
 	font-family: Lumberjack_Rough;
-    font-size: 32px;
-    color: rgba(0, 0, 0, 1);
+  font-size: 32px;
+  color: rgba(0, 0, 0, 1);
 }
 /* Nav Meu Styling */
 .nav-menu a {
@@ -1332,7 +1333,7 @@ a:hover {
     text-align: center;
     border-radius: 10px;
     line-height: 70px;
-	font-family: Lumberjack_Rough;
+	  font-family: Lumberjack_Rough;
 }
 #avatar {
     width: 100%;
@@ -1341,9 +1342,9 @@ a:hover {
     margin-bottom: 20px;
     height: 60px;
     line-height: 50px;
-	position: relative;
-	font-family: Lumberjack_Rough;
-	font-size: 18px;
+    position: relative;
+    font-family: Lumberjack_Rough;
+    font-size: 18px;
 }
 #avatar:after {
 	position: absolute;
@@ -1397,7 +1398,7 @@ a:hover {
     color: #491808;
     line-height: 40px;
     z-index: 1;
-	font-weight:600;
+	  font-weight:600;
 }
 .layer {
   position: absolute;
@@ -1463,7 +1464,7 @@ a:hover {
     font-family: Lumberjack_Rough;
     top: 0;
     color: rgba(90, 48, 36, 1);
-  z-index: 9;  
+    z-index: 9;
 }
 .smile-rating-container input {
   display: none;
@@ -2265,10 +2266,10 @@ body {
   margin-bottom: 20px;
   height: 60px;
   line-height: 50px;
-position: relative;
-font-family: Lumberjack_Rough;
-font-size: 18px;
-background: transparent;
+  position: relative;
+  font-family: Lumberjack_Rough;
+  font-size: 18px;
+  background: transparent;
 }
 
 #smartcameraImageInput[type="file"]::file-selector-button {
@@ -2315,4 +2316,8 @@ main {
 a {
   color: black;
   text-decoration: none;
+}
+
+h1, h3, p {
+  font-family: Lumberjack_Rough;
 }
