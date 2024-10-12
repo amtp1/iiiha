@@ -138,7 +138,7 @@ def generate_chatgptplus(request) -> JsonResponse:
 
 
 def flux(request) -> HttpResponse:
-    return render(request, 'flux.html')
+    return render(request, 'flux.html', {'auth_user': request.user.is_authenticated})
 
 
 @csrf_exempt
