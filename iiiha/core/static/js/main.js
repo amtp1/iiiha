@@ -402,7 +402,13 @@ function generateFusion() {
                   let image = data['image'][0];
                   let fadeImage = document.getElementById('fade-in-image-result');
                   fadeImage.style.backgroundImage = `url('data:image/png;base64, ${image}')`;
-                  fadeImage.style.maxWidth = '100%';
+                  fadeImage.style.width = '100%';
+                  fadeImage.style.height = '203px';
+                  fadeImage.style.backgroundSize = 'contain';
+                  fadeImage.style.backgroundPosition = 'center';
+                  fadeImage.style.backgroundRepeat = 'no-repeat';
+                  fadeImage.style.boxSizing = 'border-box';
+                  fadeImage.style.overflow = 'hidden';
 
                   /*
                   let contentDiv = document.getElementById('content-div');
@@ -729,6 +735,13 @@ document.getElementById('smartcameraImageInput').addEventListener('change', func
         // Устанавливаем изображение как фон для div
         const backgroundDiv = document.getElementById('fade-in-image-result');
         backgroundDiv.style.backgroundImage = `url('${base64String}')`;
+        backgroundDiv.style.width = '100%';
+        backgroundDiv.style.height = '203px';
+        backgroundDiv.style.backgroundSize = 'contain';
+        backgroundDiv.style.backgroundPosition = 'center';
+        backgroundDiv.style.backgroundRepeat = 'no-repeat';
+        backgroundDiv.style.boxSizing = 'border-box';
+        backgroundDiv.style.overflow = 'hidden';
     }
     // Читаем содержимое файла как Data URL (Base64)
     reader.readAsDataURL(file);
