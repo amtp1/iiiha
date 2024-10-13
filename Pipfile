@@ -12,6 +12,7 @@ requests = "*"
 pillow = "*"
 loguru = "*"
 fal-client = "*"
+httpcore = "*"
 
 [dev-packages]
 
