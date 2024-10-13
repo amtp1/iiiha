@@ -292,3 +292,31 @@ class ChatGPTPlusService:
         request = requests.post(url=self.BASE_URL, json=payload, headers=self.AUTH_HEADERS)
         response = request.json()
         return response
+
+
+class TranslatorService(Config):
+    def __init__(self):
+        super().__init__()
+        self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
+
+    def generate_asst(self):
+        url = 'https://api.openai.com/v1/assistants/asst_MAlaVcUGrlNo8mcexdfm2bGE'
+        request = requests.get(url=url, headers=self.ASST_AUTH_HEADERS)
+        response = request.json()
+        return response
+
+    def translate(self, prompt):
+        asst_request = self.generate_asst()
+        payload = {'model': 'gpt-4o-mini',
+                   'messages': [
+                        {"role": "user", "content": [
+                            {"type": "text", "text": asst_request.get('instructions')},
+                            {"type": "text", "text": prompt}
+                            ]}
+                    ]}
+        response = requests.post(url=self.BASE_URL, json=payload, headers=self.GPT_AUTH_HEADERS)
+        data = response.json()
+        content = data['choices'][0]['message']['content']
+        if response.status_code != 200:
+            logger.error(content)
+        return content

@@ -143,16 +143,19 @@ def flux(request) -> HttpResponse:
 
 @csrf_exempt
 def generate_flux(request) -> JsonResponse:
+    request = request.POST
+    translator = TranslatorService()
+    prompt = translator.translate(request['prompt'])
+
     def on_queue_update(update):
         if isinstance(update, fal_client.InProgress):
             for log in update.logs:
                 pass  # print(log["message"]))
 
-    request = request.POST
     result = fal_client.subscribe(
         "fal-ai/flux-pro/v1.1",
         arguments={
-            "prompt": request['prompt']
+            "prompt": prompt
         },
         with_logs=True,
         on_queue_update=on_queue_update,
