@@ -3,14 +3,12 @@ import uuid
 
 import requests
 import fal_client
-from django.shortcuts import render, redirect, HttpResponse
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse, HttpRequest
 from rest_framework.generics import ListAPIView
 from rest_framework import authentication, permissions
-from rest_framework.decorators import api_view
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from django.template.loader import render_to_string
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -73,7 +71,7 @@ def chatgpt(request) -> HttpResponse:
 
 
 @csrf_exempt
-def generate_assistant_request(request):
+def generate_assistant_request(request) -> JsonResponse:
     content = request.POST['content']
     assistant_request = AssistantRequestService()
     response = assistant_request.generate(content)
@@ -131,10 +129,6 @@ def generate_smartcamera(request) -> JsonResponse:
     request_files = request.FILES
     image = request_files['file']  # Get image from request files.
 
-    # ===> Hide image save function for time.
-    # image_obj = SmartCamera.objects.create(image=image)
-    # image_url = f"http://{request.get_host()}{image_obj.image.url}"
-
     smart_camera = SmartCameraService()  # Init SmartCameraService instance.
     content = smart_camera.main(image_file=image.file)
     return JsonResponse({'asst_name': content['asst_name'], 'content': content['content'],
@@ -189,7 +183,7 @@ def generate_flux(request) -> JsonResponse:
         return JsonResponse({'error': 'Unauthorized!'})
 
 
-def signin(request):
+def signin(request) -> (HttpResponse | HttpResponseRedirect):
     if request.POST:
         email = request.POST['email']
         password = request.POST['password']
@@ -209,7 +203,7 @@ def signin(request):
     return render(request, 'login.html')
 
 
-def signup(request):
+def signup(request) -> HttpResponseRedirect:
     email = request.POST['email']
     password = request.POST['password']
     retry_password = request.POST['retry_password']
@@ -220,36 +214,27 @@ def signup(request):
             if not user:
                 response = redirect('tariff')
                 response.set_cookie('auth_temp_data', json.dumps({'email': email, 'password': password,
-                                                       'username': str(username)}))
+                                                                  'username': str(username)}))
                 return response
-                # return redirect('tariff')
-                # user = User.objects.create_user(username=username, email=email, password=password)
-                # user = authenticate(username=username, password=password)
-                # return redirect('index')
             else:
                 return render(request, 'login.html', {'message': 'Такой пользователь уже существует!'})
         except User.DoesNotExist:
             response = redirect('tariff')
             response.set_cookie('auth_temp_data', json.dumps({'email': email, 'password': password,
-                                                   'username': str(username)}))
+                                                              'username': str(username)}))
             return response
-            # return redirect('tariff')
-            #user = User.objects.create_user(username=username, email=email, password=password)
-            #user = authenticate(username=username, password=password)
-            #login(request, user)
-            #return redirect('index')
 
 
-def logout_user(request):
+def logout_user(request) -> HttpResponseRedirect:
     logout(request)
     return redirect('index')
 
 
-def tariff(request):
+def tariff(request) -> HttpResponse:
     return render(request, 'tariff.html')
 
 
-def select_tariff(request):
+def select_tariff(request) -> JsonResponse:
     request_data = request.POST
     tariff_id = request_data['tariff_id']
     auth_temp_data = request.COOKIES.get('auth_temp_data')
@@ -262,9 +247,9 @@ def select_tariff(request):
     return JsonResponse({'response': True})
 
 
-def offer(request):
+def offer(request) -> HttpResponse:
     return render(request, 'offer.html')
 
 
-def privacy_policy(request):
+def privacy_policy(request) -> HttpResponse:
     return render(request, 'privacy-policy.html')
