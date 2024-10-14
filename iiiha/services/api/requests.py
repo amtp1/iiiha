@@ -172,7 +172,7 @@ class SmartCameraService(Config):
         logger.add(f"{log_path}/smartcamera/debug.log")
 
     def generate_main_asst(self):
-        main_asst = Assistants.objects.get(key_word='main')
+        main_asst = Assistant.objects.get(key_word='main')
         url = f'https://api.openai.com/v1/assistants/{main_asst.asst_id}'
         request = requests.get(url=url, headers=self.ASST_AUTH_HEADERS)
         response = request.json()
@@ -212,7 +212,7 @@ class SmartCameraService(Config):
             content_data['asst_name'] = 'Основной ассистент'
             content_data['content'] = self.generate()
         else:
-            asst_obj = Assistants.objects.get(key_word=content)
+            asst_obj = Assistant.objects.get(key_word=content)
             asst = self.generate_asst_by_id(asst_obj.asst_id)
             content_data['asst_name'] = asst.get('name')
             content_data['content'] = self.generate(asst.get('instructions'))
