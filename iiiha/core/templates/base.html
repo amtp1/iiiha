@@ -58,9 +58,14 @@
         {% if auth_user %}
           <li><a class="nav-link" href="smartcamera">Очень умная камера</a></li>
         {% endif %}
-
         {% if auth_user %}
-          <li><a class="nav-link" href="logout">Выйти</a></li>
+          <li>
+            <a class="nav-link">Профиль</a>
+            <ul class="nav-dropdown">
+                <li><a class="nav-link" onclick="alert('{{tariff}}')">О тарифе</a></li>
+                <li><a class="nav-link" href="logout">Выйти</a></li>
+            </ul>
+          </li>
         {% else %}
           <li><a class="nav-link" href="signin">Войти</a></li>
         {% endif %}

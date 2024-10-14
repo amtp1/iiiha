@@ -53,11 +53,23 @@ class CheckProductAPI(ListAPIView):
 
 
 def index(request) -> HttpResponse:
-    return render(request, "index.html", {'auth_user': request.user.is_authenticated})
+    user_data = {'auth_user': request.user.is_authenticated}
+    if request.user.is_authenticated:
+        tariff_set = TariffSet.objects.get(user=request.user)
+        user_data['tariff'] =  tariff_set.tariff
+    else:
+        tariff_set = None
+    return render(request, "index.html", user_data)
 
 
 def chatgpt(request) -> HttpResponse:
-    return render(request, "chatgpt.html", {'auth_user': request.user.is_authenticated})
+    user_data = {'auth_user': request.user.is_authenticated}
+    if request.user.is_authenticated:
+        tariff_set = TariffSet.objects.get(user=request.user)
+        user_data['tariff'] =  tariff_set.tariff
+    else:
+        tariff_set = None
+    return render(request, "chatgpt.html", user_data)
 
 
 @csrf_exempt
@@ -105,8 +117,11 @@ def generate_plusvector(request) -> JsonResponse:
 
 
 def smartcamera(request) -> HttpResponse:
+    user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        return render(request, 'smartcamera.html', {'auth_user': request.user.is_authenticated})
+        tariff_set = TariffSet.objects.get(user=request.user)
+        user_data['tariff'] = tariff_set.tariff
+        return render(request, 'smartcamera.html', user_data)
     else:
         return JsonResponse({'error': 'Unauthorized!'})
 
@@ -140,29 +155,38 @@ def generate_chatgptplus(request) -> JsonResponse:
 
 
 def flux(request) -> HttpResponse:
-    return render(request, 'flux.html', {'auth_user': request.user.is_authenticated})
+    user_data = {'auth_user': request.user.is_authenticated}
+    if request.user.is_authenticated:
+        tariff_set = TariffSet.objects.get(user=request.user)
+        user_data['tariff'] = tariff_set.tariff
+        return render(request, 'flux.html', user_data)
+    else:
+        return JsonResponse({'error': 'Unauthorized!'})
 
 
 @csrf_exempt
 def generate_flux(request) -> JsonResponse:
-    request = request.POST
-    translator = TranslatorService()
-    prompt = translator.translate(request['prompt'])
+    if request.user.is_authenticated:
+        request = request.POST
+        translator = TranslatorService()
+        prompt = translator.translate(request['prompt'])
 
-    def on_queue_update(update):
-        if isinstance(update, fal_client.InProgress):
-            for log in update.logs:
-                pass  # print(log["message"]))
+        def on_queue_update(update):
+            if isinstance(update, fal_client.InProgress):
+                for log in update.logs:
+                    pass  # print(log["message"]))
 
-    result = fal_client.subscribe(
-        "fal-ai/flux-pro/v1.1",
-        arguments={
-            "prompt": prompt
-        },
-        with_logs=True,
-        on_queue_update=on_queue_update,
-    )
-    return JsonResponse(result)
+        result = fal_client.subscribe(
+            "fal-ai/flux-pro/v1.1",
+            arguments={
+                "prompt": prompt
+            },
+            with_logs=True,
+            on_queue_update=on_queue_update,
+        )
+        return JsonResponse(result)
+    else:
+        return JsonResponse({'error': 'Unauthorized!'})
 
 
 def signin(request):
