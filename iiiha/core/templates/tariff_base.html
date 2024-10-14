@@ -1,0 +1,198 @@
+{% load static %}
+  <!DOCTYPE html>
+	<html lang="ru" class="no-js">
+	  <head>
+	    <meta name="yandex-verification" content="de0d6e40e8b0d925" />
+	    <meta name="google-site-verification" content="-41wXbHoDqCt6M-tpICKpdx92PERSB1uuXN8NGICz5Y" />
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="{% static 'img/fav.png' %}">
+		<!-- Author Meta -->
+		<meta name="author" content="web2best">
+		<!-- Meta Description -->
+		<meta name="description" content="{% block description %}{% endblock %}">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>{% block title %}{% endblock %}</title>
+
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+      <!--<link rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.css">-->
+		</head>
+		<body class="home-bl">
+			 <header id="home">
+			    <div class="container">
+			    	<div class="row justify-content-between d-flex">
+					  <div class="logo-bl d-flex">
+				      <div id="logo">
+				        <a href="/"><img src="{% static 'img/el2.png' %}" alt="Интегратор Искусственного Интеллекта" title="Интегратор Искусственного Интеллекта" />ИИИ-ХА!</a>
+				      </div>Beta
+					  <!-- #nav-menu-container -->
+                       </div>
+					   <section class="navigation">
+  <div  class="nav-container">
+    <nav>
+      <div class="nav-mobile"><a id="nav-toggle"><span></span></a></div>
+      <ul class="nav-list">
+        <!--<li>
+          <a class="nav-link">Тексты</a>
+          <ul class="nav-dropdown">
+            <li>
+              <a href="chatgpt">Чат-бот</a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="nav-link">Картинки</a>
+          <ul class="nav-dropdown">
+            <li>
+              <a href="fusion">Текст в картинку</a>
+            </li>
+            <li>
+              <a href="smartcamera">Картинка в текст</a>
+            </li>
+          </ul>
+        </li>-->
+      </ul>
+    </nav>
+  </div>
+</section>
+<div class="rating-container">
+  <div class="smile-rating-container">
+    <div class="smile-rating-toggle-container">
+      <form class="submit-rating">
+        <input id="meh"  name="satisfaction" type="radio" value="white" onchange="handleChange(this)"/>
+        <input id="fun" name="satisfaction" type="radio"  value="white1" onchange="handleChange(this)"/>
+       <!-- <label for="meh" class="rating-label rating-label-meh">Режим «Ковбой»</label>
+        <div class="smile-rating-toggle"></div>
+        <div class="toggle-rating-pill"></div>--->
+        <label for="fun" class="rating-label rating-label-fun"></label>
+      </form>
+    </div>
+  </div>
+  </div>
+                    <div class="slogan">
+					     <!-- <span>Интегратор Искусственного Интелекта<span>-->
+					</div>
+			    	</div>
+			    </div>
+          <div id="service-choice-modal" class="modal" tabindex="-1">
+          <div class="popup__bg">
+            
+            <div class="popup popup-error">
+              <svg class="close-popup" id="close-popup-btn" width="40" height="40" viewBox="0 0 37 37" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M1.82422 2.29395L18.2654 18.7351M34.7066 35.1763L18.2654 18.7351M18.2654 18.7351L34.7066 2.29395M18.2654 18.7351L1.82422 35.1763"
+                  stroke="#191919" stroke-width="3" stroke-linecap="round" />
+              </svg>
+
+              <div class="popup-block">
+                <p class="popup-error__text">Не удалось распознать ваш запрос, выберите тип ИИ для продолжения</p>
+                <div>
+                  <a href="javascript:generateChatGPT()" class="popup-error__button">Тексты</a>
+                  <a href="javascript:generateFusion()" class="popup-error__button">Картинки</a>
+                  <a href="/smartcamera" class="popup-error__button">Умная камера</a>
+                </div>
+              </div>
+          
+            </div>
+          </div>
+          </div>
+			  </header><!-- #header -->
+            <br>
+			<!-- Start about Area -->
+			{% block body %}{% endblock %}
+      <main>
+      <section>
+        <ul class="docs">
+            <li><a href="offer" target="_blank">Публичная оферта</a></li>
+            <li><a href="privacy-policy" target="_blank">Политика конфиденциальности</a></li>
+            <li id="inn"><small>Воронин Павел Сергеевич ИНН: 365103540395</small></li>
+            <li id="email"><small>Написать нам: <a href="mailto:ii@ixa.su">ii@ixa.su</a></small></li>
+        </ul>
+    </section>
+    </main>
+			<!-- End about Area -->
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script>const user_is_auth = "{{request.user.is_authenticated}}"</script>
+			<script>
+			let rb = document.querySelectorAll('input');
+      let div = document.querySelectorAll('div.fade-in-image');
+
+      function deleteClass() {
+        for (let b of div) {
+          // b.classList.add('open');
+        // b.classList.remove('open2');
+        }
+      }
+      rb.forEach((element, index) => {
+        element.addEventListener('change', () => {
+          deleteClass();
+          // div[index].classList.remove('open');
+        // div[index].classList.add('open2');
+        })
+      });
+            </script>
+
+
+            <script>
+      (function ($) {
+        // Begin jQuery
+        $(function () {
+          // DOM ready
+          // If a link has a dropdown, add sub menu toggle.
+          $("nav ul li a:not(:only-child)").click(function (e) {
+            $(this).siblings(".nav-dropdown").toggle();
+            // Close one dropdown when selecting another
+            $(".nav-dropdown").not($(this).siblings()).hide();
+            e.stopPropagation();
+          });
+          // Clicking away from dropdown will remove the dropdown class
+          $("html").click(function () {
+            $(".nav-dropdown").hide();
+          });
+          // Toggle open and close nav styles on click
+          $("#nav-toggle").click(function () {
+            $("nav ul").slideToggle();
+          });
+          // Hamburger to X toggle
+          $("#nav-toggle").on("click", function () {
+            this.classList.toggle("active");
+          });
+        }); // end DOM ready
+      })(jQuery); // end jQuery
+			</script>
+			<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+			<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
+			<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
+			<script src="{% static 'js/main.js' %}"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+      <script src="{% static 'js/temp.js' %}"></script>
+      <script src="{% static 'js/superfish.js' %}"></script>
+      <script src="{% static 'js/owl.carousel.min.js' %}"></script>
+      <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+      <!--<script defer src="{% static 'js/bootstrap-5.3.2-dist/bootstrap.js' %}" crossorigin="anonymous"></script>-->
+	    <!--<script defer src="{% static 'js/bootstrap-5.3.2-dist/bootstrap.bundle.min.js' %}" crossorigin="anonymous"></script>-->
+<!-- Yandex.Metrika counter -->
+<script src="{% static 'js/jquery.counterup.min.js' %}" type="text/javascript" >
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)}; m[i].l=1*new Date();
+for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r)
+{ return; }} k=e.createElement(t),a=e.getElementsByTagName(t)
+[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+ym(97086059, "init", { clickmap:true, trackLinks:true, accurateTrackBounce:true, webvisor:true
+});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/97086059" style="position:absolute; left:-9999px;" alt="" /></div></noscript> <!-- /Yandex.Metrika counter -->
+		</body>
+	</html>

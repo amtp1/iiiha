@@ -1,0 +1,234 @@
+{% extends 'tariff_base.html' %}
+{% load static %}
+{% block body %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тарифы</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+    
+    <section class="tarif">
+        <div class="container">
+            <div class="tarif__wrapper">
+                <div class="tarif__item item-tarif">
+                    <div class="item-tarif__img"><img src="{% static 'img/tarif1.jpg' %}" alt=""></div>
+                    <div class="item-tarif__info">
+                        <p class="item-tarif__name">Пастух<span class="name__icon"></span></p>
+                        <div class="item-tarif__price">
+                            <p class="price-new"></p>
+                            <div class="price-old">0 ₽/мес.</div>
+                        </div>
+                    </div>
+                    <div class="item-tarif__info">
+                        <div class="item-tarif__spec">
+                            <ul>
+                                <li>Чат-бот<span>Безлимит</span></li>
+                                <li>Генерация картинок<span>Безлимит</span></li>
+                                <li>Умная камера<span>Безлимит</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item-tarif__button" onclick="selectTariff(1)"><button>Оплатить</button></div>
+                </div>
+                <div class="tarif__item item-tarif">
+                    <div class="item-tarif__img"><img src="{% static 'img/tarif2.jpg' %}" alt=""></div>
+                    <div class="item-tarif__info">
+                        <p class="item-tarif__name">Ковбой<span class="name__icon"></span></p>
+                        <div class="item-tarif__price">
+                            <p class="price-new"></p>
+                            <div class="price-old">1 500 ₽/мес.</div>
+                        </div>
+                    </div>
+                    <div class="item-tarif__info">
+                        <div class="item-tarif__spec">
+                            <ul>
+                                <li>Чат-бот<span>Безлимит</span></li>
+                                <li>Генерация картинок<span>Безлимит</span></li>
+                                <li>Умная камера<span>Безлимит</span></li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Текст в картинку в векторе</p>
+                                        <ul>
+                                            <li>0</li>
+                                            <li>1</li>
+                                            <li>2</li>
+                                            <li>3</li>
+                                            <li>4</li>
+                                            <li><img src="{% static 'img/spec-dop.svg' %}" alt=""></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Аудио в текст с переводом</p>
+                                        <ul>
+                                            <li>0</li>
+                                            <li>20</li>
+                                            <li><img src="{% static 'img/spec-dop.svg' %}" alt=""></li>
+                                            <li>60</li>
+                                            <li>80</li>
+                                            <li>100</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item-tarif__button" onclick="selectTariff(1)"><button>Оплатить</button></div>
+                </div>
+
+                <!--<div class="tarif__item item-tarif">
+                    <div class="item-tarif__img"><img src="./img/tarif3.jpg" alt=""></div>
+                    <div class="item-tarif__info">
+                        <p class="item-tarif__name">Мустанг<span class="name__icon"><img src="./img/item-name.svg" alt=""></span></p>
+                        <div class="item-tarif__price">
+                            <p class="price-new">5 333 ₽/мес.</p>
+                            <div class="price-old">4 000 ₽/мес.</div>
+                        </div>
+                    </div>
+                    <div class="item-tarif__info">
+                        <div class="item-tarif__spec">
+                            <ul>
+                                <li>Чат-бот<span>Безлимит</span></li>
+                                <li>Генерация картинок<span>Безлимит</span></li>
+                                <li>Умная камера<span>Безлимит</span></li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Текст в картинку в векторе</p>
+                                        <ul>
+                                            <li>0</li>
+                                            <li>2</li>
+                                            <li>4</li>
+                                            <li>6</li>
+                                            <li><img src="./img/spec-dop.svg" alt=""></li>
+                                            <li>10</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Аудио в текст с переводом</p>
+                                        <ul>
+                                            <li><img src="./img/spec-dop.svg" alt=""></li>
+                                            <li>50</li>
+                                            <li>150</li>
+                                            <li>200</li>
+                                            <li>250</li>
+                                            <li>300</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Саммари из аудио в текст</p>
+                                        <ul>
+                                            <li>0</li>
+                                            <li>20</li>
+                                            <li><img src="./img/spec-dop.svg" alt=""></li>
+                                            <li>60</li>
+                                            <li>80</li>
+                                            <li>100</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Текст в аудио</p>
+                                        <ul>
+                                            <li>0</li>
+                                            <li>20</li>
+                                            <li><img src="./img/spec-dop.svg" alt=""></li>
+                                            <li>60</li>
+                                            <li>80</li>
+                                            <li>100</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item-tarif__button"><button>Оплатить</button></div>
+                </div>
+
+                <div class="tarif__item item-tarif">
+                    <div class="item-tarif__img"><img src="./img/tarif4.jpg" alt=""></div>
+                    <div class="item-tarif__info">
+                        <p class="item-tarif__name">Родео<span class="name__icon"><img src="./img/item-name.svg" alt=""></span></p>
+                        <div class="item-tarif__price">
+                            <p class="price-new">13 334 ₽/мес.</p>
+                            <div class="price-old">8 000 ₽/мес.</div>
+                        </div>
+                    </div>
+                    <div class="item-tarif__info">
+                        <div class="item-tarif__spec">
+                            <ul>
+                                <li>Чат-бот<span>Безлимит</span></li>
+                                <li>Генерация картинок<span>Безлимит</span></li>
+                                <li>Умная камера<span>Безлимит</span></li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Текст в картинку в векторе</p>
+                                        <ul>
+                                            <li>0</li>
+                                            <li>5</li>
+                                            <li>10</li>
+                                            <li><img src="./img/spec-dop.svg" alt=""></li>
+                                            <li>20</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Аудио в текст с переводом</p>
+                                        <ul>
+                                            <li>0</li>
+                                            <li>200</li>
+                                            <li>400</li>
+                                            <li>600</li>
+                                            <li>800</li>
+                                            <li><img src="./img/spec-dop.svg" alt=""></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Саммари из аудио в текст</p>
+                                        <ul>
+                                            <li><img src="./img/spec-dop.svg" alt=""></li>
+                                            <li>50</li>
+                                            <li>150</li>
+                                            <li>200</li>
+                                            <li>250</li>
+                                            <li>300</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="item-tarif__dop">
+                                        <p class="item-tarif__dop-name">Текст в аудио с созданием собственного голоса</p>
+                                        <ul>
+                                            <li>0</li>
+                                            <li>5</li>
+                                            <li>10</li>
+                                            <li>15</li>
+                                            <li>20</li>
+                                            <li><img src="./img/spec-dop.svg" alt=""></li>
+                                            <li>30</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="item-tarif__button"><button>Оплатить</button></div>
+                </div>-->
+            </div>
+        </div>
+    </section>
+</body>
+</html>
+{% endblock %}

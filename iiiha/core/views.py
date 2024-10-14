@@ -1,3 +1,4 @@
+import json
 import uuid
 
 import requests
@@ -9,6 +10,7 @@ from rest_framework import authentication, permissions
 from rest_framework.decorators import api_view
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
+from django.template.loader import render_to_string
 
 from django.views.decorators.csrf import csrf_exempt
 
@@ -192,21 +194,48 @@ def signup(request):
         try:
             user = User.objects.get(email=email)
             if not user:
-                user = User.objects.create_user(username=username, email=email, password=password)
-                user = authenticate(username=username, password=password)
-                return redirect('index')
+                response = redirect('tariff')
+                response.set_cookie('auth_temp_data', json.dumps({'email': email, 'password': password,
+                                                       'username': str(username)}))
+                return response
+                # return redirect('tariff')
+                # user = User.objects.create_user(username=username, email=email, password=password)
+                # user = authenticate(username=username, password=password)
+                # return redirect('index')
             else:
                 return render(request, 'login.html', {'message': 'Такой пользователь уже существует!'})
         except User.DoesNotExist:
-            user = User.objects.create_user(username=username, email=email, password=password)
-            user = authenticate(username=username, password=password)
-            login(request, user)
-            return redirect('index')
+            response = redirect('tariff')
+            response.set_cookie('auth_temp_data', json.dumps({'email': email, 'password': password,
+                                                   'username': str(username)}))
+            return response
+            # return redirect('tariff')
+            #user = User.objects.create_user(username=username, email=email, password=password)
+            #user = authenticate(username=username, password=password)
+            #login(request, user)
+            #return redirect('index')
 
 
 def logout_user(request):
     logout(request)
     return redirect('index')
+
+
+def tariff(request):
+    return render(request, 'tariff.html')
+
+
+def select_tariff(request):
+    request_data = request.POST
+    tariff_id = request_data['tariff_id']
+    auth_temp_data = request.COOKIES.get('auth_temp_data')
+    email, password, username = list(json.loads(auth_temp_data).values())
+    user = User.objects.create_user(username=username, email=email, password=password)
+    tariff = Tariff.objects.get(tariff_id=tariff_id)
+    TariffSet.objects.create(user=user, tariff=tariff)
+    user = authenticate(username=username, password=password)
+    login(request, user)
+    return JsonResponse({'response': True})
 
 
 def offer(request):

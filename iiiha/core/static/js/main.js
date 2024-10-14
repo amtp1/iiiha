@@ -641,6 +641,33 @@ function generateFlux() {
   }
 }
 
+function selectTariff(tariff_id) {
+  let data = new FormData();
+  data.append('tariff_id', tariff_id);
+
+  fetch('select_tariff', {
+    method: 'POST',
+    body: data,
+    contentType: 'application/json',
+    headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRFToken': $.cookie('csrftoken')
+    },
+  }).then(function (response) {
+    response.json().then(
+        function (data) {
+          try{
+            if (data['response'] == true) {
+              return window.location.replace('/');
+            }
+          } catch(e) {
+            return alert(`Ошибка: ${e}`);
+          }
+        }
+    )
+  });
+}
+
 function scrollIntoView(id) {
   document.getElementById(id).scrollIntoView({ block: 'center', behavior: 'smooth' });
 }

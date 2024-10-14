@@ -22,6 +22,8 @@ urlpatterns = [
     path('signin', signin, name='signin'),
     path('signup', signup, name='signup'),
     path('logout', logout_user, name='logout_user'),
+    path('tariff', tariff, name='tariff'),
+    path('select_tariff', select_tariff, name='select_tariff'),
     path('offer', offer, name='offer'),
     path('privacy-policy', privacy_policy, name='privacy-policy'),
 
