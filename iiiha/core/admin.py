@@ -4,7 +4,7 @@ from .models import *
 
 @admin.register(User)
 class User(admin.ModelAdmin):
-    list_display = ['username', 'email']
+    list_display = ['email']
 
 @admin.register(Assistant)
 class Assistant(admin.ModelAdmin):
