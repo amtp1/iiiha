@@ -400,7 +400,7 @@ function generateFusion() {
                 try{
                   resetPreGenerateButton();
                   let image = data['image'][0];
-                  let fadeImage = document.getElementById('fade-in-image-result');
+                  /*let fadeImage = document.getElementById('fade-in-image-result');
                   fadeImage.style.backgroundImage = `url('data:image/png;base64, ${image}')`;
                   fadeImage.style.width = '100%';
                   fadeImage.style.height = '203px';
@@ -409,23 +409,19 @@ function generateFusion() {
                   fadeImage.style.backgroundRepeat = 'no-repeat';
                   fadeImage.style.boxSizing = 'border-box';
                   fadeImage.style.overflow = 'hidden';
-
-                  /*
-                  let contentDiv = document.getElementById('content-div');
-                  const contentP = document.createElement('p');
-                  contentDiv.style.overflow = 'hidden';
-                  contentP.id = 'content';
-                  let fusionImageResult = document.getElementById('fusion-image-result');
-                  if (fusionImageResult){
-                      fusionImageResult.remove();
-                  }
-                  const newImage = document.createElement('img');
-                  newImage.id = 'fusion-image-result';
-                  newImage.src = `data:image/png;base64,${image}`;
-                  contentP.appendChild(newImage);
-                  contentDiv.appendChild(contentP);
-                  scrollIntoView('fusion-image-result');
                   */
+
+                  const parent = document.querySelector('.info-content');
+                  let fadeImage = document.querySelector('#fade-in-image-result');
+                  let imageResult = document.createElement('img');
+                  imageResult.src = `data:image/png;base64, ${image}`;
+                  imageResult.style.width = '100%';
+                  imageResult.style.height = '310px';
+                  imageResult.style.borderRadius = '8px';
+                  // fadeImage.appendChild(imageResult);
+                  // fadeImage.style.backgroundImage = `url('${image}')`;
+                  // fadeImage.style.maxWidth = '100%';
+                  parent.replaceChild(imageResult, fadeImage);
                 } catch(e) {
                   return alert(`Ошибка: ${e}`);
                 }
@@ -612,26 +608,17 @@ function generateFlux() {
                   resetPreGenerateButton();
                   resetPreGenerateButton();
                   let image = data['images'][0]['url'];
-                  let fadeImage = document.getElementById('fade-in-image-result');
-                  fadeImage.style.backgroundImage = `url('${image}')`;
-                  fadeImage.style.maxWidth = '100%';
-
-                  /*
-                  let contentDiv = document.getElementById('content-div');
-                  const contentP = document.createElement('p');
-                  contentDiv.style.overflow = 'hidden';
-                  contentP.id = 'content';
-                  let fusionImageResult = document.getElementById('fusion-image-result');
-                  if (fusionImageResult){
-                      fusionImageResult.remove();
-                  }
-                  const newImage = document.createElement('img');
-                  newImage.id = 'fusion-image-result';
-                  newImage.src = `data:image/png;base64,${image}`;
-                  contentP.appendChild(newImage);
-                  contentDiv.appendChild(contentP);
-                  scrollIntoView('fusion-image-result');
-                  */
+                  const parent = document.querySelector('.info-content');
+                  let fadeImage = document.querySelector('#fade-in-image-result');
+                  let imageResult = document.createElement('img');
+                  imageResult.src = image;
+                  imageResult.style.width = '100%';
+                  imageResult.style.height = '310px';
+                  imageResult.style.borderRadius = '8px';
+                  // fadeImage.appendChild(imageResult);
+                  // fadeImage.style.backgroundImage = `url('${image}')`;
+                  // fadeImage.style.maxWidth = '100%';
+                  parent.replaceChild(imageResult, fadeImage);
                 } catch(e) {
                   return alert(`Ошибка: ${e}`);
                 }
