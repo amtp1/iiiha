@@ -1,0 +1,18 @@
+{% extends 'base/unauthorized.html' %}
+{% block body %}
+<div class="container">				
+    <div class="single-info row mt-40 align-items-center">
+        <div class="col-lg-12 col-md-12 no-padding info-center">
+            <div class="info-content">
+              {% if auth_user %}
+                <div class="fade-in-image auth"></div>
+              {% else %}
+                <div class="fade-in-image"></div>
+              {% endif %}
+              <br>
+                <button id="pre-generate-btn" class="form-btn" type="button" onclick="window.location.replace('signin')"><small>Войдите или зарегистрируйтесь</small></button>
+                <div id="content-div" class="content">
+                    <p id="content"></p>
+                </div>
+            </div>
+{% endblock %}

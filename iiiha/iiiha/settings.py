@@ -34,6 +34,7 @@ DEBUG = bool(os.getenv('DEBUG'))
 ALLOWED_HOSTS = ['*']
 
 CSRF_TRUSTED_ORIGINS = ['https://ixa.su']
+AUTH_USER_MODEL = 'core.User'
 
 
 # Application definition

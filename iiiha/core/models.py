@@ -5,7 +5,8 @@ from django.db import models
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
+# from django.contrib.auth.models import User
 
 
 class UUIDFileStorage(FileSystemStorage):
@@ -44,14 +45,8 @@ class Tariff(models.Model):
         verbose_name_plural = "Тарифы"
 
 
-class TariffSet(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    tariff = models.ForeignKey(Tariff, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"Соотношение #{self.user} - {self.tariff}"
+class User(AbstractUser):
+    tariff = models.ForeignKey(Tariff, on_delete=models.SET_NULL, null=True)
 
     class Meta:
-        db_table = "tariff_sets"
-        verbose_name = "Соотношение пользователя к тарифу"
-        verbose_name_plural = "Соотношения пользователя к тарифу"
+        db_table = "auth_user"

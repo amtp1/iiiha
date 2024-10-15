@@ -53,20 +53,14 @@ class CheckProductAPI(ListAPIView):
 def index(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        tariff_set = TariffSet.objects.get(user=request.user)
-        user_data['tariff'] =  tariff_set.tariff
-    else:
-        tariff_set = None
+        user_data['tariff'] = request.user.tariff
     return render(request, "index.html", user_data)
 
 
 def chatgpt(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        tariff_set = TariffSet.objects.get(user=request.user)
-        user_data['tariff'] =  tariff_set.tariff
-    else:
-        tariff_set = None
+        user_data['tariff'] = request.user.tariff
     return render(request, "chatgpt.html", user_data)
 
 
@@ -117,11 +111,10 @@ def generate_plusvector(request) -> JsonResponse:
 def smartcamera(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        tariff_set = TariffSet.objects.get(user=request.user)
-        user_data['tariff'] = tariff_set.tariff
+        user_data['tariff'] = request.user.tariff
         return render(request, 'smartcamera.html', user_data)
     else:
-        return JsonResponse({'error': 'Unauthorized!'})
+        return render(request, 'unauthorized.html')
 
 
 @csrf_exempt
@@ -151,11 +144,10 @@ def generate_chatgptplus(request) -> JsonResponse:
 def flux(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        tariff_set = TariffSet.objects.get(user=request.user)
-        user_data['tariff'] = tariff_set.tariff
+        user_data['tariff'] = request.user.tariff
         return render(request, 'flux.html', user_data)
     else:
-        return JsonResponse({'error': 'Unauthorized!'})
+       return render(request, 'unauthorized.html')
 
 
 @csrf_exempt
@@ -180,7 +172,7 @@ def generate_flux(request) -> JsonResponse:
         )
         return JsonResponse(result)
     else:
-        return JsonResponse({'error': 'Unauthorized!'})
+        return render(request, 'unauthorized.html')
 
 
 def signin(request) -> (HttpResponse | HttpResponseRedirect):
@@ -241,9 +233,8 @@ def select_tariff(request) -> JsonResponse:
     tariff_id = request_data['tariff_id']
     auth_temp_data = request.COOKIES.get('auth_temp_data')
     email, password, username = list(json.loads(auth_temp_data).values())
-    user = User.objects.create_user(username=username, email=email, password=password)
     tariff = Tariff.objects.get(tariff_id=tariff_id)
-    TariffSet.objects.create(user=user, tariff=tariff)
+    user = User.objects.create_user(username=username, email=email, password=password, tariff=tariff)
     user = authenticate(username=username, password=password)
     login(request, user)
     return JsonResponse({'response': True})
