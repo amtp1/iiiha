@@ -223,6 +223,8 @@ def signup(request) -> HttpResponseRedirect:
             response.set_cookie('auth_temp_data', json.dumps({'email': email, 'password': password,
                                                               'username': str(username)}))
             return response
+    else:
+        return render(request, 'login.html', {'message': 'Пароли не совпадают!'})
 
 
 def logout_user(request) -> HttpResponseRedirect:
