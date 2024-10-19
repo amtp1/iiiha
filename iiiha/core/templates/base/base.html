@@ -1,4 +1,6 @@
 {% load static %}
+{% load define_tag %}
+{% load floattags %}
   <!DOCTYPE html>
 	<html lang="ru" class="no-js">
 	  <head>
@@ -39,7 +41,7 @@
 					  <!-- #nav-menu-container -->
                        </div>
 					   <section class="navigation">
-  <div  class="nav-container">
+  <div class="nav-container">
     <nav>
       <div class="nav-mobile"><a id="nav-toggle"><span></span></a></div>
       <ul class="nav-list">
@@ -59,15 +61,7 @@
           <li><a class="nav-link" href="smartcamera">Очень умная камера</a></li>
         {% endif %}
         {% if auth_user %}
-          <li>
-            <a class="nav-link">Профиль</a>
-            <ul class="nav-dropdown">
-                <li><a class="nav-link" onclick="alert('{{tariff}}')">О тарифе</a></li>
-                <li><a class="nav-link" href="logout">Выйти</a></li>
-            </ul>
-          </li>
-        {% else %}
-          <!--<li><a class="nav-link" href="signin">Войти</a></li>-->
+        <li id="tariff"><b>{{tariff}}: {{balance|formatted_float}} ₽</b></li>
         {% endif %}
         <!--<li>
           <a class="nav-link">Тексты</a>
@@ -92,14 +86,20 @@
     </nav>
   </div>
 </section>
-{% if not auth_user %}
 <div class="rating-container">
   <div class="smile-rating-container">
     <div class="smile-rating-toggle-container">
+      {% if auth_user %}
+        {% define 'checked' as checked %}
+        {% define "setTimeout(function () {logOut()}, 500)" as func %}
+      {% else %}
+        {% define '' as checked %}
+        {% define "setTimeout(function () {window.location.replace('signin')}, 500)" as func %}
+      {% endif %}
       <form class="submit-rating">
-        <input id="meh"  name="satisfaction" type="radio" value="white" onchange="handleChange(this)"/>
-        <input id="fun" name="satisfaction" type="radio"  value="white1" onchange="handleChange(this)" onclick="setTimeout(function () {window.location.replace('signin')}, 1000)"/>
-        <label for="meh" class="rating-label rating-label-meh">Режим «Ковбой»</label>
+        <input id="meh"  name="satisfaction" type="radio" value="white" onchange="handleChange(this)" onclick="{{func}}"/ {{checked}}>
+        <input id="fun" name="satisfaction" type="radio"  value="white1" onchange="handleChange(this)" onclick="{{func}}"/ {{checked}}>
+        <label for="meh" class="rating-label rating-label-meh"></label>
           <div class="smile-rating-toggle"></div>
           <div class="toggle-rating-pill"></div>
         <label for="fun" class="rating-label rating-label-fun"></label>
@@ -107,8 +107,7 @@
     </div>
   </div>
   </div>
-{% endif %}
-                    <div class="slogan">
+    <div class="slogan">
 					     <!-- <span>Интегратор Искусственного Интелекта<span>-->
 					</div>
 			    	</div>
@@ -151,8 +150,9 @@
     </section>
     </main>
 			<!-- End about Area -->
-			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script>const user_is_auth = "{{request.user.is_authenticated}}"</script>
+			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+      <script>const user_is_auth = "{{request.user.is_authenticated}}"
+      </script>
 			<script>
         let rb = document.querySelectorAll('input');
         let div = document.querySelectorAll('div.fade-in-image');
@@ -202,7 +202,7 @@
 			<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 			<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
 			<script src="{% static 'js/main.js' %}"></script>
-      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
+      <!--<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>-->
       <script src="{% static 'js/temp.js' %}"></script>
       <script src="{% static 'js/superfish.js' %}"></script>
       <script src="{% static 'js/owl.carousel.min.js' %}"></script>

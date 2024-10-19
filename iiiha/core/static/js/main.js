@@ -339,31 +339,18 @@ function generateChatGPT() {
       generateBtn.disabled = true;
       generateBtn.innerText = 'Идёт генерация ...';
 
-      let data = new FormData();
-      data.append('content', textArea.val());
-
-      fetch('generate_chatgpt', {
-          method: 'POST',
-          body: data,
-          contentType: 'application/json',
-          headers: {
-              'X-Requested-With': 'XMLHttpRequest',
-              'X-CSRFToken': $.cookie('csrftoken')
-          },
-          }).then(function (response) {
-          response.json().then(
-              function (data) {
-                  resetPreGenerateButton();
-                  let content = data['choices'][0]['message']['content'];
-                  let contentDiv = document.getElementById('content-div');
-                  const contentP = document.createElement('p');
-                  contentDiv.style.overflow = 'auto';
-                  contentP.id = 'content';
-                  contentP.innerHTML = convertMarkdownToHTML(content);
-                  contentDiv.appendChild(contentP);
-                  scrollIntoView('content-div');
-              }
-          )
+      // ChatGpt generate request (POST)
+      $.post('generate_chatgpt', {'content': textArea.val()},
+        function(data){
+          resetPreGenerateButton();
+          let content = data['choices'][0]['message']['content'];
+          let contentDiv = document.getElementById('content-div');
+          const contentP = document.createElement('p');
+          contentDiv.style.overflow = 'auto';
+          contentP.id = 'content';
+          contentP.innerHTML = convertMarkdownToHTML(content);
+          contentDiv.appendChild(contentP);
+          scrollIntoView('content-div');
       });
   }
 }
@@ -374,7 +361,6 @@ function generateFusion() {
   } catch(e) {
     null;
   }
-  resetContent();
   let textArea = $('textarea');
   if (textArea.val() == "") {
       return alert('Поле не должно оставаться пустым!');
@@ -400,17 +386,6 @@ function generateFusion() {
                 try{
                   resetPreGenerateButton();
                   let image = data['image'][0];
-                  /*let fadeImage = document.getElementById('fade-in-image-result');
-                  fadeImage.style.backgroundImage = `url('data:image/png;base64, ${image}')`;
-                  fadeImage.style.width = '100%';
-                  fadeImage.style.height = '203px';
-                  fadeImage.style.backgroundSize = 'contain';
-                  fadeImage.style.backgroundPosition = 'center';
-                  fadeImage.style.backgroundRepeat = 'no-repeat';
-                  fadeImage.style.boxSizing = 'border-box';
-                  fadeImage.style.overflow = 'hidden';
-                  */
-
                   const parent = document.querySelector('.info-content');
                   let fadeImage = document.querySelector('#fade-in-image-result');
                   let imageResult = document.createElement('img');
@@ -418,9 +393,6 @@ function generateFusion() {
                   imageResult.style.width = '100%';
                   imageResult.style.height = '310px';
                   imageResult.style.borderRadius = '8px';
-                  // fadeImage.appendChild(imageResult);
-                  // fadeImage.style.backgroundImage = `url('${image}')`;
-                  // fadeImage.style.maxWidth = '100%';
                   parent.replaceChild(imageResult, fadeImage);
                 } catch(e) {
                   return alert(`Ошибка: ${e}`);
@@ -528,7 +500,6 @@ function generateChatGPTPlus() {
 }
 
 function generateSmartCamera() {
-  resetContent();
   var file = document.querySelector('input[type=file]').files[0];
   if (file == undefined) {
       return alert('Загрузите изображение для определения!');
@@ -581,7 +552,6 @@ function generateSmartCamera() {
 }
 
 function generateFlux() {
-  resetContent();
   let textArea = $('textarea');
   if (textArea.val() == "") {
       return alert('Поле не должно оставаться пустым!');
@@ -615,9 +585,6 @@ function generateFlux() {
                   imageResult.style.width = '100%';
                   imageResult.style.height = '310px';
                   imageResult.style.borderRadius = '8px';
-                  // fadeImage.appendChild(imageResult);
-                  // fadeImage.style.backgroundImage = `url('${image}')`;
-                  // fadeImage.style.maxWidth = '100%';
                   parent.replaceChild(imageResult, fadeImage);
                 } catch(e) {
                   return alert(`Ошибка: ${e}`);
@@ -628,31 +595,54 @@ function generateFlux() {
   }
 }
 
-function selectTariff(tariff_id) {
-  let data = new FormData();
-  data.append('tariff_id', tariff_id);
+function signUp() {
+  $.post('signup', {'email': $("input[name=email]").first().val(),
+                    'password': $("input[name=password]").first().val(),
+                    'retry_password': $("input[name=retry_password]").first().val()},
+    function(data) {
+      if (data['status_code'] == 200) {
+        document.cookie = `auth_temp_data=${JSON.stringify(
+          {'email': $("input[name=email]").first().val(),
+           'password': $("input[name=password]").first().val(),
+           'retry_password': $("input[name=retry_password]").first().val()
+        })}`;
+        return window.location.replace('tariff');
+      } else if (data['status_code'] == 400) {
+        let alertDanger = $('#auth-alert');
+        alertDanger.text(data['message']);
+        alertDanger.show();
+      }}
+  )
+}
 
-  fetch('select_tariff', {
-    method: 'POST',
-    body: data,
-    contentType: 'application/json',
-    headers: {
-        'X-Requested-With': 'XMLHttpRequest',
-        'X-CSRFToken': $.cookie('csrftoken')
-    },
-  }).then(function (response) {
-    response.json().then(
-        function (data) {
-          try{
-            if (data['response'] == true) {
-              return window.location.replace('/');
-            }
-          } catch(e) {
-            return alert(`Ошибка: ${e}`);
-          }
-        }
-    )
-  });
+function signIn() {
+  $.post('signin', {'email': $("input[name=email]").first().val(),
+                    'password': $("input[name=password]").first().val()},
+    function(data) {
+      if (data['status_code'] == 200) {
+        return window.location.replace('/');
+      } else if (data['status_code'] == 400) {
+        let alertDanger = $('#auth-alert');
+        alertDanger.text(data['message']);
+        alertDanger.show();
+      }}
+  )
+}
+
+function logOut() {
+  $.post('logout', {},
+    function(data) {
+      if (data['status_code'] == 200)
+        return window.location.replace('/');
+    }
+  )
+}
+
+function selectTariff(tariff_id) {
+  $.post('select_tariff', {'tariff_id': tariff_id}, function(data) {
+    if (data['status_code'] == 200)
+      return window.location.replace('/');
+  })
 }
 
 function scrollIntoView(id) {

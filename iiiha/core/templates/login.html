@@ -6,7 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
 		<!-- Favicon-->
-		<link rel="shortcut icon" href="img/fav.png">
+		<link rel="shortcut icon" href="{% static 'img/fav.png' %}">
 		<!-- Author Meta -->
 		<meta name="author" content="codepixer">
 		<!-- Meta Description -->
@@ -26,12 +26,9 @@
 			<link rel="stylesheet" href="{% static 'css/main.css' %}">
 		</head>
 		<body class="login-page">
-			{% if message %}
-				<script>alert('{{message}}'); window.location.replace('/');</script>
-			{% endif %}
-                    <div class="slogan mob-slogan">
-					      <span>Интегратор Искусственного Интелекта<span>
-					</div>
+			<div class="slogan mob-slogan">
+					<span>Интегратор Искусственного Интелекта<span>
+			</div>
 
 			<!-- start banner Area -->
 			<section class="banner-area" id="login">	
@@ -54,14 +51,14 @@
 					<div class="wrap">
                     <div class="items-wrap">
                         <div class="items marquee reverce"">
-						    <span class="item">ChatGPT StableDiffusion Kandinsky TTS</span>
+						    <span class="item">ChatGPT Kandinsky Yandex Kling Flux</span>
 					    </div>
 						<div class="items marquee reverce"">
-						    <span class="item">ChatGPT StableDiffusion Kandinsky TTS</span>
+						    <span class="item">ChatGPT Kandinsky Yandex Kling Flux</span>
 					    </div>
 					</div>
 					</div>
-					<div class="wrap">
+					<!--<div class="wrap">
                     <div class="items-wrap">
                         <div class="items marquee reverce"">
 						    <span class="item">Yandex Whisper Dalle ElevenLabs Sora</span>
@@ -70,7 +67,7 @@
 						    <span class="item">Yandex Whisper Dalle ElevenLabs Sora</span>
 					    </div>
 					</div>
-					</div>
+					</div>-->
 					
                     </div>
 				</div>
@@ -86,18 +83,16 @@
 			         <h3>Войти</h3>
 				     <img class="form-img" src="{% static 'img/el2.png' %}" alt="">
 			    </div>
-				<form action="/signin" method="post">
-					{% csrf_token %}
 					<div class="mt-10">
 						<input type="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required class="input">
 					</div>
 					<div class="mt-10">
 						<input type="password" name="password" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль'" required class="input">
 					</div>
-					<button class="form-btn" type="submit">Продолжить</button>
-				</form>
+					<button class="form-btn" type="submit" onclick="signIn()">Продолжить</button>
+					<div id="auth-alert" class="alert alert-danger auth" role="alert"></div>
 				<div class="form-bl-bottom">
-			         <a href="#" class="black-btn">Нет аккаунта?</a>
+			         <a class="black-btn">Нет аккаунта?</a>
 				     <a href="#form1" class="popup-content red-btn">Зарегистрироваться</a>
 			    </div>
 			   </div>	
@@ -109,24 +104,22 @@
 			         <h3>Создать аккаунт</h3>
 				     <img class="form-img" src="{% static 'img/el2.png' %}" alt="">
 			    </div>
-				<form action="/signup" method="post">
-					{% csrf_token %}
-					<div class="mt-10">
-						<input type="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required class="input">
-					</div>
-					<div class="mt-10">
-						<input type="password" name="password" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль'" required class="input">
-					</div>
-					<div class="mt-10">
-						<input type="password" name="retry_password" placeholder="Повторить пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Повторить пароль'" required class="input">
-					</div>
-					<button class="form-btn" type="submit">Продолжить</button>
-				</form>
+				<div class="mt-10">
+					<input type="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required class="input">
+				</div>
+				<div class="mt-10">
+					<input type="password" name="password" placeholder="Пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Пароль'" required class="input">
+				</div>
+				<div class="mt-10">
+					<input type="password" name="retry_password" placeholder="Повторить пароль" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Повторить пароль'" required class="input">
+				</div>
+				<button class="form-btn" type="submit" onclick="signUp()">Продолжить</button>
+				<div id="auth-alert" class="alert alert-danger auth" role="alert"></div>
 				<div class="form-bl-bottom">
-			         <a href="#" class="black-btn">Уже есть аккаунт?</a>
+			         <a class="black-btn">Уже есть аккаунт?</a>
 				     <a href="#form" class="popup-content red-btn">Войти</a>
 			    </div>
-			   </div>	
+			   </div>
 			</div>
 			
 			

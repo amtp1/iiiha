@@ -520,7 +520,7 @@ img.plane {
 	  font-family: Lumberjack_Rough;
     font-size: 48px;
     color: rgba(0, 0, 0, 1);
-    margin-left: -105px;
+    margin-left: -10px;
 }
 #logo img {
     margin-right: 10px;
@@ -1458,9 +1458,9 @@ a:hover {
 }
 .rating-label-meh {
     font-size: 16px;
-    width: 170px;
+    width: 10px;
     text-align: left;
-    left: -130px;
+    left: -150px;
     font-family: Lumberjack_Rough;
     top: 0;
     color: rgba(90, 48, 36, 1);
@@ -2126,7 +2126,7 @@ body {
 .smile-rating-container {
     position: relative;
     width: 100%;
-    margin-left: 57%;
+    margin-left: 43%;
     display: block;
     
 }
@@ -2189,7 +2189,7 @@ body {
 }
 .rating-container {
     margin-left: 0;
-	margin-top: 12px;
+	  margin-top: 12px;
 }
 .banner-content img {
     width: 100%;
@@ -2494,4 +2494,14 @@ h1, h3, p {
 }
 .item-tarif__dop {
   width: 100%;
+}
+
+#tariff {
+  margin-top: 9px;
+}
+
+.alert-danger.auth {
+  display: none;
+  margin-top: 10px;
+  background-color: orange;
 }

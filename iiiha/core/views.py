@@ -179,6 +179,7 @@ def generate_flux(request) -> JsonResponse:
         return render(request, 'unauthorized.html')
 
 
+@csrf_exempt
 def signin(request) -> (HttpResponse | HttpResponseRedirect):
     if request.POST:
         email = request.POST['email']
@@ -186,20 +187,25 @@ def signin(request) -> (HttpResponse | HttpResponseRedirect):
         try:
             user = User.objects.get(email=email)
             if not user:
-                return render(request, 'login.html', {'message': 'Неверная электронная почта!'})
+                return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Неверная электронная почта!'})
             else:
                 try:
                     user = authenticate(username=user.username, password=password)
-                    login(request, user)
-                    return redirect('index')
+                    if user is None:
+                        return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Неверный пароль!'})
+                    else:
+                        login(request, user)
+                        return JsonResponse({'status_code': 200, 'type': 'success', 'message': ''})
                 except AttributeError:
-                    return render(request, 'login.html', {'message': 'Неверный пароль!'})
+                    return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Неверный пароль!'})
         except User.DoesNotExist:
-            return render(request, 'login.html', {'message': 'Такого пользователя не существует!'})
+            return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Такого пользователя не существует!'})
     return render(request, 'login.html')
 
 
+@csrf_exempt
 def signup(request) -> HttpResponseRedirect:
+    print(request.POST)
     email = request.POST['email']
     password = request.POST['password']
     retry_password = request.POST['retry_password']
@@ -208,30 +214,26 @@ def signup(request) -> HttpResponseRedirect:
         try:
             user = User.objects.get(email=email)
             if not user:
-                response = redirect('tariff')
-                response.set_cookie('auth_temp_data', json.dumps({'email': email, 'password': password,
-                                                                  'username': str(username)}))
-                return response
+                return JsonResponse({'status_code': 200, 'type': 'select_tariff', 'message': ''})
             else:
-                return render(request, 'login.html', {'message': 'Такой пользователь уже существует!'})
+                return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Такой пользователь уже существует!'})
         except User.DoesNotExist:
-            response = redirect('tariff')
-            response.set_cookie('auth_temp_data', json.dumps({'email': email, 'password': password,
-                                                              'username': str(username)}))
-            return response
+            return JsonResponse({'status_code': 200, 'type': 'select_tariff'})
     else:
-        return render(request, 'login.html', {'message': 'Пароли не совпадают!'})
+        return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Пароли не совпадают!'})
 
 
+@csrf_exempt
 def logout_user(request) -> HttpResponseRedirect:
     logout(request)
-    return redirect('index')
+    return JsonResponse({'status_code': 200, 'type': 'success', 'message': ''})
 
 
 def tariff(request) -> HttpResponse:
     return render(request, 'tariff.html')
 
 
+@csrf_exempt
 def select_tariff(request) -> JsonResponse:
     request_data = request.POST
     tariff_id = request_data['tariff_id']
@@ -241,7 +243,9 @@ def select_tariff(request) -> JsonResponse:
     user = User.objects.create_user(username=username, email=email, password=password, tariff=tariff)
     user = authenticate(username=username, password=password)
     login(request, user)
-    return JsonResponse({'response': True})
+    response = JsonResponse({'status_code': 200, 'type': 'success', 'message': ''})
+    response.delete_cookie('auth_temp_data')
+    return response
 
 
 def offer(request) -> HttpResponse:
