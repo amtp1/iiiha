@@ -37,7 +37,7 @@ class Tariff(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название тарифа')
 
     def __str__(self):
-        return f"Тариф #{self.tariff_id} - {self.name}"
+        return f"{self.name}"
 
     class Meta:
         db_table = "tariffs"
