@@ -97,7 +97,7 @@
         <input id="meh"  name="satisfaction" type="radio" value="white" onchange="handleChange(this)" onclick="{{func}}"/ {{checked}}>
         <input id="fun" name="satisfaction" type="radio"  value="white1" onchange="handleChange(this)" onclick="{{func}}"/ {{checked}}>
         {% if auth_user %}
-          <label for="meh" class="rating-label rating-label-meh"><b>{{tariff}}: {{balance|formatted_float}} ₽</b></label>
+          <label for="meh" class="rating-label rating-label-meh"><b><a href="tariff">{{tariff}}: {{balance|formatted_float}} ₽</a></b></label>
         {% else %}
           <label for="meh" class="rating-label rating-label-meh">Войти</label>
         {% endif %}
