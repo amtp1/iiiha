@@ -47,6 +47,7 @@ class Tariff(models.Model):
 
 class User(AbstractUser):
     tariff = models.ForeignKey(Tariff, on_delete=models.SET_NULL, null=True)
+    balance = models.FloatField(default=0.0, null=False)
 
     class Meta:
         db_table = "auth_user"
