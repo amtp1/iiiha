@@ -161,6 +161,39 @@ function generateSmartCamera() {
     }
 }
 
+function generateFreeSmartCamera() {
+  var file = document.querySelector('input[type=file]').files[0];
+    if (file == undefined) {
+        return alert('Загрузите изображение для определения!');
+    } else {
+        let generateBtn = document.getElementById('pre-generate-btn');
+        generateBtn.disabled = true;
+        generateBtn.innerText = 'Идёт генерация ...';
+
+        let data = new FormData();
+        data.append('file', file);
+
+        $.post({url: 'generate_freesmartcamera',
+                data: data,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    console.log(data);
+                    resetPreGenerateButton(is_check_button=true);
+                    let contentDiv = document.getElementById('content-div');
+                    const contentP = document.createElement('p');
+                    contentDiv.style.overflow = 'auto';
+                    contentP.id = 'content';
+                    contentP.innerHTML = `<span class="badge text-bg-info"><h5>Результат:</h5></span><br><b>Товар: ${data['name']}</b><br>
+                                          Минимальная цена: ${data['minPrice']} руб.<br>
+                                          Максимальная цена: ${data['maxPrice']} руб.`;
+                    contentDiv.appendChild(contentP);
+                    scrollIntoView('content-div');
+                }
+        })
+    }
+}
+
 function generateFlux() {
   let textArea = $('textarea');
   if (textArea.val() == "") {

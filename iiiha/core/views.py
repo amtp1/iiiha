@@ -131,6 +131,20 @@ def generate_smartcamera(request) -> JsonResponse:
                         'yandex_data': content['yandex_data']})
 
 
+def freesmartcamera(request):
+    return render(request, 'freesmartcamera.html')
+
+
+@csrf_exempt
+def generate_freesmartcamera(request):
+    request_files = request.FILES
+    image = request_files['file']  # Get image from request files.
+
+    free_smart_camera = FreeSmartCameraService()  # Init FreeSmartCameraService instance.
+    response = free_smart_camera.generate(image)
+    return JsonResponse(response)
+
+
 def chatgptplus(request) -> HttpResponse:
     return render(request, 'chatgptplus.html')
 
@@ -205,11 +219,9 @@ def signin(request) -> (HttpResponse | HttpResponseRedirect):
 
 @csrf_exempt
 def signup(request) -> HttpResponseRedirect:
-    print(request.POST)
     email = request.POST['email']
     password = request.POST['password']
     retry_password = request.POST['retry_password']
-    username = uuid.uuid1()
     if password == retry_password:
         try:
             user = User.objects.get(email=email)
@@ -238,10 +250,10 @@ def select_tariff(request) -> JsonResponse:
     request_data = request.POST
     tariff_id = request_data['tariff_id']
     auth_temp_data = request.COOKIES.get('auth_temp_data')
-    email, password, username = list(json.loads(auth_temp_data).values())
+    email, password, _ = list(json.loads(auth_temp_data).values())
     tariff = Tariff.objects.get(tariff_id=tariff_id)
-    user = User.objects.create_user(username=username, email=email, password=password, tariff=tariff)
-    user = authenticate(username=username, password=password)
+    user = User.objects.create_user(username=str(uuid.uuid4()), email=email, password=password, tariff=tariff)
+    user = authenticate(username=user.username, password=password)
     login(request, user)
     response = JsonResponse({'status_code': 200, 'type': 'success', 'message': ''})
     response.delete_cookie('auth_temp_data')

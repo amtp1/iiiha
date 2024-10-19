@@ -237,6 +237,21 @@ class SmartCameraService(Config):
         return check_response
 
 
+class FreeSmartCameraService:
+    def __init__(self):
+        self.BASE_URL = 'https://api.webastera.ru/api.php'
+
+    def encode_image(self, image_file):
+        base64_image = base64.b64encode(image_file.read()).decode('utf-8')
+        return base64_image
+
+    def generate(self, image_file):
+        data = {'action': 'yandex_picture', 'url_picture': f"data:image/jpeg;base64,{self.encode_image(image_file)}"}
+        request = requests.post(url=self.BASE_URL, json=data)
+        response = request.json()
+        return response
+
+
 class FoodAssistantRequestService(Config):
     def __init__(self):
         super().__init__()
