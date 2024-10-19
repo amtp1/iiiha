@@ -54,6 +54,7 @@ def index(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
         user_data['tariff'] = request.user.tariff
+        user_data['balance'] = request.user.balance
     return render(request, "index.html", user_data)
 
 
@@ -61,6 +62,7 @@ def chatgpt(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
         user_data['tariff'] = request.user.tariff
+        user_data['balance'] = request.user.balance
     return render(request, "chatgpt.html", user_data)
 
 
@@ -112,6 +114,7 @@ def smartcamera(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
         user_data['tariff'] = request.user.tariff
+        user_data['balance'] = request.user.balance
         return render(request, 'smartcamera.html', user_data)
     else:
         return render(request, 'unauthorized.html')
@@ -145,6 +148,7 @@ def flux(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
         user_data['tariff'] = request.user.tariff
+        user_data['balance'] = request.user.balance
         return render(request, 'flux.html', user_data)
     else:
        return render(request, 'unauthorized.html')
