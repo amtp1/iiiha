@@ -520,7 +520,7 @@ img.plane {
 	  font-family: Lumberjack_Rough;
     font-size: 48px;
     color: rgba(0, 0, 0, 1);
-    margin-left: -130px;
+    margin-left: -80px;
 }
 #logo img {
     margin-right: 10px;
@@ -1446,8 +1446,8 @@ a:hover {
   color: #ff4a00;
   transition: 500ms;
   width: 24px;
-    height: 24px;
-    left: 0;
+  height: 24px;
+  left: 0;
 }
 .rating-label:hover, .rating-label:active {
   
