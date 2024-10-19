@@ -5,7 +5,7 @@ register = Library()
 
 
 def formatted_float(value):
-    value = floatformat(value, arg=1)
+    value = floatformat(value, arg=0)
     return str(value).replace(',', '.')
 
 
