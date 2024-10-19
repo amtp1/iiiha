@@ -60,9 +60,6 @@
         {% if auth_user %}
           <li><a class="nav-link" href="smartcamera">Очень умная камера</a></li>
         {% endif %}
-        {% if auth_user %}
-        <li id="tariff"><b>{{tariff}}: {{balance|formatted_float}} ₽</b></li>
-        {% endif %}
         <!--<li>
           <a class="nav-link">Тексты</a>
           <ul class="nav-dropdown">
@@ -99,7 +96,11 @@
       <form class="submit-rating">
         <input id="meh"  name="satisfaction" type="radio" value="white" onchange="handleChange(this)" onclick="{{func}}"/ {{checked}}>
         <input id="fun" name="satisfaction" type="radio"  value="white1" onchange="handleChange(this)" onclick="{{func}}"/ {{checked}}>
-        <label for="meh" class="rating-label rating-label-meh"></label>
+        {% if auth_user %}
+          <label for="meh" class="rating-label rating-label-meh"><b>{{tariff}}: {{balance|formatted_float}} ₽</b></label>
+        {% else %}
+          <label for="meh" class="rating-label rating-label-meh">Войти</label>
+        {% endif %}
           <div class="smile-rating-toggle"></div>
           <div class="toggle-rating-pill"></div>
         <label for="fun" class="rating-label rating-label-fun"></label>
