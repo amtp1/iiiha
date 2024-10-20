@@ -34,7 +34,6 @@ class AssistantRequestService(Config):
     def __init__(self):
         super().__init__()
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
-        logger.add(f"{log_path}/gpt/assistant/debug.log")
 
     def generate_main_asst(self):
         url = 'https://api.openai.com/v1/assistants/asst_h1t8ISoM3fX0ZwZR1DS83Unj'
@@ -57,15 +56,12 @@ class AssistantRequestService(Config):
         }
         request = requests.post(url=self.BASE_URL, json=data, headers=headers)
         response = json.loads(request.text)
-        if request.status_code != 200:
-            logger.error(response)
         return response
 
 
 class ChatGPTService:
     def __init__(self):
         self.BASE_URL = 'https://api.openai.com/v1/chat/completions'
-        logger.add(f"{log_path}/gpt/chat/debug.log")
 
     def generate(self, content=None):
         data = {'model': 'gpt-4o-mini', 'messages': [{'role': 'user', 'content': content}],
@@ -77,7 +73,6 @@ class ChatGPTService:
         }
         request = requests.post(url=self.BASE_URL, json=data, headers=headers)
         response = json.loads(request.text)
-        logger.info(response)
         return response
 
 
@@ -167,9 +162,7 @@ class SmartCameraService(Config):
     def __init__(self):
         super().__init__()
         self.URL = 'https://api.openai.com/v1/chat/completions'
-
         self.BASE_IMAGE = None
-        logger.add(f"{log_path}/smartcamera/debug.log")
 
     def generate_main_asst(self):
         main_asst = Assistant.objects.get(key_word='main')
@@ -202,8 +195,6 @@ class SmartCameraService(Config):
         response = requests.post(url=self.URL, json=payload, headers=self.GPT_AUTH_HEADERS)
         data = response.json()
         content = data['choices'][0]['message']['content']
-        if response.status_code != 200:
-            logger.error(content)
         return content
 
     def check_asst_content_response(self, content):
