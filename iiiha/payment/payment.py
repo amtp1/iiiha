@@ -34,7 +34,6 @@ class PaymentAPI:
             "description": tariff_id
         })
         payment_data = json.loads(payment.json())
-        print(payment_data)
         payment_id = payment_data['id']
         payment_url = (payment_data['confirmation'])['confirmation_url']
         description = payment_data['description']
