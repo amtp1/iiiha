@@ -141,7 +141,7 @@ def generate_freesmartcamera(request):
     image = request_files['file']  # Get image from request files.
 
     free_smart_camera = FreeSmartCameraService()  # Init FreeSmartCameraService instance.
-    response = free_smart_camera.generate(image)
+    response = free_smart_camera.main(image)
     return JsonResponse(response)
 
 

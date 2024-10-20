@@ -237,19 +237,43 @@ class SmartCameraService(Config):
         return check_response
 
 
-class FreeSmartCameraService:
+class FreeSmartCameraService(Config):
     def __init__(self):
+        super().__init__()
         self.BASE_URL = 'https://api.webastera.ru/api.php'
+        self.BASE_IMAGE = None
 
     def encode_image(self, image_file):
         base64_image = base64.b64encode(image_file.read()).decode('utf-8')
         return base64_image
 
-    def generate(self, image_file):
-        data = {'action': 'yandex_picture', 'url_picture': f"data:image/jpeg;base64,{self.encode_image(image_file)}"}
+    def generate(self):
+        data = {'action': 'yandex_picture', 'url_picture': f"data:image/jpeg;base64,{self.BASE_IMAGE}"}
         request = requests.post(url=self.BASE_URL, json=data)
         response = request.json()
         return response
+
+    def about(self):
+        url = 'https://api.openai.com/v1/chat/completions'
+        payload = {'model': 'gpt-4o-mini',
+                   'messages': [
+                        {"role": "user", "content": [
+                            {"type": "text", "text": "Опиши то, что на картинке"},
+                            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{self.BASE_IMAGE}"}}
+                            ]}
+                    ]}
+        response = requests.post(url=url, json=payload, headers=self.GPT_AUTH_HEADERS)
+        data = response.json()
+        content = data['choices'][0]['message']['content']
+        if response.status_code != 200:
+            logger.error(content)
+        return content
+
+    def main(self, image_file):
+        self.BASE_IMAGE = self.encode_image(image_file)
+        generate_resp = self.generate()
+        about_resp = self.about()
+        return {'about': about_resp, 'yandex': generate_resp}
 
 
 class FoodAssistantRequestService(Config):

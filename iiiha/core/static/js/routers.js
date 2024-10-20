@@ -17,7 +17,6 @@ function generateAssistantRequest() {
                       if (content == 'chatgpt') {
                         generateChatGPT();
                       } else if (content == 'fusion') {
-                        console.log(user_is_auth);
                         if (user_is_auth == 'False') {
                           generateFusion();
                         } else {
@@ -178,15 +177,16 @@ function generateFreeSmartCamera() {
                 processData: false,
                 contentType: false,
                 success: function(data) {
-                    console.log(data);
                     resetPreGenerateButton(is_check_button=true);
                     let contentDiv = document.getElementById('content-div');
                     const contentP = document.createElement('p');
                     contentDiv.style.overflow = 'auto';
                     contentP.id = 'content';
-                    contentP.innerHTML = `<span class="badge text-bg-info"><h5>Результат:</h5></span><br><b>Товар: ${data['name']}</b><br>
-                                          Минимальная цена: ${data['minPrice']} руб.<br>
-                                          Максимальная цена: ${data['maxPrice']} руб.`;
+                    contentP.innerHTML = `<span class="badge text-bg-info"><h5>Результат:</h5></span><br>
+                                          ${data['about']}<br><br>
+                                          <b>Товар: ${data['yandex']['name']}</b><br>
+                                          Минимальная цена: ${data['yandex']['minPrice']} руб.<br>
+                                          Максимальная цена: ${data['yandex']['maxPrice']} руб.`;
                     contentDiv.appendChild(contentP);
                     scrollIntoView('content-div');
                 }
