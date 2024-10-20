@@ -14,6 +14,6 @@ class Assistant(admin.ModelAdmin):
 
 @admin.register(Tariff)
 class Tariff(admin.ModelAdmin):
-    fields = ['tariff_id', 'name']
-    list_display = ['tariff_id', 'name']
+    fields = ['tariff_id', 'name', 'price']
+    list_display = ['tariff_id', 'name', 'price']
     search_fields = ['tarrif_id', 'name']
