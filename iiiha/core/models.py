@@ -16,7 +16,7 @@ class UUIDFileStorage(FileSystemStorage):
 
 
 class SmartCamera(models.Model):
-    image = models.ImageField(storage=UUIDFileStorage())
+    image = models.ImageField(storage=UUIDFileStorage(), verbose_name='Изображение')
 
 
 class Assistant(models.Model):
@@ -35,6 +35,7 @@ class Assistant(models.Model):
 class Tariff(models.Model):
     tariff_id = models.IntegerField(verbose_name='Идентификатор тарифа')
     name = models.CharField(max_length=255, verbose_name='Название тарифа')
+    price = models.IntegerField(default=0, null=False, verbose_name='Цена тарифа')
 
     def __str__(self):
         return f"{self.name}"
@@ -46,8 +47,8 @@ class Tariff(models.Model):
 
 
 class User(AbstractUser):
-    tariff = models.ForeignKey(Tariff, on_delete=models.SET_NULL, null=True)
-    balance = models.FloatField(default=0.0, null=False)
+    tariff = models.ForeignKey(Tariff, on_delete=models.SET_NULL, null=True, verbose_name='Тариф')
+    balance = models.FloatField(default=0.0, null=False, verbose_name='Баланс')
 
     class Meta:
         db_table = "auth_user"
