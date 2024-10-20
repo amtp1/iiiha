@@ -161,6 +161,7 @@ function generateSmartCamera() {
 }
 
 function generateFreeSmartCamera() {
+  $('#content').remove();
   var file = document.querySelector('input[type=file]').files[0];
     if (file == undefined) {
         return alert('Загрузите изображение для определения!');
