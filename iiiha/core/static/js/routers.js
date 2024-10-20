@@ -51,7 +51,7 @@ function generateChatGPT() {
     } catch(e) {
       null;
     }
-    resetContent();
+    $('#content').remove();
     let textArea = $('textarea');
     if (textArea.val() == "") {
         return alert('Поле не должно оставаться пустым!');
