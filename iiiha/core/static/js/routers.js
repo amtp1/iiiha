@@ -186,8 +186,8 @@ function generateFreeSmartCamera() {
                     contentP.innerHTML = `<span class="badge text-bg-info"><h5>Результат:</h5></span><br>
                                           ${data['about']}<br><br>
                                           <b>Товар: ${data['yandex']['name']}</b><br>
-                                          Минимальная цена: ${data['yandex']['minPrice']} руб.<br>
-                                          Максимальная цена: ${data['yandex']['maxPrice']} руб.`;
+                                          Минимальная цена: ${data['yandex']['minPrice'] ? data['yandex']['minPrice'] + ' руб.' : 'Неизвестно'}<br>
+                                          Максимальная цена: ${data['yandex']['maxPrice'] ? data['yandex']['maxPrice'] + ' руб.' : 'Неизвестно'}`;
                     contentDiv.appendChild(contentP);
                     scrollIntoView('content-div');
                 }
@@ -274,6 +274,7 @@ function logOut() {
 function selectTariff(tariff_id) {
     $.post('select_tariff', {'tariff_id': tariff_id}, function(data) {
       if (data['status_code'] == 200)
-        return window.location.replace('/');
+        // return window.location.replace('/');
+      return true;
     })
 }
