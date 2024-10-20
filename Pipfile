@@ -13,6 +13,7 @@ pillow = "*"
 loguru = "*"
 fal-client = "*"
 httpcore = "*"
+yookassa = "*"
 
 [dev-packages]
 

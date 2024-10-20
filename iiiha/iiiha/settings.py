@@ -36,6 +36,8 @@ ALLOWED_HOSTS = ['*']
 CSRF_TRUSTED_ORIGINS = ['https://ixa.su']
 AUTH_USER_MODEL = 'core.User'
 
+# REDIRECT_URL = os.getenv("REDIRECT_URL")
+
 
 # Application definition
 
@@ -166,3 +168,6 @@ PLUSVECTOR_API_KEY = os.getenv('PLUSVECTOR_API_KEY')
 SMARTCAMERA_API_KEY = os.getenv('SMARTCAMERA_API_KEY')
 
 CHATGPT_PLUS = os.getenv('CHATGPT_PLUS')
+
+YOOKASSA_SECRET_KEY = os.getenv('YOOKASSA_SECRET_KEY')
+YOOKASSA_SHOP_ID = os.getenv('YOOKASSA_SHOP_ID')

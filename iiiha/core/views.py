@@ -14,6 +14,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 from services.api.requests import *
 from .models import *
+from payment.payment import PaymentAPI
 
 
 class CheckFoodValueAPI(ListAPIView):
@@ -249,13 +250,31 @@ def tariff(request) -> HttpResponse:
 def select_tariff(request) -> JsonResponse:
     request_data = request.POST
     tariff_id = request_data['tariff_id']
+    tariff = Tariff.objects.get(tariff_id=tariff_id)
+    payment_api = PaymentAPI()
+    response = payment_api.get_payment_url(price=tariff.price, tariff_id=tariff_id)
+    response = JsonResponse(response)
+    return response
+
+
+@csrf_exempt
+def check_payment(request) -> JsonResponse:
+    payment_id = request.POST['payment_id']
+    payment_api = PaymentAPI()
+    response = payment_api.check_payment(payment_id=payment_id)
+    return JsonResponse(response)
+
+
+@csrf_exempt
+def create_user(request):
+    tariff_id = request.POST['tariff_id']
     auth_temp_data = request.COOKIES.get('auth_temp_data')
     email, password, _ = list(json.loads(auth_temp_data).values())
     tariff = Tariff.objects.get(tariff_id=tariff_id)
-    user = User.objects.create_user(username=str(uuid.uuid4()), email=email, password=password, tariff=tariff)
+    user = User.objects.create_user(username=str(uuid.uuid4()), email=email, password=password, tariff=tariff, balance=tariff.price)
     user = authenticate(username=user.username, password=password)
     login(request, user)
-    response = JsonResponse({'status_code': 200, 'type': 'success', 'message': ''})
+    response = JsonResponse({'status_code': 200, 'type': 'success', 'message': 'created'})
     response.delete_cookie('auth_temp_data')
     return response
 

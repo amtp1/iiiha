@@ -1,3 +1,5 @@
+let intervalId = null;
+
 function generateAssistantRequest() {
     $('#content').remove();
     let textArea = $('textarea');
@@ -23,7 +25,11 @@ function generateAssistantRequest() {
                           generateFlux();
                         }
                       } else if (content == 'smartcamera') {
-                        window.location.replace('smartcamera');
+                        if (user_is_auth == 'False') {
+                          window.location.replace('freesmartcamera');
+                        } else {
+                          window.location.replace('smartcamera');
+                        }
                       } else if (content == 'menu') {
                         $('#service-choice-modal').modal('show');
                       } else {
@@ -140,12 +146,12 @@ function generateSmartCamera() {
                         content = 'Не удалось распознать объект!';
                     } else if (content == null && yandex_content != null) {
                         content = `<b>Товар: ${yandex_content['name']}</b>
-                                    Минимальная цена: ${yandex_content['minPrice']}
-                                    Максимальная цена: ${yandex_content['maxPrice']}`;
+                                    ${yandex_content['minPrice'] ? 'Минимальная цена: '+ yandex_content['minPrice'] + ' руб.<br>' : ''}
+                                    ${yandex_content['maxPrice'] ? 'Максимальная цена: '+ yandex_content['maxPrice'] + ' руб.' : ''}`;
                     } else if (content != null && yandex_content != null){
                         content += `<br><br><b>Товар: ${yandex_content['name']}</b>
-                                    Минимальная цена: ${yandex_content['minPrice']} руб.
-                                    Максимальная цена: ${yandex_content['maxPrice']} руб.`;
+                                    ${yandex_content['minPrice'] ? 'Минимальная цена: '+ yandex_content['minPrice'] + ' руб.<br>' : ''}
+                                    ${yandex_content['maxPrice'] ? 'Максимальная цена: '+ yandex_content['maxPrice'] + ' руб.' : ''}`;
                     }
                     let contentDiv = document.getElementById('content-div');
                     const contentP = document.createElement('p');
@@ -186,8 +192,8 @@ function generateFreeSmartCamera() {
                     contentP.innerHTML = `<span class="badge text-bg-info"><h5>Результат:</h5></span><br>
                                           ${data['about']}<br><br>
                                           <b>Товар: ${data['yandex']['name']}</b><br>
-                                          Минимальная цена: ${data['yandex']['minPrice'] ? data['yandex']['minPrice'] + ' руб.' : 'Неизвестно'}<br>
-                                          Максимальная цена: ${data['yandex']['maxPrice'] ? data['yandex']['maxPrice'] + ' руб.' : 'Неизвестно'}`;
+                                          ${data['yandex']['minPrice'] ? 'Минимальная цена: '+ data['yandex']['minPrice'] + ' руб.<br>' : ''}
+                                          ${data['yandex']['maxPrice'] ? 'Максимальная цена: '+ data['yandex']['maxPrice'] + ' руб.' : ''}`;
                     contentDiv.appendChild(contentP);
                     scrollIntoView('content-div');
                 }
@@ -274,7 +280,25 @@ function logOut() {
 function selectTariff(tariff_id) {
     $.post('select_tariff', {'tariff_id': tariff_id}, function(data) {
       if (data['status_code'] == 200)
-        // return window.location.replace('/');
-      return true;
+        intervalId = setInterval(() => checkPayment(data['payment_id'], data['description']), 7000);
+        window.open(data['payment_url'], '_blank').focus();
     })
+}
+
+function checkPayment(payment_id, tariff_id) {
+  $.post('check_payment', {'payment_id': payment_id}, function(data) {
+    if (data['status_code'] == 200 && data['message'] == true) {
+      clearInterval(intervalId);
+      return createUser(tariff_id);
+    }
+    }
+  )
+}
+
+function createUser(tariff_id) {
+  $.post('create_user', {'tariff_id': tariff_id}, function(data) {
+    if (data['status_code'] == 200) {
+      return window.location.replace('/');
+    }
+  })
 }

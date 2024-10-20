@@ -1,8 +1,10 @@
+from enum import Enum
 from os.path import splitext
 from uuid import uuid4
 
 from django.db import models
 from django.conf import settings
+from django.utils import timezone
 from django.core.files.storage import FileSystemStorage
 
 from django.contrib.auth.models import AbstractUser
@@ -52,3 +54,35 @@ class User(AbstractUser):
 
     class Meta:
         db_table = "auth_user"
+
+
+class Payment(models.Model):
+    class Status(Enum):
+        success = ("success", "Успешно")
+        in_progress = ("in_progress", "В процессе")
+
+        @classmethod
+        def get_value(cls, member):
+            return cls[member].value[0]
+
+    payment_id = models.CharField(max_length=128)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    status = models.CharField(
+        max_length=32,
+        choices=[x.value for x in Status],
+        default=Status.get_value("in_progress"),
+        verbose_name="Статус оплаты",
+    )
+    created = models.DateTimeField(verbose_name="Дата платежа", default=timezone.now)
+    updated = models.DateTimeField(
+        verbose_name="Дата обновления",
+        auto_now=True,
+        auto_now_add=False,
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        db_table = "payments"
+        verbose_name = "Платеж"
+        verbose_name_plural = "Платежи"
