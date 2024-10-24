@@ -123,13 +123,16 @@ def smartcamera(request) -> HttpResponse:
 
 @csrf_exempt
 def generate_smartcamera(request) -> JsonResponse:
-    request_files = request.FILES
-    image = request_files['file']  # Get image from request files.
+    if request.user.is_authenticated:
+        request_files = request.FILES
+        image = request_files['file']  # Get image from request files.
 
-    smart_camera = SmartCameraService()  # Init SmartCameraService instance.
-    content = smart_camera.main(image_file=image.file)
-    return JsonResponse({'asst_name': content['asst_name'], 'content': content['content'],
-                        'yandex_data': content['yandex_data']})
+        smart_camera = SmartCameraService()  # Init SmartCameraService instance.
+        content = smart_camera.main(image_file=image.file)
+        return JsonResponse({'asst_name': content['asst_name'], 'content': content['content'],
+                             'yandex_data': content['yandex_data']})
+    else:
+        return render(request, 'unauthorized.html')
 
 
 def freesmartcamera(request):
