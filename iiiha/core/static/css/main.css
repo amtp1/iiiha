@@ -2500,9 +2500,6 @@ h1, h3, p {
   width: 100%;
 }
 
-
-
-
 @media (max-width: 1300px) {
   .tarif__wrapper {
       flex-wrap: wrap;
@@ -2543,4 +2540,10 @@ h1, h3, p {
       padding-left: 16px;
       min-width: auto;
   }
+}
+
+.alert-danger.auth {
+	display: none;
+	background-color: orange;
+  margin-top: 10px;
 }
