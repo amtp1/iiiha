@@ -110,7 +110,7 @@ function generateFusion() {
                     imageResult.id = 'fade-in-image-result';
                     imageResult.src = `data:image/png;base64, ${image}`;
                     imageResult.style.width = '100%';
-                    imageResult.style.height = '310px';
+                    imageResult.style.height = '350px';
                     imageResult.style.borderRadius = '8px';
                     parent.replaceChild(imageResult, fadeImage);
                 } catch(e) {
@@ -231,7 +231,7 @@ function generateFlux() {
                 imageResult.id = 'fade-in-image-result';
                 imageResult.src = image;
                 imageResult.style.width = '100%';
-                imageResult.style.height = '310px';
+                imageResult.style.height = '350px';
                 imageResult.style.borderRadius = '8px';
                 parent.replaceChild(imageResult, fadeImage);
               }
