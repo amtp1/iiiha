@@ -127,10 +127,14 @@ def generate_smartcamera(request) -> JsonResponse:
         request_files = request.FILES
         image = request_files['file']  # Get image from request files.
 
-        smart_camera = SmartCameraService()  # Init SmartCameraService instance.
-        content = smart_camera.main(image_file=image.file)
-        return JsonResponse({'asst_name': content['asst_name'], 'content': content['content'],
-                             'yandex_data': content['yandex_data']})
+        service = Service.objects.get(name='smartcamera')
+        if not update_user_balance(request.user, service.price):
+            return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Недостаточно средств!'})
+        else:
+            smart_camera = SmartCameraService()  # Init SmartCameraService instance.
+            content = smart_camera.main(image_file=image.file)
+            return JsonResponse({'status_code': 200, 'asst_name': content['asst_name'], 'content': content['content'],
+                                'yandex_data': content['yandex_data']})
     else:
         return render(request, 'unauthorized.html')
 
@@ -175,24 +179,29 @@ def flux(request) -> HttpResponse:
 @csrf_exempt
 def generate_flux(request) -> JsonResponse:
     if request.user.is_authenticated:
-        request = request.POST
-        translator = TranslatorService()
-        prompt = translator.translate(request['prompt'])
+        service = Service.objects.get(name='flux')
+        if not update_user_balance(request.user, service.price):
+            return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Недостаточно средств!'})
+        else:
+            request = request.POST
+            translator = TranslatorService()
+            prompt = translator.translate(request['prompt'])
 
-        def on_queue_update(update):
-            if isinstance(update, fal_client.InProgress):
-                for log in update.logs:
-                    pass  # print(log["message"]))
+            def on_queue_update(update):
+                if isinstance(update, fal_client.InProgress):
+                    for log in update.logs:
+                        pass  # print(log["message"]))
 
-        result = fal_client.subscribe(
-            "fal-ai/flux-pro/v1.1",
-            arguments={
-                "prompt": prompt
-            },
-            with_logs=True,
-            on_queue_update=on_queue_update,
-        )
-        return JsonResponse(result)
+            result = fal_client.subscribe(
+                "fal-ai/flux-pro/v1.1",
+                arguments={
+                    "prompt": prompt
+                },
+                with_logs=True,
+                on_queue_update=on_queue_update,
+            )
+            result['status_code'] = 200
+            return JsonResponse(result)
     else:
         return render(request, 'unauthorized.html')
 
@@ -294,3 +303,13 @@ def offer(request) -> HttpResponse:
 
 def privacy_policy(request) -> HttpResponse:
     return render(request, 'privacy-policy.html')
+
+
+def update_user_balance(user, value):
+    user = User.objects.get(email=user.email)
+    if user.balance - value < 0:
+        return False
+    else:
+        user.balance -= value
+        user.save()
+        return True

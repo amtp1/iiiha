@@ -139,28 +139,33 @@ function generateSmartCamera() {
                 contentType: false,
                 success: function(data) {
                     resetPreGenerateButton(is_check_button=true);
-                    let asst_name = data['asst_name'] 
-                    let content = data['content'];
-                    let yandex_content = data['yandex_data'];
-                    if (content == null && yandex_content == null) {
-                        content = 'Не удалось распознать объект!';
-                    } else if (content == null && yandex_content != null) {
-                        content = `<b>Товар: ${yandex_content['name']}</b>
-                                    ${yandex_content['minPrice'] ? 'Минимальная цена: '+ yandex_content['minPrice'] + ' руб.<br>' : ''}
-                                    ${yandex_content['maxPrice'] ? 'Максимальная цена: '+ yandex_content['maxPrice'] + ' руб.' : ''}`;
-                    } else if (content != null && yandex_content != null){
-                        content += `<br><br><b>Товар: ${yandex_content['name']}</b>
-                                    ${yandex_content['minPrice'] ? 'Минимальная цена: '+ yandex_content['minPrice'] + ' руб.<br>' : ''}
-                                    ${yandex_content['maxPrice'] ? 'Максимальная цена: '+ yandex_content['maxPrice'] + ' руб.' : ''}`;
+                    if (data['status_code'] == 400) {
+                      return alert(data['message']);
                     }
-                    let contentDiv = document.getElementById('content-div');
-                    const contentP = document.createElement('p');
-                    contentDiv.style.overflow = 'auto';
-                    contentP.id = 'content';
-                    contentP.innerHTML = `<span class="badge text-bg-success">Подключен: ${asst_name}${yandex_content ? ' и Товаровед' : ''}</span><br>
-                    <span class="badge text-bg-info"><h5>Результат:</h5></span> ${convertMarkdownToHTML(content)}<br>`;
-                    contentDiv.appendChild(contentP);
-                    scrollIntoView('content-div');
+                    else {
+                      let asst_name = data['asst_name'] 
+                      let content = data['content'];
+                      let yandex_content = data['yandex_data'];
+                      if (content == null && yandex_content == null) {
+                          content = 'Не удалось распознать объект!';
+                      } else if (content == null && yandex_content != null) {
+                          content = `<b>Товар: ${yandex_content['name']}</b>
+                                      ${yandex_content['minPrice'] ? 'Минимальная цена: '+ yandex_content['minPrice'] + ' руб.<br>' : ''}
+                                      ${yandex_content['maxPrice'] ? 'Максимальная цена: '+ yandex_content['maxPrice'] + ' руб.' : ''}`;
+                      } else if (content != null && yandex_content != null){
+                          content += `<br><br><b>Товар: ${yandex_content['name']}</b>
+                                      ${yandex_content['minPrice'] ? 'Минимальная цена: '+ yandex_content['minPrice'] + ' руб.<br>' : ''}
+                                      ${yandex_content['maxPrice'] ? 'Максимальная цена: '+ yandex_content['maxPrice'] + ' руб.' : ''}`;
+                      }
+                      let contentDiv = document.getElementById('content-div');
+                      const contentP = document.createElement('p');
+                      contentDiv.style.overflow = 'auto';
+                      contentP.id = 'content';
+                      contentP.innerHTML = `<span class="badge text-bg-success">Подключен: ${asst_name}${yandex_content ? ' и Товаровед' : ''}</span><br>
+                      <span class="badge text-bg-info"><h5>Результат:</h5></span> ${convertMarkdownToHTML(content)}<br>`;
+                      contentDiv.appendChild(contentP);
+                      scrollIntoView('content-div');
+                    }
                 }
         })
     }
@@ -215,17 +220,21 @@ function generateFlux() {
           function(data) {
             try{
               resetPreGenerateButton();
-              resetPreGenerateButton();
-              let image = data['images'][0]['url'];
-              const parent = document.querySelector('.info-content');
-              let fadeImage = document.querySelector('#fade-in-image-result');
-              let imageResult = document.createElement('img');
-              imageResult.id = 'fade-in-image-result';
-              imageResult.src = image;
-              imageResult.style.width = '100%';
-              imageResult.style.height = '310px';
-              imageResult.style.borderRadius = '8px';
-              parent.replaceChild(imageResult, fadeImage);
+              if (data['status_code'] == 400) {
+                return alert(data['message']);
+              }
+              else {
+                let image = data['images'][0]['url'];
+                const parent = document.querySelector('.info-content');
+                let fadeImage = document.querySelector('#fade-in-image-result');
+                let imageResult = document.createElement('img');
+                imageResult.id = 'fade-in-image-result';
+                imageResult.src = image;
+                imageResult.style.width = '100%';
+                imageResult.style.height = '310px';
+                imageResult.style.borderRadius = '8px';
+                parent.replaceChild(imageResult, fadeImage);
+              }
             } catch(e) {
               return alert(`Ошибка: ${e}`);
             }
