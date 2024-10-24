@@ -2485,6 +2485,7 @@ h1, h3, p {
   top: 50%;
   transform: translateY(-50%);
   left: 0;
+  z-index: 10;
 }
 .item-tarif__dop>ul>li {
   color: #F5EBC8;
@@ -2499,12 +2500,47 @@ h1, h3, p {
   width: 100%;
 }
 
-#tariff {
-  margin-top: 9px;
-}
 
-.alert-danger.auth {
-  display: none;
-  margin-top: 10px;
-  background-color: orange;
+
+
+@media (max-width: 1300px) {
+  .tarif__wrapper {
+      flex-wrap: wrap;
+  }
+  .tarif__item {
+      max-width: 48%;
+  }
+}
+@media (max-width: 900px) {
+  .tarif__item {
+      max-width: 100%;
+      width: auto;
+  }
+}
+@media (max-width: 500px) {
+  .item-tarif__name {
+      margin: 0;
+  }
+  .item-tarif__spec>ul>li,
+  .item-tarif__spec ul li span {
+      font-size: 12px;
+  }
+  .item-tarif__spec ul li span  {
+      padding-right: 0;
+      padding-left: 5px;
+      justify-content: left;
+      margin: 0;
+      margin-top: 5px;
+  }
+  .item-tarif__spec>ul>li {
+      display: block;
+  }
+  .item-tarif__button button {
+      padding: 15px;
+  }
+  .item-tarif__dop>ul>li {
+      padding: 0;
+      padding-left: 16px;
+      min-width: auto;
+  }
 }
