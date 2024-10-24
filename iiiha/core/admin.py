@@ -23,3 +23,9 @@ class Payment(admin.ModelAdmin):
     fields = ['payment_id', 'user', 'status', 'created', 'updated']
     list_display = ['payment_id', 'user', 'status']
     readonly_fields = ['payment_id', 'user', 'status', 'created', 'updated']
+
+@admin.register(Service)
+class Service(admin.ModelAdmin):
+    fields = ['name', 'price']
+    list_display = ['name', 'price']
+    search_fields = ['name']

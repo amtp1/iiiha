@@ -86,3 +86,27 @@ class Payment(models.Model):
         db_table = "payments"
         verbose_name = "Платеж"
         verbose_name_plural = "Платежи"
+
+
+class Service(models.Model):
+    class ServiceName(Enum):
+        success = ("smartcamera", "Умная камера")
+        in_progress = ("flux", "Flux")
+
+        @classmethod
+        def get_value(cls, member):
+            return cls[member].value[0]
+
+    name = models.CharField(
+        unique=True,
+        max_length=32,
+        choices=[x.value for x in ServiceName],
+        default=ServiceName.get_value("in_progress"),
+        verbose_name="Имя сервиса",
+    )
+    price = models.FloatField(default=0.0, verbose_name='Цена за 1 генерацию')
+
+    class Meta:
+        db_table = "services"
+        verbose_name = "Сервис"
+        verbose_name_plural = "Сервисы"
