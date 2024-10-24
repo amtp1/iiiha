@@ -268,11 +268,17 @@ def check_payment(request) -> JsonResponse:
 @csrf_exempt
 def create_user(request):
     tariff_id = request.POST['tariff_id']
-    auth_temp_data = request.COOKIES.get('auth_temp_data')
-    email, password, _ = list(json.loads(auth_temp_data).values())
     tariff = Tariff.objects.get(tariff_id=tariff_id)
-    user = User.objects.create_user(username=str(uuid.uuid4()), email=email, password=password, tariff=tariff, balance=tariff.price)
-    user = authenticate(username=user.username, password=password)
+
+    if not request.user.is_authenticated:
+        auth_temp_data = request.COOKIES.get('auth_temp_data')
+        email, password, _ = list(json.loads(auth_temp_data).values())
+        user = User.objects.create_user(username=str(uuid.uuid4()), email=email, password=password, tariff=tariff, balance=tariff.price)
+        user = authenticate(username=user.username, password=password)
+    else:
+        user = User.objects.get(email=request.user.email)
+        user.balance += tariff.price
+        user.save()
     login(request, user)
     response = JsonResponse({'status_code': 200, 'type': 'success', 'message': 'created'})
     response.delete_cookie('auth_temp_data')
