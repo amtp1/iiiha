@@ -90,8 +90,9 @@ class Payment(models.Model):
 
 class Service(models.Model):
     class ServiceName(Enum):
-        success = ("smartcamera", "Умная камера")
-        in_progress = ("flux", "Flux")
+        smartcamera = ("smartcamera", "Smart Camera")
+        flux = ("flux", "Flux")
+        kling = ("kling", "Kling")
 
         @classmethod
         def get_value(cls, member):
@@ -101,7 +102,7 @@ class Service(models.Model):
         unique=True,
         max_length=32,
         choices=[x.value for x in ServiceName],
-        default=ServiceName.get_value("in_progress"),
+        default=ServiceName.get_value("smartcamera"),
         verbose_name="Имя сервиса",
     )
     price = models.FloatField(default=0.0, verbose_name='Цена за 1 генерацию')

@@ -79,6 +79,10 @@
         {% else %}
           <li><a class="nav-link" href="freesmartcamera">Умная камера</a></li>
         {% endif %}
+
+        {% if auth_user %}
+          <li><a class="nav-link" href="kling">Видео</a></li>
+        {% endif %}
         <!--<li>
           <a class="nav-link">Тексты</a>
           <ul class="nav-dropdown">

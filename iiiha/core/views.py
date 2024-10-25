@@ -219,6 +219,53 @@ def generate_flux(request) -> JsonResponse:
         return render(request, 'unauthorized.html')
 
 
+def kling(request):
+    user_data = {'auth_user': request.user.is_authenticated}
+    if request.user.is_authenticated:
+        user_data['tariff'] = request.user.tariff
+        user_data['balance'] = request.user.balance
+        return render(request, 'kling.html', user_data)
+    else:
+       return render(request, 'unauthorized.html')
+
+
+@csrf_exempt
+def generate_kling(request):
+    if request.user.is_authenticated:
+        service = Service.objects.get(name='kling')
+        new_balance = update_user_balance(request.user, service.price)
+        if not new_balance[0]:
+            return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Недостаточно средств!'})
+        else:
+            try:
+                post_request = request.POST
+                #translator = TranslatorService()
+                # prompt = translator.translate(post_request['prompt'])
+                prompt = post_request['prompt']
+
+                def on_queue_update(update):
+                    if isinstance(update, fal_client.InProgress):
+                        for log in update.logs:
+                            pass  # print(log["message"]))
+
+                result = fal_client.subscribe(
+                    "fal-ai/kling-video/v1/pro/text-to-video",
+                    arguments={
+                        "prompt": prompt
+                    },
+                    with_logs=True,
+                    on_queue_update=on_queue_update,
+                )
+                result['status_code'] = 200
+                result['balance'] = str(float(new_balance[1]))
+                return JsonResponse(result)
+            except Exception as e:
+                traceback.print_exc()
+                return JsonResponse({'status_code': 400, 'type': 'error', 'message': str(e)})
+    else:
+        return render(request, 'unauthorized.html')
+
+
 @csrf_exempt
 def signin(request) -> (HttpResponse | HttpResponseRedirect):
     if request.POST:

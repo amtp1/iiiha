@@ -245,6 +245,48 @@ function generateFlux() {
   }
 }
 
+function generateKling() {
+  let textArea = $('textarea');
+  if (textArea.val() == "") {
+      return alert('Поле не должно оставаться пустым!');
+  } else {
+      let generateBtn = document.getElementById('pre-generate-btn');
+      generateBtn.disabled = true;
+      generateBtn.innerText = 'Идёт генерация ...';
+
+      $.post(
+        'generate_kling', {'prompt': textArea.val()},
+          function(data) {
+            try{
+              resetPreGenerateButton();
+              if (data['status_code'] == 400) {
+                return alert(data['message']);
+              }
+              else {
+                let video = data['video']['url'];
+                const parent = document.querySelector('.info-content');
+                let fadeImage = document.querySelector('#fade-in-image-result');
+                let videoResult = document.createElement('video');
+                let videoSource = document.createElement('source');
+                videoResult.id = 'fade-in-image-result';
+                videoSource.src = video;
+                videoSource.type = 'video/mp4';
+                videoResult.style.width = '100%';
+                videoResult.style.height = '370px';
+                videoResult.style.borderRadius = '8px';
+                videoResult.setAttribute('controls', '');
+                videoResult.appendChild(videoSource);
+                parent.replaceChild(videoResult, fadeImage);
+                $('#balance').text(data['balance']);
+              }
+            } catch(e) {
+              return alert(`Ошибка: ${e}`);
+            }
+          }
+      )
+  }
+}
+
 function signUp() {
     $.post('signup', {'email': $("input[name=email]").first().val(),
                       'password': $("input[name=password]").first().val(),

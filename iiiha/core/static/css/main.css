@@ -1818,6 +1818,7 @@ nav ul li a, nav ul li a:visited {
 
 nav {
   float: right;
+  margin-left: -130px;
 }
 nav ul {
   list-style: none;
@@ -1837,7 +1838,7 @@ nav ul li a:visited {
   font-weight: 400;
   color: #5a3024;
   text-decoration: none;
-  font-size: 24px;
+  font-size: 20px;
   font-family: Lumberjack_Rough;
 }
 @media (max-width: 900px) {
@@ -1848,12 +1849,12 @@ nav ul li a:visited {
 nav ul li a:not(:only-child):after{
   content:"";
 	background: url(../img/ma.png) no-repeat center bottom/cover;
-    position:absolute;
-    right:-10px;
-    bottom:0;
-    width: 18px;
-    height: 11px;
-	top: 20px;
+  position:absolute;
+  right:-10px;
+  bottom:0;
+  width: 18px;
+  height: 11px;
+  top: 20px;
 }
 nav ul li ul li {
   min-width: 190px;
