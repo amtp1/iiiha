@@ -109,9 +109,9 @@ function generateFusion() {
                     let imageResult = document.createElement('img');
                     imageResult.id = 'fade-in-image-result';
                     imageResult.src = `data:image/png;base64, ${image}`;
-                    imageResult.style.width = '100%';
-                    imageResult.style.height = '370px';
-                    imageResult.style.borderRadius = '8px';
+                    imageResult.style.width = '100% !important';
+                    imageResult.style.height = '370px !important';
+                    imageResult.style.borderRadius = '8px !important';
                     parent.replaceChild(imageResult, fadeImage);
                 } catch(e) {
                     return alert(`Ошибка: ${e}`);
@@ -231,9 +231,9 @@ function generateFlux() {
                 let imageResult = document.createElement('img');
                 imageResult.id = 'fade-in-image-result';
                 imageResult.src = image;
-                imageResult.style.width = '100%';
-                imageResult.style.height = '370px';
-                imageResult.style.borderRadius = '8px';
+                imageResult.style.width = '100% !important';
+                imageResult.style.height = '370px !important';
+                imageResult.style.borderRadius = '8px !important';
                 parent.replaceChild(imageResult, fadeImage);
                 $('#balance').text(data['balance']);
               }
@@ -271,9 +271,9 @@ function generateKling() {
                 videoResult.id = 'fade-in-image-result';
                 videoSource.src = video;
                 videoSource.type = 'video/mp4';
-                videoResult.style.width = '100%';
-                videoResult.style.height = '370px';
-                videoResult.style.borderRadius = '8px';
+                videoResult.style.width = '100% !important';
+                videoResult.style.height = '370px !important';
+                videoResult.style.borderRadius = '8px !important';
                 videoResult.setAttribute('controls', '');
                 videoResult.appendChild(videoSource);
                 parent.replaceChild(videoResult, fadeImage);
