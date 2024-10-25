@@ -1,26 +1,26 @@
 {% load static %}
 {% load define_tag %}
 {% load floattags %}
-  <!DOCTYPE html>
+<!DOCTYPE html>
 	<html lang="ru" class="no-js">
 	  <head>
 	    <meta name="yandex-verification" content="de0d6e40e8b0d925" />
 	    <meta name="google-site-verification" content="-41wXbHoDqCt6M-tpICKpdx92PERSB1uuXN8NGICz5Y" />
-		<!-- Mobile Specific Meta -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
-		<!-- Favicon-->
-		<link rel="shortcut icon" href="{% static 'img/fav.png' %}">
-		<!-- Author Meta -->
-		<meta name="author" content="web2best">
-		<!-- Meta Description -->
-		<meta name="description" content="{% block description %}{% endblock %}">
-		<!-- Meta Keyword -->
-		<meta name="keywords" content="">
-		<!-- meta character set -->
-		<meta charset="UTF-8">
-		<!-- Site Title -->
-		<title>{% block title %}{% endblock %}</title>
+      <!-- Mobile Specific Meta -->
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+      <!-- Favicon-->
+      <link rel="shortcut icon" href="{% static 'img/fav.png' %}">
+      <!-- Author Meta -->
+      <meta name="author" content="web2best">
+      <!-- Meta Description -->
+      <meta name="description" content="{% block description %}{% endblock %}">
+      <!-- Meta Keyword -->
+      <meta name="keywords" content="">
+      <!-- meta character set -->
+      <meta charset="UTF-8">
+      <!-- Site Title -->
+      <title>{% block title %}{% endblock %}</title>
 
 			<!--
 			CSS
@@ -29,6 +29,8 @@
 			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
 			<link rel="stylesheet" href="{% static 'css/main.css' %}">
       <!--<link rel="stylesheet" href="css/bootstrap-5.3.2-dist/bootstrap.css">-->
+      <script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+      <script src="{% static 'js/waypoints.min.js' %}"></script>
 
       <!-- Yandex.Metrika counter -->
       <script src="{% static 'js/jquery.counterup.min.js' %}" type="text/javascript" >
@@ -43,9 +45,9 @@
       <noscript><div><img src="https://mc.yandex.ru/watch/97086059" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
       <!-- /Yandex.Metrika counter -->
 		</head>
-		<body class="home-bl">
+		<body class="home-bl counter">
 			 <header id="home">
-			    <div class="container">
+			    <div class="container counter">
 			    	<div class="row justify-content-between d-flex">
 					  <div class="logo-bl d-flex">
 				      <div id="logo">
@@ -214,7 +216,6 @@
           }); // end DOM ready
         })(jQuery); // end jQuery
 			</script>
-			<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
 			<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>
 			<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
 			<script src="{% static 'js/main.js' %}"></script>
