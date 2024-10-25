@@ -164,6 +164,7 @@ function generateSmartCamera() {
                       contentP.innerHTML = `<span class="badge text-bg-success">Подключен: ${asst_name}${yandex_content ? ' и Товаровед' : ''}</span><br>
                       <span class="badge text-bg-info"><h5>Результат:</h5></span> ${convertMarkdownToHTML(content)}<br>`;
                       contentDiv.appendChild(contentP);
+                      $('#balance').text(data['balance']);
                       scrollIntoView('content-div');
                     }
                 }
@@ -234,6 +235,7 @@ function generateFlux() {
                 imageResult.style.height = '370px';
                 imageResult.style.borderRadius = '8px';
                 parent.replaceChild(imageResult, fadeImage);
+                $('#balance').text(data['balance']);
               }
             } catch(e) {
               return alert(`Ошибка: ${e}`);

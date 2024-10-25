@@ -130,16 +130,18 @@ def generate_smartcamera(request) -> JsonResponse:
             image = request_files['file']  # Get image from request files.
 
             service = Service.objects.get(name='smartcamera')
-            if not update_user_balance(request.user, service.price):
+            new_balance = update_user_balance(request.user, service.price)
+            if not new_balance[0]:
                 return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Недостаточно средств!'})
             else:
                 smart_camera = SmartCameraService()  # Init SmartCameraService instance.
                 content = smart_camera.main(image_file=image.file)
-                return JsonResponse({'status_code': 200, 'asst_name': content['asst_name'], 'content': content['content'],
-                                    'yandex_data': content['yandex_data']})
+                return JsonResponse({'status_code': 200, 'balance': str(float(new_balance[1])), 
+                                     'asst_name': content['asst_name'], 'content': content['content'],
+                                     'yandex_data': content['yandex_data']})
         except Exception as e:
             traceback.print_exc()
-            return JsonResponse({'status_code': 400, 'type': 'error', 'message': e})
+            return JsonResponse({'status_code': 400, 'type': 'error', 'message': str(e)})
     else:
         return render(request, 'unauthorized.html')
 
@@ -185,13 +187,14 @@ def flux(request) -> HttpResponse:
 def generate_flux(request) -> JsonResponse:
     if request.user.is_authenticated:
         service = Service.objects.get(name='flux')
-        if not update_user_balance(request.user, service.price):
+        new_balance = update_user_balance(request.user, service.price)
+        if not new_balance[0]:
             return JsonResponse({'status_code': 400, 'type': 'error', 'message': 'Недостаточно средств!'})
         else:
             try:
-                request = request.POST
+                post_request = request.POST
                 translator = TranslatorService()
-                prompt = translator.translate(request['prompt'])
+                prompt = translator.translate(post_request['prompt'])
 
                 def on_queue_update(update):
                     if isinstance(update, fal_client.InProgress):
@@ -207,10 +210,11 @@ def generate_flux(request) -> JsonResponse:
                     on_queue_update=on_queue_update,
                 )
                 result['status_code'] = 200
+                result['balance'] = str(float(new_balance[1]))
                 return JsonResponse(result)
             except Exception as e:
                 traceback.print_exc()
-                return JsonResponse({'status_code': 400, 'type': 'error', 'message': e})
+                return JsonResponse({'status_code': 400, 'type': 'error', 'message': str(e)})
     else:
         return render(request, 'unauthorized.html')
 
@@ -317,8 +321,8 @@ def privacy_policy(request) -> HttpResponse:
 def update_user_balance(user, value):
     user = User.objects.get(email=user.email)
     if user.balance - value < 0:
-        return False
+        return (False, 0)
     else:
         user.balance -= value
         user.save()
-        return True
+        return (True, user.balance)
