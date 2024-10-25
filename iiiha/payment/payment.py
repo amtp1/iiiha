@@ -28,7 +28,7 @@ class PaymentAPI:
             },
             "confirmation": {
                 "type": "redirect",
-                "return_url": 'https://ixa.su?success'  # settings.REDIRECT_URL
+                "return_url": "https://ixa.su/?success"  # settings.REDIRECT_URL
             },
             "capture": True,
             "description": tariff_id
