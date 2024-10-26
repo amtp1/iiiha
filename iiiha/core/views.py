@@ -254,7 +254,7 @@ def generate_kling(request):
                 prompt = post_request['prompt']
 
                 handler = fal_client.submit(
-                    "fal-ai/kling-video/v1/pro/text-to-video",
+                    "fal-ai/kling-video/v1/standard/text-to-video",
                     arguments={
                         "prompt": prompt
                     }
