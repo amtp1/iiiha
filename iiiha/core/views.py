@@ -240,8 +240,8 @@ def generate_kling(request):
         else:
             try:
                 post_request = request.POST
-                #translator = TranslatorService()
-                # prompt = translator.translate(post_request['prompt'])
+                translator = TranslatorService()
+                prompt = translator.translate(post_request['prompt'])
                 prompt = post_request['prompt']
 
                 handler = fal_client.submit(
