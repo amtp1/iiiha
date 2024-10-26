@@ -13,6 +13,9 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 
 from django.views.decorators.csrf import csrf_exempt
+from loguru import logger
+
+logger.add('log/users.log')
 
 from services.api.requests import *
 from .models import *
@@ -54,6 +57,12 @@ class CheckProductAPI(ListAPIView):
 
 
 def index(request) -> HttpResponse:
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    logger.info(ip)
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
         user_data['tariff'] = str(request.user.tariff)
