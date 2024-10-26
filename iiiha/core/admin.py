@@ -29,3 +29,10 @@ class Service(admin.ModelAdmin):
     fields = ['name', 'price']
     list_display = ['name', 'price']
     search_fields = ['name']
+
+@admin.register(GenerateHistory)
+class GenerateHistory(admin.ModelAdmin):
+    fields = ['user', 'request_id', 'service']
+    list_display = ['request_id', 'service']
+    search_fields = ['request_id', 'service']
+    readonly_fields = ['user', 'request_id', 'service']

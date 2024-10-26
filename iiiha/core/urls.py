@@ -32,6 +32,7 @@ urlpatterns = [
     path('privacy-policy', privacy_policy, name='privacy-policy'),
     path('check_payment', check_payment, name='check_payment'),
     path('create_user', create_user, name='create_user'),
+    path('history', history, name='history'),
 
     # API urls
     path('api/checkfoodvalue/<str:food_name>', CheckFoodValueAPI.as_view(), name="checkfoodvalue"),

@@ -54,7 +54,7 @@
 					  <div class="logo-bl d-flex">
 				      <div id="logo">
 				        <a href="/"><img src="{% static 'img/el2.png' %}" alt="Интегратор Искусственного Интеллекта" title="Интегратор Искусственного Интеллекта" />ИИИ-ХА!</a>
-				      </div>Beta
+				      </div>
 					  <!-- #nav-menu-container -->
                        </div>
 					   <section class="navigation">
@@ -81,7 +81,9 @@
         {% endif %}
 
         {% if auth_user %}
-          <li><a class="nav-link" href="kling">Видеограф</a></li>
+          {% if tariff == "Ковбой" %}
+            <li><a class="nav-link" href="kling">Видеограф</a></li>
+          {% endif %}
         {% endif %}
         <!--<li>
           <a class="nav-link">Тексты</a>
@@ -230,5 +232,6 @@
       <script src="{% static 'js/superfish.js' %}"></script>
       <script src="{% static 'js/owl.carousel.min.js' %}"></script>
       <script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 	</body>
 </html>

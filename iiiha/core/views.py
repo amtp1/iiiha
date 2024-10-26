@@ -1,10 +1,11 @@
 import json
 import uuid
+import time
 import traceback
 
 import requests
 import fal_client
-from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, HttpResponse, HttpResponseRedirect
 from django.http import JsonResponse, HttpRequest
 from rest_framework.generics import ListAPIView
 from rest_framework import authentication, permissions
@@ -55,7 +56,7 @@ class CheckProductAPI(ListAPIView):
 def index(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        user_data['tariff'] = request.user.tariff
+        user_data['tariff'] = str(request.user.tariff)
         user_data['balance'] = request.user.balance
     return render(request, "index.html", user_data)
 
@@ -63,7 +64,7 @@ def index(request) -> HttpResponse:
 def chatgpt(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        user_data['tariff'] = request.user.tariff
+        user_data['tariff'] = str(request.user.tariff)
         user_data['balance'] = request.user.balance
     return render(request, "chatgpt.html", user_data)
 
@@ -115,7 +116,7 @@ def generate_plusvector(request) -> JsonResponse:
 def smartcamera(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        user_data['tariff'] = request.user.tariff
+        user_data['tariff'] = str(request.user.tariff)
         user_data['balance'] = request.user.balance
         return render(request, 'smartcamera.html', user_data)
     else:
@@ -176,7 +177,7 @@ def generate_chatgptplus(request) -> JsonResponse:
 def flux(request) -> HttpResponse:
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        user_data['tariff'] = request.user.tariff
+        user_data['tariff'] = str(request.user.tariff)
         user_data['balance'] = request.user.balance
         return render(request, 'flux.html', user_data)
     else:
@@ -222,7 +223,7 @@ def generate_flux(request) -> JsonResponse:
 def kling(request):
     user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
-        user_data['tariff'] = request.user.tariff
+        user_data['tariff'] = str(request.user.tariff)
         user_data['balance'] = request.user.balance
         return render(request, 'kling.html', user_data)
     else:
@@ -243,19 +244,19 @@ def generate_kling(request):
                 # prompt = translator.translate(post_request['prompt'])
                 prompt = post_request['prompt']
 
-                def on_queue_update(update):
-                    if isinstance(update, fal_client.InProgress):
-                        for log in update.logs:
-                            pass  # print(log["message"]))
-
-                result = fal_client.subscribe(
+                handler = fal_client.submit(
                     "fal-ai/kling-video/v1/pro/text-to-video",
                     arguments={
                         "prompt": prompt
-                    },
-                    with_logs=True,
-                    on_queue_update=on_queue_update,
+                    }
                 )
+                user = User.objects.get(email=request.user.email)
+                GenerateHistory.objects.create(user=user, request_id=handler.request_id, service='kling')
+                while True:
+                    status = fal_client.status("fal-ai/kling-video/v1/pro/text-to-video", handler.request_id, with_logs=True)
+                    if status != fal_client.InProgress:
+                        result = fal_client.result("fal-ai/kling-video/v1/pro/text-to-video", handler.request_id)
+                        break
                 result['status_code'] = 200
                 result['balance'] = str(float(new_balance[1]))
                 return JsonResponse(result)
@@ -355,6 +356,15 @@ def create_user(request):
     response = JsonResponse({'status_code': 200, 'type': 'success', 'message': 'created'})
     response.delete_cookie('auth_temp_data')
     return response
+
+
+def history(request):
+    if request.user.is_authenticated:
+        user = User.objects.get(email=request.user.email)
+        histories = GenerateHistory.objects.filter(user=user).all()
+        return render(request, 'history.html', {'histories': histories})
+    else:
+        return render(request, 'unauthorized.html')
 
 
 def offer(request) -> HttpResponse:

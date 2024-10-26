@@ -111,3 +111,14 @@ class Service(models.Model):
         db_table = "services"
         verbose_name = "Сервис"
         verbose_name_plural = "Сервисы"
+
+
+class GenerateHistory(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=False, default=None, verbose_name='Пользователь')
+    request_id = models.CharField(max_length=255, verbose_name='ID генерации')
+    service = models.CharField(max_length=32, verbose_name='Сервис')
+
+    class Meta:
+        db_table = "generattions_history"
+        verbose_name = "История генерации"
+        verbose_name_plural = "История генераций"
