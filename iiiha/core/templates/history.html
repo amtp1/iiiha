@@ -19,13 +19,17 @@
                       </tr>
                     </thead>
                     <tbody>
+                    {% for history in histories %}
                       <tr>
-                        {% for history in histories %}
-                            <td><a href="{{history.request_id|get_video_url}}"><b>Видео</b></a></td>
+                            {% if history.request_id|check_status == 'Готово' %}
+                                <td><a href="{{history.request_id|get_video_url}}"><b>Видео</b></a></td>
+                            {% else %}
+                                <td>Видео</td>
+                            {% endif %}
                             <td>{{history.request_id|check_status}}</td>
                             <td>{{history.service}}</td>
-                        {% endfor %}
                       </tr>
+                      {% endfor %}
                     </tbody>
                   </table>
 

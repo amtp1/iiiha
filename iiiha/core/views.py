@@ -359,10 +359,14 @@ def create_user(request):
 
 
 def history(request):
+    user_data = {'auth_user': request.user.is_authenticated}
     if request.user.is_authenticated:
+        user_data['tariff'] = str(request.user.tariff)
+        user_data['balance'] = request.user.balance
         user = User.objects.get(email=request.user.email)
         histories = GenerateHistory.objects.filter(user=user).all()
-        return render(request, 'history.html', {'histories': histories})
+        user_data['histories'] = histories
+        return render(request, 'history.html', user_data)
     else:
         return render(request, 'unauthorized.html')
 
