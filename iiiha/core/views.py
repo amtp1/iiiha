@@ -253,9 +253,9 @@ def generate_kling(request):
                 user = User.objects.get(email=request.user.email)
                 GenerateHistory.objects.create(user=user, request_id=handler.request_id, service='kling')
                 while True:
-                    status = fal_client.status("fal-ai/kling-video/v1/pro/text-to-video", handler.request_id, with_logs=True)
+                    status = fal_client.status("fal-ai/kling-video/v1/standard/text-to-video", handler.request_id, with_logs=True)
                     if status != fal_client.InProgress:
-                        result = fal_client.result("fal-ai/kling-video/v1/pro/text-to-video", handler.request_id)
+                        result = fal_client.result("fal-ai/kling-video/v1/standard/text-to-video", handler.request_id)
                         break
                 result['status_code'] = 200
                 result['balance'] = str(float(new_balance[1]))
