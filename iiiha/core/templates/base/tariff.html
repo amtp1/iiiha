@@ -57,10 +57,33 @@
 					  <!-- #nav-menu-container -->
                        </div>
 					   <section class="navigation">
-  <div  class="nav-container">
+  <div class="nav-container">
     <nav>
       <div class="nav-mobile"><a id="nav-toggle"><span></span></a></div>
       <ul class="nav-list">
+        {% if auth_user %}
+          <li><a class="nav-link" href="chatgpt">Спроси меня и я отвечу</a></li>
+        {% else %}
+          <li><a class="nav-link" href="chatgpt">Спроси меня</a></li>
+        {% endif %}
+
+        {% if auth_user %}
+          <li><a class="nav-link" href="flux">Художник-реалист</a></li>
+        {% else %}
+          <li><a class="nav-link" href="fusion">Художник</a></li>
+        {% endif %}
+
+        {% if auth_user %}
+          <li><a class="nav-link" href="smartcamera">Очень умная камера</a></li>
+        {% else %}
+          <li><a class="nav-link" href="freesmartcamera">Умная камера</a></li>
+        {% endif %}
+
+        {% if auth_user %}
+          {% if tariff == "Ковбой" %}
+            <li><a class="nav-link" href="kling">Видеограф</a></li>
+          {% endif %}
+        {% endif %}
         <!--<li>
           <a class="nav-link">Тексты</a>
           <ul class="nav-dropdown">

@@ -664,7 +664,7 @@ header {
 
 .banner-content h1 {
   color: #fff;
-  font-size: 72px;
+  font-size: 52px;
   font-weight: 700;
   line-height: 1em;
   margin-top: 20px;
@@ -1838,7 +1838,7 @@ nav ul li a:visited {
   font-weight: 400;
   color: #5a3024;
   text-decoration: none;
-  font-size: 20px;
+  font-size: 16px;
   font-family: Lumberjack_Rough;
 }
 @media (max-width: 900px) {

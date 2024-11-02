@@ -63,15 +63,15 @@
       <div class="nav-mobile"><a id="nav-toggle"><span></span></a></div>
       <ul class="nav-list">
         {% if auth_user %}
-          <li><a class="nav-link" href="chatgpt">Спроси меня и я отвечу</a></li>
+          <li><a class="nav-link" href="clever">Спроси меня и я отвечу</a></li>
         {% else %}
-          <li><a class="nav-link" href="chatgpt">Спроси меня</a></li>
+          <li><a class="nav-link" href="clever">Спроси меня</a></li>
         {% endif %}
 
         {% if auth_user %}
-          <li><a class="nav-link" href="flux">Художник-реалист</a></li>
+          <li><a class="nav-link" href="image">Художник-реалист</a></li>
         {% else %}
-          <li><a class="nav-link" href="fusion">Художник</a></li>
+          <li><a class="nav-link" href="freeimage">Художник</a></li>
         {% endif %}
 
         {% if auth_user %}
@@ -80,9 +80,9 @@
           <li><a class="nav-link" href="freesmartcamera">Умная камера</a></li>
         {% endif %}
 
-        {% if auth_user %}
+         {% if auth_user %}
           {% if tariff == "Ковбой" %}
-            <li><a class="nav-link" href="kling">Видеограф</a></li>
+            <li><a class="nav-link" href="video">Видеограф</a></li>
           {% endif %}
         {% endif %}
         <!--<li>
@@ -155,6 +155,8 @@
                   <a href="javascript:generateChatGPT()" class="popup-error__button">Тексты</a>
                   <a href="javascript:generateFusion()" class="popup-error__button">Картинки</a>
                   <a href="/smartcamera" class="popup-error__button">Умная камера</a>
+                 
+             
                 </div>
               </div>
           
@@ -165,16 +167,25 @@
 
 			<!-- Start about Area -->
 			{% block body %}{% endblock %}
-      <main>
-      <section>
+	<!--<center><div style="width:100%;height:500px;overflow:hidden;position:relative;"><iframe style="width:100%;height:100%;border:1px solid #e6e6e6;border-radius:8px;box-sizing:border-box" src="https://yandex.ru/maps-reviews-widget/161052686413?comments"></iframe>
+<a href="https://yandex.ru/maps/org/iii_kha_/161052686413/" target="_blank" style="box-sizing:border-box;text-decoration:none;color:#b3b3b3;font-size:10px;font-family:YS Text,sans-serif;padding:0 20px;position:absolute;bottom:8px;width:100%;text-align:center;left:0">ИИИ-ХА!</a>
+</div>	 </center>-->	
+<main>
+    <section>
         <ul class="docs">
+            <li id="email">О нас: <a href="https://yandex.ru/maps/org/iii_kha_/161052686413/reviews/">отзывы</a>, <a target="_blank" href="https://clck.ru/3EMxnS">презентация</a> и... <a href="https://clck.ru/3EN2sY">песня</a></li>
+            <li id="email">Написать нам: <a href="mailto:ii@ixa.su">ii@ixa.su</a></li>
+            
             <li><a href="offer" target="_blank">Публичная оферта</a></li>
             <li><a href="privacy-policy" target="_blank">Политика конфиденциальности</a></li>
             <li id="inn"><small>Воронин Павел Сергеевич ИНН: 365103540395</small></li>
-            <li id="email"><small>Написать нам: <a href="mailto:ii@ixa.su">ii@ixa.su</a></small></li>
+            
         </ul>
-    </section>
-    </main>
+  </main>
+  </section>
+    </div>
+ 
+   
 			<!-- End about Area -->
 			<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
       <script>const user_is_auth = "{{request.user.is_authenticated}}"
